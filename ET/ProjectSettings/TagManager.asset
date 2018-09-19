@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: TriCircle
+    uniqueID: 1855755255
+    locked: 0
+  - name: TriFrame
+    uniqueID: 3490258251
+    locked: 0
+  - name: TriEffect
+    uniqueID: 1994623587
+    locked: 0
+  - name: TriWeapon
+    uniqueID: 3417356079
+    locked: 0
