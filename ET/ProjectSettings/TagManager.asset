@@ -41,6 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: OnFrame
+    uniqueID: 2402455929
+    locked: 0
   - name: TriCircle
     uniqueID: 1855755255
     locked: 0

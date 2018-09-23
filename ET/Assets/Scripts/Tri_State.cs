@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tri_State : MonoBehaviour {
+public class Tri_State : MonoBehaviour { // 삼각형이 q를 누르면 왼쪽, e를 누르면 오른쪽으로 회전함
 
-	private int Tri_state;
 
-	enum state{
-		idle,
+	public enum Tstate{
+		idle=0,
 		tleft,
 		tright
 	}
 
-	// Use this for initialization
-	void Start () {
-		Tri_State = state.idle;
+    private Tstate Tristate;
+    // Use this for initialization
+    void Start () {
+		Tristate = Tstate.idle;
 	}
 	
 	// Update is called once per frame
@@ -22,31 +22,54 @@ public class Tri_State : MonoBehaviour {
 		
 	}
 
-	public void trun_left(){
-		if(Tri_state=state.idle){
-			Tri_state=state.tleft;
-			transform.Rotate();
-		}
-		else if(Tri_state=state.tleft){
-			Tri_state=state.tright;
-			transform.Rotate();
-		}else if(Tri_state=state.tright){
-			Tri_state=state.idle;
-			transform.Rotate();
-		}
-	}
+	public void turn_left(){
+        if (Tristate == Tstate.idle)
+        {
+            Tristate = Tstate.tleft;
+        }
+        else if (Tristate == Tstate.tleft)
+        {
+            Tristate = Tstate.tright;
+        }
+        else if (Tristate == Tstate.tright)
+        {
+            Tristate = Tstate.idle;
+        }
+        SetRotation();
+    }
 
 	public void turn_right(){
-		if(Tri_state=state.idle){
-			Tri_state=state.tright;
-			transform.Rotate();
+		if(Tristate==Tstate.idle){
+			Tristate=Tstate.tright;
 		}
-		else if(Tri_state=state.tleft){
-			Tri_state=state.idle;
-			transform.Rotate();
-		}else if(Tri_state=state.tright){
-			Tri_state=state.tleft;
-			transform.Rotate();
-		}
-	}
+		else if(Tristate==Tstate.tleft){
+			Tristate=Tstate.idle;
+		}else if(Tristate==Tstate.tright){
+			Tristate=Tstate.tleft;
+        }
+        SetRotation();
+    }
+
+    private void SetRotation() // rotation 값 설정
+    {
+        if(Tristate == Tstate.idle)
+        {
+            transform.SetPositionAndRotation(new Vector3(-5.1f, 0f, 0f), new Quaternion(0f, 0f, 0f, 0f));
+        }
+        else if(Tristate == Tstate.tleft)
+        {
+            transform.SetPositionAndRotation(new Vector3(-5.1f, 0f, 0f), new Quaternion(0f, 0f, 0f, 0f));
+            transform.Rotate(new Vector3(0f, 0f, 153f));
+        }
+        else if(Tristate == Tstate.tright)
+        {
+            transform.SetPositionAndRotation(new Vector3(-5.1f, 0f, 0f), new Quaternion(0f, 0f, 0f, 0f));
+            transform.Rotate(new Vector3(0f, 0f, -90f));
+        }
+    }
+
+    public Tstate GetTstate() // Tristate 값을 반환
+    {
+        return Tristate;
+    }
 }
