@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.ET", "UnityVS.ET.csproj", "{B46CC68D-F4E8-4AD6-7154-DD86883D8DFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.ET.Editor", "UnityVS.ET.Editor.csproj", "{B3A81CCD-FDE3-4A21-D627-48683A0F0C12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B46CC68D-F4E8-4AD6-7154-DD86883D8DFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B46CC68D-F4E8-4AD6-7154-DD86883D8DFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B46CC68D-F4E8-4AD6-7154-DD86883D8DFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B46CC68D-F4E8-4AD6-7154-DD86883D8DFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3A81CCD-FDE3-4A21-D627-48683A0F0C12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3A81CCD-FDE3-4A21-D627-48683A0F0C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3A81CCD-FDE3-4A21-D627-48683A0F0C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3A81CCD-FDE3-4A21-D627-48683A0F0C12}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

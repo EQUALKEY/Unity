@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class Tri_State : MonoBehaviour { // 삼각형이 q를 누르면 왼쪽, e를 누르면 오른쪽으로 회전함
 
-
+    public GameObject EventContoller;
 	public enum Tstate{
 		idle=0,
-		tleft,
-		tright
+        co
 	}
 
-    private Tstate Tristate;
+    private Tstate TriState; // 삼각형 회전 상태 저장
     // Use this for initialization
     void Start () {
-		Tristate = Tstate.idle;
+		TriState = Tstate.idle;
 	}
 	
 	// Update is called once per frame
@@ -22,54 +21,39 @@ public class Tri_State : MonoBehaviour { // 삼각형이 q를 누르면 왼쪽, 
 		
 	}
 
-	public void turn_left(){
-        if (Tristate == Tstate.idle)
+	public void turn(){
+        if (TriState == Tstate.idle)
         {
-            Tristate = Tstate.tleft;
+            TriState = Tstate.co;
         }
-        else if (Tristate == Tstate.tleft)
+        else if (TriState == Tstate.co)
         {
-            Tristate = Tstate.tright;
-        }
-        else if (Tristate == Tstate.tright)
-        {
-            Tristate = Tstate.idle;
-        }
-        SetRotation();
-    }
-
-	public void turn_right(){
-		if(Tristate==Tstate.idle){
-			Tristate=Tstate.tright;
-		}
-		else if(Tristate==Tstate.tleft){
-			Tristate=Tstate.idle;
-		}else if(Tristate==Tstate.tright){
-			Tristate=Tstate.tleft;
+            TriState = Tstate.idle;
         }
         SetRotation();
     }
 
     private void SetRotation() // rotation 값 설정
     {
-        if(Tristate == Tstate.idle)
+        EventContoller.GetComponent<GamePlay>().Initiate();
+        if(TriState == Tstate.idle)
         {
             transform.SetPositionAndRotation(new Vector3(-5.1f, 0f, 0f), new Quaternion(0f, 0f, 0f, 0f));
         }
-        else if(Tristate == Tstate.tleft)
+        else if(TriState == Tstate.co)
         {
-            transform.SetPositionAndRotation(new Vector3(-5.1f, 0f, 0f), new Quaternion(0f, 0f, 0f, 0f));
-            transform.Rotate(new Vector3(0f, 0f, 153f));
-        }
-        else if(Tristate == Tstate.tright)
-        {
-            transform.SetPositionAndRotation(new Vector3(-5.1f, 0f, 0f), new Quaternion(0f, 0f, 0f, 0f));
-            transform.Rotate(new Vector3(0f, 0f, -90f));
+            transform.SetPositionAndRotation(new Vector3(-5.1f, -1.2f, 0f), new Quaternion(0f, 0f, 0f, 0f));
+            transform.Rotate(new Vector3(0f, 0f, 90f));
         }
     }
 
-    public Tstate GetTstate() // Tristate 값을 반환
+    public Tstate GetTstate() // TriState 값을 반환
     {
-        return Tristate;
+        return TriState;
+    }
+
+    public void SetTstate(Tstate input_state) // 선을 input_state로 변경.
+    {
+        TriState = input_state;
     }
 }

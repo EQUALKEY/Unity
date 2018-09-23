@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Line_State : MonoBehaviour { // 현재 활성화 되어있는 선을 저장
+
     public enum Lstate
     {
         idle = 0,
@@ -10,6 +11,7 @@ public class Line_State : MonoBehaviour { // 현재 활성화 되어있는 선�
         Hypotenuse,
         Height
     }
+
     private Lstate L_state;
 
     void Start()
