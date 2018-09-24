@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class GamePlay : MonoBehaviour { // 게임의 전반적인 부분을 관리하는 이벤트컨트롤러라 생각하면 됨.
 
-	public GameObject Tri;
+	public GameObject Tri;              // 삼각형
 	public GameObject Tri_withoutWeapon;
+    public GameObject Enemy;            // Enemy (sin, sec, tan ... 컨트롤)
+    public GameObject GameOver;         // GameOver시 나타나고 EventController의 ResetGame 실행
 
+    public GameObject Circle_b;     // idle 상태 base Circle
+    public GameObject Circle_h;     // idle 상태 hypo Circle
+    public GameObject Circle_cob;   // co 상태 base Circle (height)
+    public GameObject Circle_coh;   // co 상태 hypo Circle
 
-    public GameObject Circle_b;
-    public GameObject Circle_h;
-    public GameObject Circle_cob;
-    public GameObject Circle_coh;
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 	// Update is called once per frame
@@ -33,4 +35,10 @@ public class GamePlay : MonoBehaviour { // 게임의 전반적인 부분을 관�
         Tri.GetComponent<Line_State>().SetLstate(Line_State.Lstate.idle);
     }
 
+    public void ResetGame() { // 게임 다시 시작
+        Enemy.SetActive(true);
+        Enemy.GetComponent<RandomAttack>().Awake();
+        Initiate();
+		GameOver.SetActive(false);
+    }
 }

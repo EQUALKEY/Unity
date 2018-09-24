@@ -56,3 +56,6 @@ TagManager:
   - name: TriWeapon
     uniqueID: 3417356079
     locked: 0
+  - name: GameOver
+    uniqueID: 348785339
+    locked: 0

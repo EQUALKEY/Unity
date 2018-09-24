@@ -54,10 +54,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Background_touch.cs" />
+     <Compile Include="Assets\Scripts\GameOver.cs" />
      <Compile Include="Assets\Scripts\GamePlay.cs" />
      <Compile Include="Assets\Scripts\GameStart.cs" />
      <Compile Include="Assets\Scripts\Line_State.cs" />
      <Compile Include="Assets\Scripts\OnFrame.cs" />
+     <Compile Include="Assets\Scripts\RandomAttack.cs" />
      <Compile Include="Assets\Scripts\Tri_State.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Git/Unity/ET/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
