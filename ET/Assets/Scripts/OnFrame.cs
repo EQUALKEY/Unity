@@ -12,8 +12,10 @@ public class OnFrame : MonoBehaviour {
     public GameObject Enemy;
     public GameObject GameOver;
 
+    public GameObject Spear;
+
     private Vector3 BaseScale;
-    private string name;
+    private string thisname;
     private Line_State.Lstate clickedLine;
     private Line_State.Lstate preLine;
     private Tri_State.Tstate thisTri;
@@ -21,14 +23,13 @@ public class OnFrame : MonoBehaviour {
 
     void Start() // name, clickedLine에 this 정보 저장
     {
-        name = this.gameObject.name;
-        if(name == "Invisible_height")
+        thisname = this.gameObject.name;
+        if(thisname == "Invisible_height")
             clickedLine = Line_State.Lstate.Height;
-        else if(name == "Invisible_base")
+        else if(thisname == "Invisible_base")
             clickedLine = Line_State.Lstate.Base;
-        else if(name == "Invisible_hypotenuse")
+        else if(thisname == "Invisible_hypotenuse")
             clickedLine = Line_State.Lstate.Hypotenuse;
-        Debug.Log(clickedLine);
     }
 
     public void OnMouseEnter() // 선 위에 마우스를 올리면 이펙트 활성화
@@ -75,7 +76,11 @@ public class OnFrame : MonoBehaviour {
     private void Attack(Tri_State.Tstate t, Line_State.Lstate pl, Line_State.Lstate cl) {
         if (t == Tri_State.Tstate.idle) {                                                              // 삼각형이 idle 상태인 경우
             if (pl == Line_State.Lstate.Base) {                                                        // Base가 활성화 시
-                if (cl == Line_State.Lstate.Hypotenuse) Enemy.GetComponent<RandomAttack>().Anwser(1);  // idle 상태에서 Base - Hypo 순서는 sec, index는 1
+                if (cl == Line_State.Lstate.Hypotenuse)
+                {
+                    Enemy.GetComponent<RandomAttack>().Anwser(1);
+                    Instantiate(Spear, Tri.transform);
+                }// idle 상태에서 Base - Hypo 순서는 sec, index는 1
                 else if (cl == Line_State.Lstate.Height) Enemy.GetComponent<RandomAttack>().Anwser(2); // idle 상태에서 Base - Height 순서는 tan, index는 2
                 else GameOver.SetActive(true);                                                         // idle 상태에서 Base - Base 순서는 GameOver
             } else if (pl == Line_State.Lstate.Hypotenuse) {                                                 // Hypo가 활성화 시

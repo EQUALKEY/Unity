@@ -14,9 +14,11 @@ public class GamePlay : MonoBehaviour { // 게임의 전반적인 부분을 관�
     public GameObject Circle_cob;   // co 상태 base Circle (height)
     public GameObject Circle_coh;   // co 상태 hypo Circle
 
+    public bool isPlay;
+
 	// Use this for initialization
 	void Start () {
-
+        isPlay = true;
 	}
 	
 	// Update is called once per frame
@@ -36,9 +38,17 @@ public class GamePlay : MonoBehaviour { // 게임의 전반적인 부분을 관�
     }
 
     public void ResetGame() { // 게임 다시 시작
+
+        Enemy.SetActive(false);
+        Enemy.GetComponent<RandomAttack>().StopCountTime();
         Enemy.SetActive(true);
         Enemy.GetComponent<RandomAttack>().Awake();
         Initiate();
 		GameOver.SetActive(false);
+    }
+
+    public void OverGame()
+    {
+        isPlay = false;
     }
 }

@@ -30,11 +30,14 @@ public class RandomAttack : MonoBehaviour {
 	IEnumerator CountTime() {
 		if(f == 0.0f) {
 			if(isSolving) GameOver.SetActive(true);
-			System.Random r = new System.Random();
-			int rand = r.Next(0, 6);
-			TriFunc[rand].SetActive(true);
-			activated[rand] = true;
-			isSolving = true;
+
+            //if (EventController.GetComponent<GamePlay>().isPlay){
+                System.Random r = new System.Random();
+                int rand = r.Next(0, 6);
+                TriFunc[rand].SetActive(true);
+                activated[rand] = true;
+                isSolving = true;
+           // }
 		}
 		if(f <= faster) {
 			yield return new WaitForSeconds(0.1f);
@@ -47,15 +50,27 @@ public class RandomAttack : MonoBehaviour {
 	}
 
 	public void Anwser(int index) {
-		if (activated[index]) {
-			activated[index] = false;
-			TriFunc[index].SetActive(false);
-			isSolving = false;
-			EventController.GetComponent<GamePlay>().Initiate();
-		} else GameOver.SetActive(true);
+        if (activated[index])
+        {
+            activated[index] = false;
+            TriFunc[index].SetActive(false);
+            isSolving = false;
+            EventController.GetComponent<GamePlay>().Initiate();
+        }
+        else
+        {
+            GameOver.SetActive(true);
+            StopCountTime();
+            EventController.GetComponent<GamePlay>().OverGame();
+        }
 	}
 
-	public void Stop() {
+	public void StopCountTime() {
 		StopCoroutine("CountTime");
 	}
+
+    private void Update()
+    {
+
+    }
 }

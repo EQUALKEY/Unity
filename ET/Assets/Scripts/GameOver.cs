@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour {
 
@@ -8,13 +9,14 @@ public class GameOver : MonoBehaviour {
 	public GameObject Enemy;
 
 	public void OnMouseDown() {
-		Enemy.SetActive(false);
-		Enemy.GetComponent<RandomAttack>().Stop();
-		EventController.GetComponent<GamePlay>().ResetGame();
+
+        EventController.GetComponent<GamePlay>().ResetGame();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+
+    public void Awake()
+    {
+        EventController.GetComponent<GamePlay>().isPlay = false;
+    }
 }
