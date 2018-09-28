@@ -19,6 +19,7 @@ public class RandomAttack : MonoBehaviour {
 	private bool isSolving;
 
 	public void Awake() {
+		EventController.GetComponent<GamePlay>().isPlay = true;
 		isSolving = false;
 		foreach (GameObject i in TriFunc) i.SetActive(false);
 		for (int i =0; i<6; i++) activated[i] = false;
@@ -31,13 +32,13 @@ public class RandomAttack : MonoBehaviour {
 		if(f == 0.0f) {
 			if(isSolving) GameOver.SetActive(true);
 
-            //if (EventController.GetComponent<GamePlay>().isPlay){
+            if (EventController.GetComponent<GamePlay>().isPlay){
                 System.Random r = new System.Random();
                 int rand = r.Next(0, 6);
                 TriFunc[rand].SetActive(true);
                 activated[rand] = true;
                 isSolving = true;
-           // }
+            }
 		}
 		if(f <= faster) {
 			yield return new WaitForSeconds(0.1f);

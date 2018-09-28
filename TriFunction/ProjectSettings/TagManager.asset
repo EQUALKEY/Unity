@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3285542457
+    locked: 0
+  - name: Button
+    uniqueID: 2893389857
+    locked: 0
+  - name: ModeBackground
+    uniqueID: 301235731
+    locked: 0
+  - name: ModeButtons
+    uniqueID: 3946170301
+    locked: 0
+  - name: Triangle
+    uniqueID: 3716339737
+    locked: 0
+  - name: TriangleButton
+    uniqueID: 3391828223
+    locked: 0
+  - name: GameOver
+    uniqueID: 199176289
+    locked: 0
+  - name: GameOverButton
+    uniqueID: 3916298539
+    locked: 0

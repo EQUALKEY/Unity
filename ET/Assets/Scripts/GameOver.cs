@@ -9,7 +9,7 @@ public class GameOver : MonoBehaviour {
 	public GameObject Enemy;
 
 	public void OnMouseDown() {
-
+        SceneManager.LoadScene("Play");
         EventController.GetComponent<GamePlay>().ResetGame();
 	}
 
