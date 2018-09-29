@@ -54,13 +54,15 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Play\EventController.cs" />
+     <Compile Include="Assets\Scripts\Play\RestartButton.cs" />
+     <Compile Include="Assets\Scripts\Play\ToTitleButton.cs" />
      <Compile Include="Assets\Scripts\Title\CloseButton.cs" />
-     <Compile Include="Assets\Scripts\Title\EasyButton.cs" />
      <Compile Include="Assets\Scripts\Title\GameStartButton.cs" />
      <Compile Include="Assets\Scripts\Title\HelpButton.cs" />
-     <Compile Include="Assets\Scripts\Title\NormalButton.cs" />
+     <Compile Include="Assets\Scripts\Title\InfinityButton.cs" />
      <Compile Include="Assets\Scripts\Title\RankButton.cs" />
      <Compile Include="Assets\Scripts\Title\SoundButton.cs" />
+     <Compile Include="Assets\Scripts\Title\StoryButton.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Git/Unity/TriFunction/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
