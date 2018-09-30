@@ -56,7 +56,7 @@ TagManager:
   - name: Triangle
     uniqueID: 3716339737
     locked: 0
-  - name: TriangleButton
+  - name: TriangleEdge
     uniqueID: 3391828223
     locked: 0
   - name: GameOver
