@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CoAngleRange : MonoBehaviour {
     public GameObject CoAngle_Range;
+    public GameObject EC;
 
     // Use this for initialization
     void Start () {

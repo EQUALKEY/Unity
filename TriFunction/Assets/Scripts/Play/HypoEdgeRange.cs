@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HypoEdgeRange : MonoBehaviour {
+
+    public GameObject EC;
     public GameObject HypoEdge_Range;
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    private void OnMouseEnter()
+    {
+        HypoEdge_Range.SetActive(true);
+        EC.GetComponent<EventController>().isOutofTriRange = false;
+    }
+    private void OnMouseExit()
+    {
+        HypoEdge_Range.SetActive(false);
+        EC.GetComponent<EventController>().isOutofTriRange = true;
+    }
+
 }

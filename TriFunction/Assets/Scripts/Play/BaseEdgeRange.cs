@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseEdgeRange : MonoBehaviour {
+
+    public GameObject EC;
     public GameObject BaseEdge_Range;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private void OnMouseEnter()
+    {
+        BaseEdge_Range.SetActive(true);
+        EC.GetComponent<EventController>().isOutofTriRange = false;
+    }
+    private void OnMouseExit()
+    {
+        BaseEdge_Range.SetActive(false) ;
+        EC.GetComponent<EventController>().isOutofTriRange = true;
+    }
 }

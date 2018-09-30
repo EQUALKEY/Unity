@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseAngleRange : MonoBehaviour {
+
+    public GameObject EC;
     public GameObject BaseAngle_Range;
 
 	// Use this for initialization
