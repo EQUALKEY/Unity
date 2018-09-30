@@ -9,35 +9,31 @@ public class HeightEdgeRange : MonoBehaviour {
     public GameObject HeightDeleteEffect;
     private EventController ec;
 
-    void Awake()
-    {
+    void Awake() {
         ec = EC.GetComponent<EventController>();
     }
 
     private void OnMouseEnter()
     {
         ec.isOutofTriRange = false;
-        if (ec.Tstate == 2)
+        if (!ec.isClick)
         {
-            HeightDeleteEffect.SetActive(true);
-        }
-        else
-        {
-            HeightEffect.SetActive(true);
+            if (ec.Tstate == 2)
+            {
+                HeightDeleteEffect.SetActive(true);
+            }
+            else
+            {
+                HeightEffect.SetActive(true);
+            }
         }
     }
 
     private void OnMouseExit()
     {
         ec.isOutofTriRange = true;
-        if (ec.Tstate == 2)
-        {
-            HeightDeleteEffect.SetActive(false);
-        }
-        else
-        {
-            HeightEffect.SetActive(false);
-        }
+        HeightDeleteEffect.SetActive(false);
+        if (ec.Tstate != 2) HeightEffect.SetActive(false);
     }
 
     private void OnMouseDown()

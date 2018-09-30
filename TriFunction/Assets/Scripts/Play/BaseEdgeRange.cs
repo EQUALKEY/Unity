@@ -9,35 +9,31 @@ public class BaseEdgeRange : MonoBehaviour {
     public GameObject BaseDeleteEffect;
     private EventController ec;
 
-    void Awake()
-    {
+    void Awake() {
         ec = EC.GetComponent<EventController>();
     }
 
     private void OnMouseEnter()
     {
         ec.isOutofTriRange = false;
-        if (ec.Tstate == 3)
+        if (!ec.isClick)
         {
-            BaseDeleteEffect.SetActive(true);
-        }
-        else
-        {
-            BaseEffect.SetActive(true);
+            if (ec.Tstate == 3)
+            {
+                BaseDeleteEffect.SetActive(true);
+            }
+            else
+            {
+                BaseEffect.SetActive(true);
+            }
         }
     }
 
     private void OnMouseExit()
     {
         ec.isOutofTriRange = true;
-        if (ec.Tstate == 3)
-        {
-            BaseDeleteEffect.SetActive(false);
-        }
-        else
-        {
-            BaseEffect.SetActive(false);
-        }
+        BaseDeleteEffect.SetActive(false);
+        if (ec.Tstate != 3) BaseEffect.SetActive(false);
     }
 
     private void OnMouseDown()

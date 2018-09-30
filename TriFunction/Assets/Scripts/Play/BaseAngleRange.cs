@@ -9,17 +9,19 @@ public class BaseAngleRange : MonoBehaviour {
     public GameObject EC;
     private EventController ec;
 
-    void Awake()
-    {
+    void Awake() {
         ec = EC.GetComponent<EventController>();
     }
 
     private void OnMouseEnter()
     {
         ec.isOutofTriRange = false;
-        if (ec.isCo)
+        if (!ec.isClick)
         {
-            CoAngleDeleteEffect.SetActive(true);
+            if (ec.isCo)
+            {
+                CoAngleDeleteEffect.SetActive(true);
+            }
         }
     }
 

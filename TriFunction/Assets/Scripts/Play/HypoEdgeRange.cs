@@ -16,27 +16,24 @@ public class HypoEdgeRange : MonoBehaviour {
     private void OnMouseEnter()
     {
         ec.isOutofTriRange = false;
-        if (ec.Tstate == 1)
+        if (!ec.isClick)
         {
-            HypoDeleteEffect.SetActive(true);
-        }
-        else
-        {
-            HypoEffect.SetActive(true);
+            if (ec.Tstate == 1)
+            {
+                HypoDeleteEffect.SetActive(true);
+            }
+            else
+            {
+                HypoEffect.SetActive(true);
+            }
         }
     }
 
     private void OnMouseExit()
     {
         ec.isOutofTriRange = true;
-        if (ec.Tstate == 1)
-        {
-            HypoDeleteEffect.SetActive(false);
-        }
-        else
-        {
-            HypoEffect.SetActive(false);
-        }
+        HypoDeleteEffect.SetActive(false);
+        if (ec.Tstate != 1) HypoEffect.SetActive(false);
     }
 
     private void OnMouseDown()
