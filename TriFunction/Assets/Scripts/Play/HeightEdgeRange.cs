@@ -5,17 +5,67 @@ using UnityEngine;
 public class HeightEdgeRange : MonoBehaviour {
 
     public GameObject EC;
-    public GameObject HeightEdge_Range;
+    public GameObject HeightEffect;
+    public GameObject HeightDeleteEffect;
+    private EventController ec;
+
+    void Awake()
+    {
+        ec = EC.GetComponent<EventController>();
+    }
 
     private void OnMouseEnter()
     {
-        HeightEdge_Range.SetActive(true);
-        EC.GetComponent<EventController>().isOutofTriRange = false;
-    }
-    private void OnMouseExit()
-    {
-        HeightEdge_Range.SetActive(false);
-        EC.GetComponent<EventController>().isOutofTriRange = true;
+        ec.isOutofTriRange = false;
+        if (ec.Tstate == 2)
+        {
+            HeightDeleteEffect.SetActive(true);
+        }
+        else
+        {
+            HeightEffect.SetActive(true);
+        }
     }
 
+    private void OnMouseExit()
+    {
+        ec.isOutofTriRange = true;
+        if (ec.Tstate == 2)
+        {
+            HeightDeleteEffect.SetActive(false);
+        }
+        else
+        {
+            HeightEffect.SetActive(false);
+        }
+    }
+
+    private void OnMouseDown()
+    {
+        int Tstate = ec.Tstate;
+        bool isCo = ec.isCo;
+        if (Tstate == 0)
+        { // 변활성화된게 없는경우
+            HeightEffect.SetActive(true);
+            ec.Tstate = 2;
+        }
+        else if (Tstate == 1)
+        { // Hypo 활성화시
+
+        }
+        else if (Tstate == 2)
+        { // Height 활성화시
+            HeightEffect.SetActive(false);
+            HeightDeleteEffect.SetActive(false);
+            ec.Tstate = 0;
+        }
+        else if (Tstate == 3)
+        { // Base 활성화시
+
+        }
+        else
+        { // 예외시 ERROR
+            Debug.Log("TriState out of range ERROR\n");
+        }
+    }
 }

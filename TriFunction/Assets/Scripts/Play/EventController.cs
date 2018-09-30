@@ -4,23 +4,27 @@ using UnityEngine;
 
 public class EventController : MonoBehaviour {
 
-    public bool isOutofTriRange;
     public GameObject Tri;
+    public bool isOutofTriRange;
+    // int형태로 Tstate변수에 변활성화상태 저장
+    public int Tstate; // 활성화X = 0, Hypo = 1, Height = 2, Base = 3
+    // bool형태로 isCo변수에 각도활성화상태 저장
+    public bool isCo; // 기본각 = false, Co각 = true;
 
+    private Vector3 standardPosition;
+    private Vector3 curScreenSpace;
+    private Vector3 scrSpace;
+    private Vector3 offset;
+    private Vector3 curPosition;
+    private float standardRotation;
+    private float standardw;
 
-    Vector3 standardPosition;
-    Vector3 curScreenSpace;
-    Vector3 scrSpace;
-    Vector3 offset;
-    Vector3 curPosition;
-    float standardRotation;
-    float standardw;
-    // Use this for initialization
-    void Start () {
+    void Awake () {
+        Tstate = 0;
+        isCo = false;
         isOutofTriRange = true;
 	}
 	
-	// Update is called once per frame
 	void Update () {
         if (isOutofTriRange)
         {
