@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CoAngleRange : MonoBehaviour {
 
-    public GameObject CoAngle;
-    public GameObject CoAngleEffect;
-    public GameObject CoAngleDeleteEffect;
     public GameObject EC;
     private EventController ec;
 
@@ -16,37 +13,35 @@ public class CoAngleRange : MonoBehaviour {
 
     private void OnMouseEnter()
     {
-        ec.isOutofTriRange = false;
-        if (!ec.isClick)
+        if (!ec.isRotating)
         {
             if (ec.isCo)
             {
-                CoAngleDeleteEffect.SetActive(true);
+                ec.CoAngleDeleteEffect.SetActive(true);
             }
             else
             {
-                CoAngleEffect.SetActive(true);
+                ec.CoAngleEffect.SetActive(true);
             }
         }
     }
 
     private void OnMouseExit()
     {
-        ec.isOutofTriRange = true;
-        CoAngleDeleteEffect.SetActive(false);
-        CoAngleEffect.SetActive(false);
+        ec.CoAngleDeleteEffect.SetActive(false);
+        ec.CoAngleEffect.SetActive(false);
     }
 
     private void OnMouseDown()
     {
         if(ec.isCo)
         {
-            CoAngle.SetActive(false);
-            CoAngleDeleteEffect.SetActive(false);
+            ec.CoAngle.SetActive(false);
+            ec.CoAngleDeleteEffect.SetActive(false);
             ec.isCo = false;
         } else
         {
-            CoAngle.SetActive(true);
+            ec.CoAngle.SetActive(true);
             ec.isCo = true;
         }
     }

@@ -59,6 +59,9 @@ TagManager:
   - name: TriangleEdge
     uniqueID: 3391828223
     locked: 0
+  - name: Weapon
+    uniqueID: 3244139239
+    locked: 0
   - name: GameOver
     uniqueID: 199176289
     locked: 0
