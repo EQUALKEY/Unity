@@ -24,10 +24,18 @@ public class HypoEdgeRange : MonoBehaviour {
                     ec.HypoDeleteEffect.SetActive(true);
                     break;
                 case 2: // Height
-                    if(ec.isCo) ec.CoSpearEffect.SetActive(true);
+                    if (ec.isCo)
+                    {
+                        ec.CoSpearEffect.SetActive(true);
+                        ec.HypoCoLineEffect.SetActive(true);
+                    }
                     break;
                 case 3: // Base
-                    if(!ec.isCo) ec.SpearEffect.SetActive(true);
+                    if (!ec.isCo)
+                    {
+                        ec.SpearEffect.SetActive(true);
+                        ec.HypoIdleLineEffect.SetActive(true);
+                    }
                     break;
             }
         }
@@ -39,6 +47,11 @@ public class HypoEdgeRange : MonoBehaviour {
         ec.CoSpearEffect.SetActive(false);
         ec.HypoEffect.SetActive(false);
         ec.HypoDeleteEffect.SetActive(false);
+        if (!ec.isLaunching)
+        {
+            ec.HypoIdleLineEffect.SetActive(false);
+            ec.HypoCoLineEffect.SetActive(false);
+        }
     }
 
     private void OnMouseDown()
@@ -50,11 +63,15 @@ public class HypoEdgeRange : MonoBehaviour {
                 ec.HypoEffect.SetActive(false);
                 ec.HypoDeleteEffect.SetActive(true);
                 ec.Tstate = 1;
+                if (ec.isCo) ec.MakeCircle(ec.HypoCoCircle);
+                else ec.MakeCircle(ec.HypoIdleCircle);
                 break;
             case 1: // Hypo 활성화시
                 ec.HypoActivated.SetActive(false);
                 ec.HypoEffect.SetActive(true);
                 ec.HypoDeleteEffect.SetActive(false);
+                ec.HypoCoCircle.SetActive(false);
+                ec.HypoIdleCircle.SetActive(false);
                 ec.Tstate = 0;
                 break;
             case 2: // Height 활성화시

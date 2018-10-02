@@ -37,9 +37,13 @@ public class EventController : MonoBehaviour {
     public GameObject HeightCircle;
     public GameObject BaseCircle;
 
-    // 무기들, 무기들 Effect
+    // 조준선 Effect
+    public GameObject HypoIdleLineEffect;
+    public GameObject HypoCoLineEffect;
     public GameObject BaseLineEffect;
-    public GameObject HypoLineEffect;
+    public GameObject HeightLineEffect;
+
+    // 무기들, 무기들 Effect
     public GameObject Spear;
     public GameObject Bow;
     public GameObject Arrow;
@@ -65,7 +69,7 @@ public class EventController : MonoBehaviour {
     public GameObject CoAngle;
     public GameObject CoAngleEffect;
     public GameObject CoAngleDeleteEffect;
-    
+
     public bool isRotating;      // bool형태로 삼각형 회전 중인지 아닌지 체크
     public bool isLaunching;     // 무기 발사 중인지 체크
     // int형태로 Tstate변수에 변활성화상태 저장
@@ -73,6 +77,11 @@ public class EventController : MonoBehaviour {
     // bool형태로 isCo변수에 각도활성화상태 저장
     public bool isCo;            // 기본각 = false, Co각 = true;
 
+    // 원 생성을 위한 변수들
+    private float f;                        // 원 크기 조절을 위한 실수
+    private Vector3 BaseScale;              // 초기 원 크기
+
+    // 삼각형 회전을 위한 변수들
     private Vector3 TriStartPosition;       // Tri Start Position
     private Quaternion TriStartRotation;    // Tri Start Rocation
     private Vector3 MouseStartPosition;     // 마우스 위치 - 클릭한 순간
@@ -80,6 +89,7 @@ public class EventController : MonoBehaviour {
     private Vector3 CoR;                    // Center of Rotation
     private float RotateAngle;              // 회전각도
 
+    // 초기화
     void Awake () {
         CoR = new Vector3(0f, -0.15f, 0f);  // 깨다 위치
         Tstate = 0;
@@ -88,15 +98,18 @@ public class EventController : MonoBehaviour {
         isRotating = false;
 	}
 
+    // 클릭하면 회전시작
     void OnMouseDown() {
         isRotating = true;
         RotateInit();
     }
     
+    // 마우스 떼면 회전종료
     void OnMouseUp() {
         RotateFinish();
     }
 
+    // 회전 초기화
     public void RotateInit()
     {
         // TriRange 밖에서 마우스 누르면 회전 시작
@@ -107,30 +120,7 @@ public class EventController : MonoBehaviour {
         MouseStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - CoR;
     }
 
-    public void RotateFinish()
-    {
-        if(isRotating)
-        {
-            isRotating = false;
-            Spear.SetActive(false);
-            Bow.SetActive(false);
-            Arrow.SetActive(false);
-            Shield.SetActive(false);
-            CoSpear.SetActive(false);
-            CoBow.SetActive(false);
-            CoArrow.SetActive(false);
-            CoShield.SetActive(false);
-            if(isLaunching)
-            {
-                isLaunching = false;
-                HypoActivated.SetActive(false);
-                HeightActivated.SetActive(false);
-                BaseActivated.SetActive(false);
-                Tstate = 0;
-            }
-        }
-    }
-
+    // 회전
 	void Update () {
         if (isRotating)
         {
@@ -143,4 +133,57 @@ public class EventController : MonoBehaviour {
             Tri.GetComponent<Transform>().position = Quaternion.Euler(Vector3.forward * RotateAngle) * TriStartPosition + CoR;
         }
 	}
+
+    // 회전 종료, 무기 발사 시 전부 다 끄고 아니면 활성화변들과 원은 놔둠
+    public void RotateFinish()
+    {
+        if (isRotating)
+        {
+            isRotating = false;
+            Spear.SetActive(false);
+            Bow.SetActive(false);
+            Arrow.SetActive(false);
+            Shield.SetActive(false);
+            CoSpear.SetActive(false);
+            CoBow.SetActive(false);
+            CoArrow.SetActive(false);
+            CoShield.SetActive(false);
+            if (isLaunching)
+            {
+                isLaunching = false;
+                HypoActivated.SetActive(false);
+                HeightActivated.SetActive(false);
+                BaseActivated.SetActive(false);
+                HypoIdleCircle.SetActive(false);
+                HypoCoCircle.SetActive(false);
+                HeightCircle.SetActive(false);
+                BaseCircle.SetActive(false);
+                HypoIdleLineEffect.SetActive(false);
+                HypoCoLineEffect.SetActive(false);
+                HeightLineEffect.SetActive(false);
+                BaseLineEffect.SetActive(false);
+                Tstate = 0;
+            }
+        }
+    }
+
+    // 원 생성, 생성할 원을 인자로 받아옴
+    public void MakeCircle(GameObject Circle)
+    {
+        Circle.SetActive(true);
+        Circle.transform.localScale = new Vector3(0f, 0f, 0f);
+        f = 0f;
+        StartCoroutine("createCircle", Circle);
+    }
+
+    IEnumerator createCircle(GameObject Circle)
+    {
+        if (f <= 1.05f)
+        {
+            Circle.transform.localScale = new Vector3(f, f, 1f);
+            f += 0.1f;
+            yield return new WaitForSeconds(0.01f);
+            StartCoroutine("createCircle", Circle);
+        }
+    }
 }

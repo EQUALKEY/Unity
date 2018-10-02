@@ -22,7 +22,11 @@ public class BaseEdgeRange : MonoBehaviour
                     ec.BaseEffect.SetActive(true);
                     break;
                 case 1: // Hypo
-                    if (ec.isCo) ec.CoBowEffect.SetActive(true);
+                    if (ec.isCo)
+                    {
+                        ec.CoBowEffect.SetActive(true);
+                        ec.HeightLineEffect.SetActive(true);
+                    }
                     break;
                 case 2: // Height
                     if (ec.isCo) ec.CoShieldEffect.SetActive(true);
@@ -40,6 +44,7 @@ public class BaseEdgeRange : MonoBehaviour
         ec.CoShieldEffect.SetActive(false);
         ec.BaseEffect.SetActive(false);
         ec.BaseDeleteEffect.SetActive(false);
+        if (!ec.isLaunching) ec.HeightLineEffect.SetActive(false);
     }
 
     private void OnMouseDown()
@@ -51,6 +56,7 @@ public class BaseEdgeRange : MonoBehaviour
                 ec.BaseEffect.SetActive(false);
                 ec.BaseDeleteEffect.SetActive(true);
                 ec.Tstate = 3;
+                if (!ec.isCo) ec.MakeCircle(ec.BaseCircle);
                 break;
             case 1: // Hypo 활성화시
                 if (ec.isCo)
@@ -77,6 +83,7 @@ public class BaseEdgeRange : MonoBehaviour
                 ec.BaseActivated.SetActive(false);
                 ec.BaseEffect.SetActive(true);
                 ec.BaseDeleteEffect.SetActive(false);
+                ec.BaseCircle.SetActive(false);
                 ec.Tstate = 0;
                 break;
         }
