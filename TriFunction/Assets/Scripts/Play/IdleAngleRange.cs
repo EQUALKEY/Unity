@@ -13,26 +13,26 @@ public class IdleAngleRange : MonoBehaviour {
 
     private void OnMouseEnter()
     {
-        if (!ec.isRotating)
+        if (!ec.isRotating && ec.isCo)
         {
-            if (ec.isCo)
-            {
-                ec.CoAngleDeleteEffect.SetActive(true);
-            }
+            ec.CoAngleDeleteEffect.SetActive(true);
+            ec.IdleAngleEffect.SetActive(true);
         }
     }
 
     private void OnMouseExit()
     {
         ec.CoAngleDeleteEffect.SetActive(false);
+        ec.IdleAngleEffect.SetActive(false);
     }
 
     private void OnMouseDown()
     {
         if (ec.isCo)
         {
-            ec.CoAngle.SetActive(false);
+            ec.IdleAngleEffect.SetActive(false);
             ec.CoAngleDeleteEffect.SetActive(false);
+            ec.CoAngle.SetActive(false);
             ec.isCo = false;
         }
     }

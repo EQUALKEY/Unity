@@ -13,11 +13,9 @@ public class HypoEdgeRange : MonoBehaviour {
 
     private void OnMouseEnter()
     {
-        int Tstate = ec.Tstate;
-        bool isCo = ec.isCo;
         if (!ec.isRotating)
         {
-            switch(Tstate)
+            switch(ec.Tstate)
             {
                 case 0: // 활성화X
                     ec.HypoEffect.SetActive(true);
@@ -26,15 +24,10 @@ public class HypoEdgeRange : MonoBehaviour {
                     ec.HypoDeleteEffect.SetActive(true);
                     break;
                 case 2: // Height
-                    if(isCo)
-                    {
-                        ec.isRotatePosible = true;
-                        ec.CoSpearEffect.SetActive(true);
-                    }
+                    if(ec.isCo) ec.CoSpearEffect.SetActive(true);
                     break;
                 case 3: // Base
-                    ec.isRotatePosible = true;
-                    ec.SpearEffect.SetActive(true);
+                    if(!ec.isCo) ec.SpearEffect.SetActive(true);
                     break;
             }
         }
@@ -42,18 +35,15 @@ public class HypoEdgeRange : MonoBehaviour {
 
     private void OnMouseExit()
     {
-        if (!ec.isRotating)
-        {
-            ec.HypoEffect.SetActive(false);
-            ec.HypoDeleteEffect.SetActive(false);
-        }
+        ec.SpearEffect.SetActive(false);
+        ec.CoSpearEffect.SetActive(false);
+        ec.HypoEffect.SetActive(false);
+        ec.HypoDeleteEffect.SetActive(false);
     }
 
     private void OnMouseDown()
     {
-        int Tstate = ec.Tstate;
-        bool isCo = ec.isCo;
-        switch(Tstate)
+        switch(ec.Tstate)
         {
             case 0: // 변활성화된게 없는경우
                 ec.HypoActivated.SetActive(true);
@@ -68,18 +58,30 @@ public class HypoEdgeRange : MonoBehaviour {
                 ec.Tstate = 0;
                 break;
             case 2: // Height 활성화시
-                if(isCo)
+                if(ec.isCo)
                 {
                     ec.CoSpearEffect.SetActive(false);
                     ec.CoSpear.SetActive(true);
                     ec.isRotating = true;
+                    ec.isLaunching = true;
+                    ec.RotateInit();
                 }
                 break;
             case 3: // Base 활성화시
-                ec.SpearEffect.SetActive(false);
-                ec.Spear.SetActive(true);
-                ec.isRotating = true;
+                if(!ec.isCo)
+                {
+                    ec.SpearEffect.SetActive(false);
+                    ec.Spear.SetActive(true);
+                    ec.isRotating = true;
+                    ec.isLaunching = true;
+                    ec.RotateInit();
+                }
                 break;
         }
+    }
+
+    void OnMouseUp()
+    {
+        ec.RotateFinish();
     }
 }

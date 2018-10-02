@@ -1094,7 +1094,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 381431807}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.045, y: 0.785, z: 0}
+  m_LocalPosition: {x: 1.04, y: 0.797, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 245203113}
@@ -1768,7 +1768,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 604878239}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.06, y: 0.797, z: 0}
+  m_LocalPosition: {x: 1.04, y: 0.797, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 914847920}
@@ -2633,7 +2633,7 @@ MonoBehaviour:
   CoSpear: {fileID: 113771852}
   CoBow: {fileID: 921569598}
   CoArrow: {fileID: 317522788}
-  CoShield: {fileID: 714449874}
+  CoShield: {fileID: 203364991}
   SpearEffect: {fileID: 1917723826}
   BowEffect: {fileID: 2141125363}
   ArrowEffect: {fileID: 1575333609}
@@ -2646,8 +2646,8 @@ MonoBehaviour:
   CoAngle: {fileID: 604878239}
   CoAngleEffect: {fileID: 381431807}
   CoAngleDeleteEffect: {fileID: 1624807752}
-  isRotatePosible: 0
   isRotating: 0
+  isLaunching: 0
   Tstate: 0
   isCo: 0
 --- !u!61 &1053816594
@@ -3768,7 +3768,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1624807752}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.045, y: 0.785, z: 0}
+  m_LocalPosition: {x: 1.04, y: 0.797, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 245203113}
@@ -3918,7 +3918,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1707789376}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.595, y: -0.553, z: 0}
+  m_LocalPosition: {x: -1.609, y: -0.572, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 245203113}

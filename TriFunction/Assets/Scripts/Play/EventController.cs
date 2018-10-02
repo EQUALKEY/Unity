@@ -65,9 +65,9 @@ public class EventController : MonoBehaviour {
     public GameObject CoAngle;
     public GameObject CoAngleEffect;
     public GameObject CoAngleDeleteEffect;
-
-    public bool isRotatePosible; // 회전 가능 / 불가능 확인
+    
     public bool isRotating;      // bool형태로 삼각형 회전 중인지 아닌지 체크
+    public bool isLaunching;     // 무기 발사 중인지 체크
     // int형태로 Tstate변수에 변활성화상태 저장
     public int Tstate;           // 활성화X = 0, Hypo = 1, Height = 2, Base = 3
     // bool형태로 isCo변수에 각도활성화상태 저장
@@ -84,27 +84,53 @@ public class EventController : MonoBehaviour {
         CoR = new Vector3(0f, -0.15f, 0f);  // 깨다 위치
         Tstate = 0;
         isCo = false;
+        isLaunching = false;
         isRotating = false;
-        isRotatePosible = true;
 	}
 
     void OnMouseDown() {
-        if (isRotatePosible)
-        {   // TriRange 밖에서 마우스 누르면 회전 시작
-            // 시작 시 삼각형 위치(깨다 기준), 회전 기록
-            TriStartPosition = Tri.GetComponent<Transform>().position - CoR;
-            TriStartRotation = Tri.GetComponent<Transform>().rotation;
-            // 마우스 시작위치는 깨다 기준 상대적 위치
-            MouseStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - CoR;
-            isRotating = true;
-        }
+        isRotating = true;
+        RotateInit();
     }
     
     void OnMouseUp() {
-        isRotating = false;
-        isRotatePosible = false;
+        RotateFinish();
     }
-	/*
+
+    public void RotateInit()
+    {
+        // TriRange 밖에서 마우스 누르면 회전 시작
+        // 시작 시 삼각형 위치(깨다 기준), 회전 기록
+        TriStartPosition = Tri.GetComponent<Transform>().position - CoR;
+        TriStartRotation = Tri.GetComponent<Transform>().rotation;
+        // 마우스 시작위치는 깨다 기준 상대적 위치
+        MouseStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - CoR;
+    }
+
+    public void RotateFinish()
+    {
+        if(isRotating)
+        {
+            isRotating = false;
+            Spear.SetActive(false);
+            Bow.SetActive(false);
+            Arrow.SetActive(false);
+            Shield.SetActive(false);
+            CoSpear.SetActive(false);
+            CoBow.SetActive(false);
+            CoArrow.SetActive(false);
+            CoShield.SetActive(false);
+            if(isLaunching)
+            {
+                isLaunching = false;
+                HypoActivated.SetActive(false);
+                HeightActivated.SetActive(false);
+                BaseActivated.SetActive(false);
+                Tstate = 0;
+            }
+        }
+    }
+
 	void Update () {
         if (isRotating)
         {
@@ -116,5 +142,5 @@ public class EventController : MonoBehaviour {
             Tri.GetComponent<Transform>().rotation = TriStartRotation * Quaternion.Euler(Vector3.forward * RotateAngle);
             Tri.GetComponent<Transform>().position = Quaternion.Euler(Vector3.forward * RotateAngle) * TriStartPosition + CoR;
         }
-	}*/
+	}
 }

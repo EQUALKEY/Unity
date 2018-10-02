@@ -8,35 +8,24 @@ public class BaseEdgeRange : MonoBehaviour
     public GameObject EC;
     private EventController ec;
 
-    void Awake()
-    {
+    void Awake() {
         ec = EC.GetComponent<EventController>();
     }
 
     private void OnMouseEnter()
     {
-        int Tstate = ec.Tstate;
-        bool isCo = ec.isCo;
         if (!ec.isRotating)
         {
-            switch (Tstate)
+            switch (ec.Tstate)
             {
                 case 0: // 활성화X
                     ec.BaseEffect.SetActive(true);
                     break;
                 case 1: // Hypo
-                    if (isCo)
-                    {
-                        ec.isRotatePosible = true;
-                        ec.CoBow.SetActive(true);
-                    }
+                    if (ec.isCo) ec.CoBowEffect.SetActive(true);
                     break;
                 case 2: // Height
-                    if (isCo)
-                    {
-                        ec.isRotatePosible = true;
-                        ec.CoShield.SetActive(true);
-                    }
+                    if (ec.isCo) ec.CoShieldEffect.SetActive(true);
                     break;
                 case 3: // Base
                     ec.BaseDeleteEffect.SetActive(true);
@@ -47,18 +36,15 @@ public class BaseEdgeRange : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (!ec.isRotating)
-        {
-            ec.BaseEffect.SetActive(false);
-            ec.BaseDeleteEffect.SetActive(false);
-        }
+        ec.CoBowEffect.SetActive(false);
+        ec.CoShieldEffect.SetActive(false);
+        ec.BaseEffect.SetActive(false);
+        ec.BaseDeleteEffect.SetActive(false);
     }
 
     private void OnMouseDown()
     {
-        int Tstate = ec.Tstate;
-        bool isCo = ec.isCo;
-        switch (Tstate)
+        switch (ec.Tstate)
         {
             case 0: // 변활성화된게 없는경우
                 ec.BaseActivated.SetActive(true);
@@ -67,20 +53,24 @@ public class BaseEdgeRange : MonoBehaviour
                 ec.Tstate = 3;
                 break;
             case 1: // Hypo 활성화시
-                if (isCo)
+                if (ec.isCo)
                 {
                     ec.CoBowEffect.SetActive(false);
                     ec.CoBow.SetActive(true);
                     ec.CoArrow.SetActive(true);
+                    ec.isLaunching = true;
                     ec.isRotating = true;
+                    ec.RotateInit();
                 }
                 break;
             case 2: // Height 활성화시
-                if (isCo)
+                if (ec.isCo)
                 {
                     ec.CoShieldEffect.SetActive(false);
                     ec.CoShield.SetActive(true);
+                    ec.isLaunching = true;
                     ec.isRotating = true;
+                    ec.RotateInit();
                 }
                 break;
             case 3: // Base 활성화시
@@ -90,5 +80,10 @@ public class BaseEdgeRange : MonoBehaviour
                 ec.Tstate = 0;
                 break;
         }
+    }
+
+    void OnMouseUp()
+    {
+        ec.RotateFinish();
     }
 }

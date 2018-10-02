@@ -13,22 +13,21 @@ public class HeightEdgeRange : MonoBehaviour {
 
     private void OnMouseEnter()
     {
-        int Tstate = ec.Tstate;
         if (!ec.isRotating)
         {
-            switch(Tstate)
+            switch(ec.Tstate)
             {
                 case 0:
                     ec.HeightEffect.SetActive(true);
                     break;
                 case 1:
-                    ec.BowEffect.SetActive(true);
+                    if(!ec.isCo) ec.BowEffect.SetActive(true);
                     break;
                 case 2:
                     ec.HeightDeleteEffect.SetActive(true);
                     break;
                 case 3:
-                    ec.Shield.SetActive(true);
+                    if(!ec.isCo) ec.ShieldEffect.SetActive(true);
                     break;
             }
         }
@@ -36,17 +35,15 @@ public class HeightEdgeRange : MonoBehaviour {
 
     private void OnMouseExit()
     {
-        if(!ec.isRotating) { 
-            ec.HeightDeleteEffect.SetActive(false);
-            ec.HeightEffect.SetActive(false);
-        }
+        ec.BowEffect.SetActive(false);
+        ec.ShieldEffect.SetActive(false);
+        ec.HeightDeleteEffect.SetActive(false);
+        ec.HeightEffect.SetActive(false);
     }
 
     private void OnMouseDown()
     {
-        int Tstate = ec.Tstate;
-        bool isCo = ec.isCo;
-        switch (Tstate)
+        switch (ec.Tstate)
         {
             case 0: // 변활성화된게 없는경우
                 ec.HeightActivated.SetActive(true);
@@ -55,10 +52,15 @@ public class HeightEdgeRange : MonoBehaviour {
                 ec.Tstate = 2;
                 break;
             case 1: // Hypo 활성화시
-                ec.BowEffect.SetActive(false);
-                ec.Bow.SetActive(true);
-                ec.Arrow.SetActive(true);
-                ec.isRotating = true;
+                if(!ec.isCo)
+                {
+                    ec.BowEffect.SetActive(false);
+                    ec.Bow.SetActive(true);
+                    ec.Arrow.SetActive(true);
+                    ec.isLaunching = true;
+                    ec.isRotating = true;
+                    ec.RotateInit();
+                }
                 break;
             case 2: // Height 활성화시
                 ec.HeightActivated.SetActive(false);
@@ -67,10 +69,20 @@ public class HeightEdgeRange : MonoBehaviour {
                 ec.Tstate = 0;
                 break;
             case 3: // Base 활성화시
-                ec.ShieldEffect.SetActive(false);
-                ec.Shield.SetActive(true);
-                ec.isRotating = true;
+                if(!ec.isCo)
+                {
+                    ec.ShieldEffect.SetActive(false);
+                    ec.Shield.SetActive(true);
+                    ec.isLaunching = true;
+                    ec.isRotating = true;
+                    ec.RotateInit();
+                }
                 break;
         }
+    }
+
+    void OnMouseUp()
+    {
+        ec.RotateFinish();
     }
 }

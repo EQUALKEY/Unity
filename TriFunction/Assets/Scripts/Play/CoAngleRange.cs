@@ -15,14 +15,8 @@ public class CoAngleRange : MonoBehaviour {
     {
         if (!ec.isRotating)
         {
-            if (ec.isCo)
-            {
-                ec.CoAngleDeleteEffect.SetActive(true);
-            }
-            else
-            {
-                ec.CoAngleEffect.SetActive(true);
-            }
+            if (ec.isCo) ec.CoAngleDeleteEffect.SetActive(true);
+            else ec.CoAngleEffect.SetActive(true);
         }
     }
 
@@ -38,10 +32,13 @@ public class CoAngleRange : MonoBehaviour {
         {
             ec.CoAngle.SetActive(false);
             ec.CoAngleDeleteEffect.SetActive(false);
+            ec.CoAngleEffect.SetActive(true);
             ec.isCo = false;
         } else
         {
+            ec.CoAngleEffect.SetActive(false);
             ec.CoAngle.SetActive(true);
+            ec.CoAngleDeleteEffect.SetActive(true);
             ec.isCo = true;
         }
     }
