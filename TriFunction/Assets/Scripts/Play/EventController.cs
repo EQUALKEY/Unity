@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EventController : MonoBehaviour {
 
@@ -89,6 +90,11 @@ public class EventController : MonoBehaviour {
     private Vector3 CoR;                    // Center of Rotation
     private float RotateAngle;              // 회전각도
 
+
+    // 현재 시각
+    public float current_Time;
+    public Text TimeText;
+
     // 초기화
     void Awake () {
         CoR = new Vector3(0f, -0.15f, 0f);  // 깨다 위치
@@ -96,6 +102,7 @@ public class EventController : MonoBehaviour {
         isCo = false;
         isLaunching = false;
         isRotating = false;
+        StartTime();
 	}
 
     // 클릭하면 회전시작
@@ -185,5 +192,19 @@ public class EventController : MonoBehaviour {
             yield return new WaitForSeconds(0.01f);
             StartCoroutine("createCircle", Circle);
         }
+    }
+    public void StartTime()
+    {
+        current_Time = 0f;
+        StartCoroutine("Timer");
+    }
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(0.01f);
+        current_Time += 0.01f;
+        TimeText.text = current_Time.ToString("##0.00") + "s";
+        Debug.Log(TimeText.text);
+        StartCoroutine("Timer");
+
     }
 }
