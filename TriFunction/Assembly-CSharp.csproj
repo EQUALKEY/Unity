@@ -61,12 +61,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Play\Arrow.cs" />
     <Compile Include="Assets\Scripts\Play\BaseEdgeRange.cs" />
     <Compile Include="Assets\Scripts\Play\CoAngleRange.cs" />
+    <Compile Include="Assets\Scripts\Play\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scripts\Play\EventController.cs" />
     <Compile Include="Assets\Scripts\Play\HeightEdgeRange.cs" />
     <Compile Include="Assets\Scripts\Play\HypoEdgeRange.cs" />
     <Compile Include="Assets\Scripts\Play\IdleAngleRange.cs" />
+    <Compile Include="Assets\Scripts\Play\MakeEnemy.cs" />
     <Compile Include="Assets\Scripts\Play\RestartButton.cs" />
     <Compile Include="Assets\Scripts\Play\ToTitleButton.cs" />
     <Compile Include="Assets\Scripts\Title\CloseButton.cs" />

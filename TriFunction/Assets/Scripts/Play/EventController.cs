@@ -8,6 +8,9 @@ public class EventController : MonoBehaviour {
     // GameOver 오브젝트
     public GameObject GameOverWindow;
 
+    // 깨다
+    public GameObject Character;
+
     // 폭탄 오브젝트들
     public GameObject SinBoom;
     public GameObject SecBoom;
@@ -95,13 +98,27 @@ public class EventController : MonoBehaviour {
     public float current_Time;
     public Text TimeText;
 
+
+    // 목숨
+    public GameObject[] LifeOn = new GameObject[3];
+    public GameObject[] LifeOff = new GameObject[3];
+    public int Lifes;
+
+    // 필살기
+    public GameObject UltiBar;
+    public GameObject UltiGage;
+    public int UltimateGage;
+
     // 초기화
     void Awake () {
-        CoR = new Vector3(0f, -0.15f, 0f);  // 깨다 위치
+        CoR = new Vector3(0f, 0f, 0f);  // 깨다 위치
         Tstate = 0;
         isCo = false;
         isLaunching = false;
         isRotating = false;
+        UltimateGage = 0;
+        Lifes = 3;
+
         StartTime();
 	}
 
@@ -193,18 +210,47 @@ public class EventController : MonoBehaviour {
             StartCoroutine("createCircle", Circle);
         }
     }
-    public void StartTime()
+    public void StartTime() // 시간 초기화 및 Timer()함수 실행
     {
         current_Time = 0f;
         StartCoroutine("Timer");
     }
-    IEnumerator Timer()
+    IEnumerator Timer() // 0.01초 단위로 시간을 측정
     {
         yield return new WaitForSeconds(0.01f);
         current_Time += 0.01f;
         TimeText.text = current_Time.ToString("##0.00") + "s";
-        Debug.Log(TimeText.text);
         StartCoroutine("Timer");
 
+    }
+
+    public void LostLife() // Life를 잃는 것을 처리해주는 함수, 적이 몸에 닿을 시 실행
+    {
+        switch (Lifes)
+        {
+            case 3:  // 3개면 2개로
+                LifeOn[2].SetActive(false);
+                LifeOff[2].SetActive(true);
+                Lifes--;
+                break;
+            case 2: // 2개면 1개로
+                LifeOn[1].SetActive(false);
+                LifeOff[1].SetActive(true);
+                Lifes--;
+                break;
+            case 1: // 1개면 게임오버
+                LifeOn[0].SetActive(false);
+                LifeOff[0].SetActive(true);
+                Lifes--;
+                GameOver();
+                break;
+        }
+    }
+
+    public void GameOver() // GameOver 시 해야될 일을 해주는 함수
+    {
+        StopCoroutine("Timer");
+        GameOverWindow.SetActive(true);
+        GameOverWindow.transform.Translate(new Vector3(0f, 0f, 0.01f));
     }
 }

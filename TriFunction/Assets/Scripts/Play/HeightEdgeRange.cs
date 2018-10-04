@@ -7,8 +7,15 @@ public class HeightEdgeRange : MonoBehaviour {
     public GameObject EC;
     private EventController ec;
 
+    private bool isBow;
+    public GameObject Bow;
+    public GameObject Arrow;
+
+
     void Awake() {
         ec = EC.GetComponent<EventController>();
+        isBow = false;
+
     }
 
     private void OnMouseEnter()
@@ -66,6 +73,7 @@ public class HeightEdgeRange : MonoBehaviour {
                     ec.isLaunching = true;
                     ec.isRotating = true;
                     ec.RotateInit();
+                    isBow = true;
                 }
                 break;
             case 2: // Height 활성화시
@@ -90,6 +98,22 @@ public class HeightEdgeRange : MonoBehaviour {
 
     void OnMouseUp()
     {
+        if (isBow)
+        {
+            StartCoroutine("Shoot_Bow");
+            isBow = false;
+        }
+
         ec.RotateFinish();
+    }
+
+    IEnumerator Shoot_Bow()
+    {
+        GameObject BowObject = Instantiate(Bow, ec.Bow.transform.position, ec.Bow.transform.rotation);
+        GameObject ArrowObject = Instantiate(Arrow, ec.Arrow.transform.position, ec.Arrow.transform.rotation);
+
+        ArrowObject.tag = "sin";
+        yield return new WaitForSeconds(1f);
+        Destroy(BowObject);
     }
 }
