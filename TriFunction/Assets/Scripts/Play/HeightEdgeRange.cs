@@ -101,6 +101,7 @@ public class HeightEdgeRange : MonoBehaviour {
         if (isBow)
         {
             StartCoroutine("Shoot_Bow");
+            ec.SetAnimationParameters(0, 1);
             isBow = false;
         }
 

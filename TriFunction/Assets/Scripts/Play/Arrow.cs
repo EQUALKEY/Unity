@@ -6,7 +6,7 @@ public class Arrow : MonoBehaviour {
 
     Vector3 direction;
     GameObject IdleAngle;
-
+    
     private void Awake()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
@@ -20,8 +20,8 @@ public class Arrow : MonoBehaviour {
     {
         if(collision.transform.tag == transform.tag)
         {
-
-            Destroy(collision.gameObject);
+            
+            collision.gameObject.GetComponent<EnemyBehaviour>().DoDie();
             Destroy(this.gameObject);
         }
     }

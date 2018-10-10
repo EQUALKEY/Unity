@@ -20,7 +20,7 @@ public class MakeEnemy : MonoBehaviour {
     {
         
         int EnemyType = Random.Range(0, 6);
-        Create_Enemy(EnemyType,0.01f);
+        Create_Enemy(EnemyType,1f);
         yield return new WaitForSeconds(3f);
         StartCoroutine("Create_Enemy_Controller");
     }

@@ -10,6 +10,7 @@ public class EventController : MonoBehaviour {
 
     // 깨다
     public GameObject Character;
+    private Animator Character_Animator;
 
     // 폭탄 오브젝트들
     public GameObject SinBoom;
@@ -98,6 +99,9 @@ public class EventController : MonoBehaviour {
     public float current_Time;
     public Text TimeText;
 
+    // 점수
+    public int Score;
+    public Text ScoreText;
 
     // 목숨
     public GameObject[] LifeOn = new GameObject[3];
@@ -118,6 +122,10 @@ public class EventController : MonoBehaviour {
         isRotating = false;
         UltimateGage = 0;
         Lifes = 3;
+        Score = 0;
+
+        Character_Animator = Character.GetComponent<Animator>();
+        Character_Animator.SetInteger("Quebon_state", 0);
 
         StartTime();
 	}
@@ -219,10 +227,40 @@ public class EventController : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.01f);
         current_Time += 0.01f;
-        TimeText.text = current_Time.ToString("##0.00") + "s";
+        TimeText.text = current_Time.ToString("##0.00") + " sec";
         StartCoroutine("Timer");
 
     }
+
+    public void GetScore(int num)
+    {
+        Score += num;
+        ScoreText.text = Score.ToString("0") + " 마리";
+    }
+
+    public void SetAnimationParameters(int NumOfAnimator, int state)
+    {
+        switch(NumOfAnimator) 
+        {
+            case 0: // Character_Animator , Quebon_state ( 0 : idle , 1 : attack , 2 : damaged )
+                Character_Animator.SetInteger("Quebon_state", state);
+                StopCoroutine("EndAnimation");
+                StartCoroutine("EndAnimation", NumOfAnimator);
+                break;
+
+        }
+    }
+
+    IEnumerator EndAnimation(int NumOfAnimator)
+    {
+        if (NumOfAnimator == 0)
+        {
+            yield return new WaitForSeconds(1f);
+            Character_Animator.SetInteger("Quebon_state", 0);
+        }
+
+    }
+
 
     public void LostLife() // Life를 잃는 것을 처리해주는 함수, 적이 몸에 닿을 시 실행
     {

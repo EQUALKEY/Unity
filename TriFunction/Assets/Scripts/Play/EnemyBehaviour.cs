@@ -21,11 +21,26 @@ public class EnemyBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Translate(Direction * Time.deltaTime);
+        transform.Translate(Direction * Velocity * Time.deltaTime);
         if (Vector3.Distance(new Vector3(0f, 0f, 0f), transform.position) < 2f)
         {
+            ec.SetAnimationParameters(0, 2);
             ec.LostLife();
             Destroy(this.gameObject);
         }
 	}
+
+    public void DoDie()
+    {
+        ec.GetScore(1);
+        Velocity = 0f;
+        GetComponent<Animator>().SetInteger("Monster_state", 1);
+        StartCoroutine("DoDestroy");
+    }
+
+    IEnumerator DoDestroy()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(this.gameObject);
+    }
 }

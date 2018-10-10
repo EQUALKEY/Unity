@@ -8,8 +8,13 @@ public class BaseEdgeRange : MonoBehaviour
     public GameObject EC;
     private EventController ec;
 
+    private bool isCoBow;
+    public GameObject CoBow;
+    public GameObject CoArrow;
+
     void Awake() {
         ec = EC.GetComponent<EventController>();
+        isCoBow = false;
     }
 
     private void OnMouseEnter()
@@ -67,6 +72,7 @@ public class BaseEdgeRange : MonoBehaviour
                     ec.isLaunching = true;
                     ec.isRotating = true;
                     ec.RotateInit();
+                    isCoBow = true;
                 }
                 break;
             case 2: // Height 활성화시
@@ -91,6 +97,23 @@ public class BaseEdgeRange : MonoBehaviour
 
     void OnMouseUp()
     {
+        if (isCoBow)
+        {
+            StartCoroutine("Shoot_CoBow");
+            ec.SetAnimationParameters(0, 1);
+            isCoBow = false;
+        }
+
         ec.RotateFinish();
+    }
+
+    IEnumerator Shoot_CoBow()
+    {
+        GameObject CoBowObject = Instantiate(CoBow, ec.CoBow.transform.position, ec.CoBow.transform.rotation);
+        GameObject CoArrowObject = Instantiate(CoArrow, ec.CoArrow.transform.position, ec.CoArrow.transform.rotation);
+
+        CoArrowObject.tag = "cos";
+        yield return new WaitForSeconds(1f);
+        Destroy(CoBowObject);
     }
 }
