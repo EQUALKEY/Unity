@@ -247,7 +247,6 @@ public class EventController : MonoBehaviour {
                 StopCoroutine("EndAnimation");
                 StartCoroutine("EndAnimation", NumOfAnimator);
                 break;
-
         }
     }
 

@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseEdgeRange : MonoBehaviour
-{
+public class BaseEdgeRange : MonoBehaviour {
 
     public GameObject EC;
     private EventController ec;
 
-    private bool isCoBow;
+    private bool isCoBow, isCoShield;
     public GameObject CoBow;
     public GameObject CoArrow;
+    public GameObject CoShield;
 
     void Awake() {
         ec = EC.GetComponent<EventController>();
         isCoBow = false;
+        isCoShield = false;
     }
 
     private void OnMouseEnter()
@@ -83,6 +84,7 @@ public class BaseEdgeRange : MonoBehaviour
                     ec.isLaunching = true;
                     ec.isRotating = true;
                     ec.RotateInit();
+                    isCoShield = true;
                 }
                 break;
             case 3: // Base 활성화시
@@ -104,6 +106,13 @@ public class BaseEdgeRange : MonoBehaviour
             isCoBow = false;
         }
 
+        if (isCoShield)
+        {
+            StartCoroutine("Keep_CoShield");
+            ec.SetAnimationParameters(0, 1);
+            isCoShield = false;
+        }
+
         ec.RotateFinish();
     }
 
@@ -115,5 +124,14 @@ public class BaseEdgeRange : MonoBehaviour
         CoArrowObject.tag = "cos";
         yield return new WaitForSeconds(1f);
         Destroy(CoBowObject);
+    }
+
+    IEnumerator Keep_CoShield()
+    {
+        GameObject CoShieldObject = Instantiate(CoShield, ec.CoShield.transform.position, ec.CoShield.transform.rotation);
+
+        CoShieldObject.tag = "cotan";
+        yield return new WaitForSeconds(2f);
+        Destroy(CoShieldObject);
     }
 }

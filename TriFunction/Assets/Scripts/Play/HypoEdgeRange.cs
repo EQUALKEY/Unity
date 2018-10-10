@@ -7,8 +7,14 @@ public class HypoEdgeRange : MonoBehaviour {
     public GameObject EC;
     private EventController ec;
 
+    private bool isSpear, isCoSpear;
+    public GameObject Spear;
+    public GameObject CoSpear;
+
     void Awake() {
         ec = EC.GetComponent<EventController>();
+        isSpear = false;
+        isCoSpear = false;
     }
 
     private void OnMouseEnter()
@@ -82,6 +88,7 @@ public class HypoEdgeRange : MonoBehaviour {
                     ec.isRotating = true;
                     ec.isLaunching = true;
                     ec.RotateInit();
+                    isCoSpear = true;
                 }
                 break;
             case 3: // Base 활성화시
@@ -92,6 +99,7 @@ public class HypoEdgeRange : MonoBehaviour {
                     ec.isRotating = true;
                     ec.isLaunching = true;
                     ec.RotateInit();
+                    isSpear = true;
                 }
                 break;
         }
@@ -99,6 +107,38 @@ public class HypoEdgeRange : MonoBehaviour {
 
     void OnMouseUp()
     {
+        if (isSpear)
+        {
+            StartCoroutine("Shoot_Spear");
+            ec.SetAnimationParameters(0, 1);
+            isSpear = false;
+        }
+
+        if (isCoSpear)
+        {
+            StartCoroutine("Shoot_CoSpear");
+            ec.SetAnimationParameters(0, 1);
+            isCoSpear = false;
+        }
+
         ec.RotateFinish();
+    }
+
+    IEnumerator Shoot_Spear()
+    {
+        GameObject SpearObject = Instantiate(Spear, ec.Spear.transform.position, ec.Spear.transform.rotation);
+
+        SpearObject.tag = "sec";
+        yield return new WaitForSeconds(1f);
+        Destroy(SpearObject);
+    }
+
+    IEnumerator Shoot_CoSpear()
+    {
+        GameObject CoSpearObject = Instantiate(CoSpear, ec.CoSpear.transform.position, ec.CoSpear.transform.rotation);
+
+        CoSpearObject.tag = "cosec";
+        yield return new WaitForSeconds(1f);
+        Destroy(CoSpearObject);
     }
 }

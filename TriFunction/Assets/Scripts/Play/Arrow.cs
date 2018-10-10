@@ -5,7 +5,6 @@ using UnityEngine;
 public class Arrow : MonoBehaviour {
 
     Vector3 direction;
-    GameObject IdleAngle;
     
     private void Awake()
     {
@@ -18,9 +17,8 @@ public class Arrow : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform.tag == transform.tag)
+        if (collision.transform.tag == transform.tag)
         {
-            
             collision.gameObject.GetComponent<EnemyBehaviour>().DoDie();
             Destroy(this.gameObject);
         }

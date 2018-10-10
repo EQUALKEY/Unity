@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4983878227806790}
   - component: {fileID: 212197068079840666}
+  - component: {fileID: 114858929649136590}
   - component: {fileID: 61658800564165380}
   - component: {fileID: 50707159071644302}
-  - component: {fileID: 114858929649136590}
   m_Layer: 0
   m_Name: CoArrow
   m_TagString: Untagged

@@ -7,22 +7,22 @@ public class HeightEdgeRange : MonoBehaviour {
     public GameObject EC;
     private EventController ec;
 
-    private bool isBow;
+    private bool isBow, isShield;
     public GameObject Bow;
     public GameObject Arrow;
-
+    public GameObject Shield;
 
     void Awake() {
         ec = EC.GetComponent<EventController>();
         isBow = false;
-
+        isShield = false;
     }
 
     private void OnMouseEnter()
     {
         if (!ec.isRotating)
         {
-            switch(ec.Tstate)
+            switch (ec.Tstate)
             {
                 case 0:
                     ec.HeightEffect.SetActive(true);
@@ -38,7 +38,7 @@ public class HeightEdgeRange : MonoBehaviour {
                     ec.HeightDeleteEffect.SetActive(true);
                     break;
                 case 3:
-                    if(!ec.isCo) ec.ShieldEffect.SetActive(true);
+                    if (!ec.isCo) ec.ShieldEffect.SetActive(true);
                     break;
             }
         }
@@ -91,6 +91,7 @@ public class HeightEdgeRange : MonoBehaviour {
                     ec.isLaunching = true;
                     ec.isRotating = true;
                     ec.RotateInit();
+                    isShield = true;
                 }
                 break;
         }
@@ -105,6 +106,13 @@ public class HeightEdgeRange : MonoBehaviour {
             isBow = false;
         }
 
+        if (isShield)
+        {
+            StartCoroutine("Keep_Shield");
+            ec.SetAnimationParameters(0, 1);
+            isShield = false;
+        }
+
         ec.RotateFinish();
     }
 
@@ -116,5 +124,14 @@ public class HeightEdgeRange : MonoBehaviour {
         ArrowObject.tag = "sin";
         yield return new WaitForSeconds(1f);
         Destroy(BowObject);
+    }
+
+    IEnumerator Keep_Shield()
+    {
+        GameObject ShieldObject = Instantiate(Shield, ec.Shield.transform.position, ec.Shield.transform.rotation);
+
+        ShieldObject.tag = "tan";
+        yield return new WaitForSeconds(2f);
+        Destroy(ShieldObject);
     }
 }
