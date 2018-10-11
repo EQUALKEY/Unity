@@ -263,7 +263,7 @@ public class EventController : MonoBehaviour {
     public void GetSkillGauge(int num)
     {
         if (!SkillReady) SkillGauge += num;
-        if (SkillGauge >= 1)
+        if (SkillGauge >= 20)
         {
             SkillButton.SetActive(true);
             SkillReady = false;
