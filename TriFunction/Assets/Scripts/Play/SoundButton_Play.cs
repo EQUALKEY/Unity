@@ -6,10 +6,14 @@ public class SoundButton_Play : MonoBehaviour {
 
     public GameObject SoundOn;
     public GameObject SoundOff;
+    public GameObject EC;
+    private AudioManager AM;
     bool isOn;
 
     void Awake()
     {
+        AM = EC.GetComponent<AudioManager>();
+
         if (PlayerPrefs.GetInt("isSoundOn") == 1)
         {
             isOn = true;
@@ -31,12 +35,14 @@ public class SoundButton_Play : MonoBehaviour {
             SoundOff.SetActive(true);
             SoundOn.SetActive(false);
             isOn = false;
+            AM.SoundOn();
         }
         else
         {
             SoundOff.SetActive(false);
             SoundOn.SetActive(true);
             isOn = true;
+            AM.SoundOff();
         }
     }
 }

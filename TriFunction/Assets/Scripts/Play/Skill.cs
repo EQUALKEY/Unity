@@ -11,6 +11,7 @@ public class Skill : MonoBehaviour {
     void Awake()
     {
         ec = EC.GetComponent<EventController>();
+        ec.SkillReady = false;
         f = 0f;
     }
 

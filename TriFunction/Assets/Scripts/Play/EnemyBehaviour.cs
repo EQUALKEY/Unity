@@ -32,6 +32,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     public void DoDie(bool isSkill = false)
     {
+        EC.GetComponent<AudioManager>().MonsterHitSound();
         if (!isSkill) ec.GetSkillGauge(1);
         ec.GetScore(1);
         Velocity = 0f;
@@ -40,6 +41,7 @@ public class EnemyBehaviour : MonoBehaviour {
     }
 
     IEnumerator DoDestroy() {
+        Destroy(GetComponent<CircleCollider2D>());
         yield return new WaitForSeconds(0.5f);
         Destroy(this.gameObject);
     }

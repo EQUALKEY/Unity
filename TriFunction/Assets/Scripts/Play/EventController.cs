@@ -266,7 +266,7 @@ public class EventController : MonoBehaviour {
         if (SkillGauge >= 20)
         {
             SkillButton.SetActive(true);
-            SkillReady = false;
+            SkillReady = true;
             SkillGauge = 0;
         }
     }
@@ -295,6 +295,7 @@ public class EventController : MonoBehaviour {
 
     public void LostLife() // Life를 잃는 것을 처리해주는 함수, 적이 몸에 닿을 시 실행
     {
+        GetComponent<AudioManager>().DamagedSound();
         switch (Lifes)
         {
             case 3:  // 3개면 2개로
@@ -312,6 +313,7 @@ public class EventController : MonoBehaviour {
                 LifeOff[0].SetActive(true);
                 Lifes--;
                 GameOver();
+                GetComponent<AudioManager>().GameOverSound();
                 break;
         }
     }
