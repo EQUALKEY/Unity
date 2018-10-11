@@ -129,7 +129,7 @@ public class HypoEdgeRange : MonoBehaviour {
         GameObject SpearObject = Instantiate(Spear, ec.Spear.transform.position, ec.Spear.transform.rotation);
 
         SpearObject.tag = "sec";
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         Destroy(SpearObject);
     }
 
@@ -138,7 +138,7 @@ public class HypoEdgeRange : MonoBehaviour {
         GameObject CoSpearObject = Instantiate(CoSpear, ec.CoSpear.transform.position, ec.CoSpear.transform.rotation);
 
         CoSpearObject.tag = "cosec";
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         Destroy(CoSpearObject);
     }
 }

@@ -124,6 +124,8 @@ public class BaseEdgeRange : MonoBehaviour {
         CoArrowObject.tag = "cos";
         yield return new WaitForSeconds(1f);
         Destroy(CoBowObject);
+        yield return new WaitForSeconds(1f);
+        Destroy(CoArrowObject);
     }
 
     IEnumerator Keep_CoShield()

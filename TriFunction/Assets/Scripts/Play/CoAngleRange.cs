@@ -13,7 +13,7 @@ public class CoAngleRange : MonoBehaviour {
 
     private void OnMouseEnter()
     {
-        if (!ec.isRotating)
+        if (!ec.isRotating && ec.Tstate == 0)
         {
             if (ec.isCo) ec.CoAngleDeleteEffect.SetActive(true);
             else ec.CoAngleEffect.SetActive(true);
@@ -28,18 +28,22 @@ public class CoAngleRange : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        if(ec.isCo)
+        if (ec.Tstate == 0)
         {
-            ec.CoAngle.SetActive(false);
-            ec.CoAngleDeleteEffect.SetActive(false);
-            ec.CoAngleEffect.SetActive(true);
-            ec.isCo = false;
-        } else
-        {
-            ec.CoAngleEffect.SetActive(false);
-            ec.CoAngle.SetActive(true);
-            ec.CoAngleDeleteEffect.SetActive(true);
-            ec.isCo = true;
+            if (ec.isCo)
+            {
+                ec.CoAngle.SetActive(false);
+                ec.CoAngleDeleteEffect.SetActive(false);
+                ec.CoAngleEffect.SetActive(true);
+                ec.isCo = false;
+            }
+            else
+            {
+                ec.CoAngleEffect.SetActive(false);
+                ec.CoAngle.SetActive(true);
+                ec.CoAngleDeleteEffect.SetActive(true);
+                ec.isCo = true;
+            }
         }
     }
 }

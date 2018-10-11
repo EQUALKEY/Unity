@@ -5,6 +5,7 @@ using UnityEngine;
 public class MakeEnemy : MonoBehaviour {
 
     public GameObject[] Enemy = new GameObject[6]; // sin,sec,tan,cos,cosec,cotan
+    public GameObject EnemyParent;
 
     private void Start()
     {
@@ -28,6 +29,7 @@ public class MakeEnemy : MonoBehaviour {
     {
         float PositionEdge = Random.Range(-1f * Mathf.PI, Mathf.PI); // 360도 방향에서 랜덤 생성
         GameObject newEnemy = Instantiate(Enemy[EnemyType], new Vector3(10f * Mathf.Cos(PositionEdge), 10f * Mathf.Sin(PositionEdge)), new Quaternion(0f,0f,0f,1f));
+        newEnemy.transform.SetParent(EnemyParent.transform);
         newEnemy.GetComponent<EnemyBehaviour>().Velocity = velocity;
     }
     

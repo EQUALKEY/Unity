@@ -5,24 +5,22 @@ using UnityEngine;
 public class MonsterInfoButton : MonoBehaviour {
 
     public GameObject MonsterInfo;
-    bool isInfoOn;
-
-    void Awake()
-    {
-        isInfoOn = true;
-    }
+    public GameObject MonsterInfoUpButton;
+    public GameObject MonsterInfoDownButton;
 
     void OnMouseDown()
     {
-        if (isInfoOn)
+        if(gameObject.name == "monster_infoUpButton")
         {
-            MonsterInfo.SetActive(false);
-            isInfoOn = false;
+            MonsterInfo.SetActive(true);
+            MonsterInfoDownButton.SetActive(true);
+            MonsterInfoUpButton.SetActive(false);
         }
         else
         {
-            MonsterInfo.SetActive(true);
-            isInfoOn = true;
+            MonsterInfo.SetActive(false);
+            MonsterInfoUpButton.SetActive(true);
+            MonsterInfoDownButton.SetActive(false);
         }
     }
 }

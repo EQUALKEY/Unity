@@ -75,6 +75,12 @@ public class EventController : MonoBehaviour {
     public GameObject CoAngleEffect;
     public GameObject CoAngleDeleteEffect;
 
+    // 필살기
+    public GameObject SkillButton;
+
+    public bool SkillReady;      // 필살기 사용 가능여부 체크
+    public int SkillGauge;       // 필살기 게이지, 0-20까지
+
     public bool isRotating;      // bool형태로 삼각형 회전 중인지 아닌지 체크
     public bool isLaunching;     // 무기 발사 중인지 체크
     // int형태로 Tstate변수에 변활성화상태 저장
@@ -127,20 +133,12 @@ public class EventController : MonoBehaviour {
         Character_Animator = Character.GetComponent<Animator>();
         Character_Animator.SetInteger("Quebon_state", 0);
 
+        SkillReady = false;
+        SkillGauge = 0;
+
         StartTime();
 	}
-
-    // 클릭하면 회전시작
-    void OnMouseDown() {
-        isRotating = true;
-        RotateInit();
-    }
     
-    // 마우스 떼면 회전종료
-    void OnMouseUp() {
-        RotateFinish();
-    }
-
     // 회전 초기화
     public void RotateInit()
     {
@@ -154,6 +152,26 @@ public class EventController : MonoBehaviour {
 
     // 회전
 	void Update () {
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            isRotating = true;
+            isLaunching = true;
+            RotateFinish();
+        }
+
+        // 클릭하면 회전시작
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            isRotating = true;
+            RotateInit();
+        }
+
+        // 마우스 떼면 회전종료
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            RotateFinish();
+        }
+
         if (isRotating)
         {
             MousePresentPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - CoR;   // 마우스 현재위치는 깨다 기준 상대적 위치
@@ -183,6 +201,8 @@ public class EventController : MonoBehaviour {
             if (isLaunching)
             {
                 isLaunching = false;
+                isCo = false;
+                CoAngle.SetActive(false);
                 HypoActivated.SetActive(false);
                 HeightActivated.SetActive(false);
                 BaseActivated.SetActive(false);
@@ -218,24 +238,37 @@ public class EventController : MonoBehaviour {
             StartCoroutine("createCircle", Circle);
         }
     }
+
     public void StartTime() // 시간 초기화 및 Timer()함수 실행
     {
         current_Time = 0f;
         StartCoroutine("Timer");
     }
+
     IEnumerator Timer() // 0.01초 단위로 시간을 측정
     {
         yield return new WaitForSeconds(0.01f);
         current_Time += 0.01f;
         TimeText.text = current_Time.ToString("##0.00") + " sec";
         StartCoroutine("Timer");
-
     }
 
     public void GetScore(int num)
     {
         Score += num;
         ScoreText.text = Score.ToString("0") + " 마리";
+    }
+
+
+    public void GetSkillGauge(int num)
+    {
+        if (!SkillReady) SkillGauge += num;
+        if (SkillGauge >= 1)
+        {
+            SkillButton.SetActive(true);
+            SkillReady = false;
+            SkillGauge = 0;
+        }
     }
 
     public void SetAnimationParameters(int NumOfAnimator, int state)
@@ -259,7 +292,6 @@ public class EventController : MonoBehaviour {
         }
 
     }
-
 
     public void LostLife() // Life를 잃는 것을 처리해주는 함수, 적이 몸에 닿을 시 실행
     {

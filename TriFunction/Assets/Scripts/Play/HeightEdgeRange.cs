@@ -124,6 +124,8 @@ public class HeightEdgeRange : MonoBehaviour {
         ArrowObject.tag = "sin";
         yield return new WaitForSeconds(1f);
         Destroy(BowObject);
+        yield return new WaitForSeconds(1f);
+        Destroy(ArrowObject);
     }
 
     IEnumerator Keep_Shield()
