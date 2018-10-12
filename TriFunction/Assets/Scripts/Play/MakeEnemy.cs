@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MakeEnemy : MonoBehaviour {
 
-    public GameObject[] Enemy = new GameObject[6]; // sin,sec,tan,cos,cosec,cotan
+    public GameObject[] Enemy = new GameObject[6];      // sin,sec,tan,cos,cosec,cotan
+    public GameObject[] EnemyTypeInfo = new GameObject[6];  // sin,sec,tan,cos,cosec,cotan
     public GameObject EnemyParent;
 
     public GameObject EC;
@@ -70,13 +71,12 @@ public class MakeEnemy : MonoBehaviour {
 
         }
 
-
         int EnemyType = Random.Range(0, 6);
         Create_Enemy(EnemyType,Monster_velocity);
         yield return new WaitForSeconds(rezentime);
-        if(ec.Lifes!=0)
-            StartCoroutine("Create_Enemy_Controller");
+        if(ec.Lifes!=0) StartCoroutine("Create_Enemy_Controller");
     }
+
     void Create_Enemy(int EnemyType, float velocity) // EnemyType이랑 velocity넣으면 적 만들어줌.
     {
         CreatedMonsterCnt++;
@@ -101,9 +101,9 @@ public class MakeEnemy : MonoBehaviour {
             LevelState = 5;
         }
         float PositionEdge = Random.Range(-1f * Mathf.PI, Mathf.PI); // 360도 방향에서 랜덤 생성
-        GameObject newEnemy = Instantiate(Enemy[EnemyType], new Vector3(10f * Mathf.Cos(PositionEdge), 10f * Mathf.Sin(PositionEdge)), new Quaternion(0f,0f,0f,1f));
-        newEnemy.transform.SetParent(EnemyParent.transform);
+        GameObject newEnemy = Instantiate(Enemy[EnemyType], new Vector3(10f * Mathf.Cos(PositionEdge), 10f * Mathf.Sin(PositionEdge)), new Quaternion(0f,0f,0f,1f), EnemyParent.transform);
+        GameObject newEnemyTypeInfo = Instantiate(EnemyTypeInfo[EnemyType], newEnemy.transform);
+        
         newEnemy.GetComponent<EnemyBehaviour>().Velocity = velocity;
     }
-    
 }

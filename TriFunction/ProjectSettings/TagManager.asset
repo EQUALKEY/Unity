@@ -51,9 +51,6 @@ TagManager:
   - name: Background
     uniqueID: 3285542457
     locked: 0
-  - name: Button
-    uniqueID: 2893389857
-    locked: 0
   - name: ModeBackground
     uniqueID: 301235731
     locked: 0
@@ -68,6 +65,9 @@ TagManager:
     locked: 0
   - name: Weapon
     uniqueID: 3244139239
+    locked: 0
+  - name: Button
+    uniqueID: 2893389857
     locked: 0
   - name: GameOver
     uniqueID: 199176289

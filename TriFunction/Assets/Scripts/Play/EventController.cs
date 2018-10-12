@@ -23,7 +23,7 @@ public class EventController : MonoBehaviour {
     // 삼각형 오브젝트
     public GameObject Tri;
     
-    // Edge 효과들 - Activated, Effect, DeleteEffect
+    // Edge 효과들 - Activated, Effect, DeleteEffect, Length
     public GameObject HypoActivated;
     public GameObject HeightActivated;
     public GameObject BaseActivated;
@@ -35,6 +35,10 @@ public class EventController : MonoBehaviour {
     public GameObject HypoDeleteEffect;
     public GameObject HeightDeleteEffect;
     public GameObject BaseDeleteEffect;
+
+    public GameObject HypoLength;
+    public GameObject HeightLength;
+    public GameObject BaseLength;
 
     // Circle 4가지
     public GameObject HypoIdleCircle;
@@ -81,6 +85,7 @@ public class EventController : MonoBehaviour {
     public bool SkillReady;      // 필살기 사용 가능여부 체크
     public int SkillGauge;       // 필살기 게이지, 0-20까지
 
+    public bool isMonsterTypeOn; // 몬스터 타입이 켜져있는지 꺼져있는지 체크
     public bool isRotating;      // bool형태로 삼각형 회전 중인지 아닌지 체크
     public bool isLaunching;     // 무기 발사 중인지 체크
     // int형태로 Tstate변수에 변활성화상태 저장
@@ -94,11 +99,16 @@ public class EventController : MonoBehaviour {
 
     // 삼각형 회전을 위한 변수들
     private Vector3 TriStartPosition;       // Tri Start Position
-    private Quaternion TriStartRotation;    // Tri Start Rocation
+    private Quaternion TriStartRotation;    // Tri Start Rotation
+    private Quaternion HypoLengthStartRotation;  // HypoLength Start Rotation
+    private Quaternion HeightLengthStartRotation;// HeightLength Start Rotation
+    private Quaternion BaseLengthStartRotation;  // BaseLength Start Rotation
     private Vector3 MouseStartPosition;     // 마우스 위치 - 클릭한 순간
     private Vector3 MousePresentPosition;   // 마우스 위치 - 현재
     private Vector3 CoR;                    // Center of Rotation
     private float RotateAngle;              // 회전각도
+
+    public Vector3 StandardScale;
 
 
     // 현재 시각
@@ -136,6 +146,11 @@ public class EventController : MonoBehaviour {
         SkillReady = false;
         SkillGauge = 0;
 
+        StandardScale = Tri.transform.localScale;
+
+        if (PlayerPrefs.GetInt("isMonsterTypeOff") == 1) isMonsterTypeOn = false;
+        else isMonsterTypeOn = true;
+
         StartTime();
 	}
     
@@ -144,14 +159,28 @@ public class EventController : MonoBehaviour {
     {
         // TriRange 밖에서 마우스 누르면 회전 시작
         // 시작 시 삼각형 위치(깨다 기준), 회전 기록
-        TriStartPosition = Tri.GetComponent<Transform>().position - CoR;
-        TriStartRotation = Tri.GetComponent<Transform>().rotation;
+        TriStartPosition = Tri.transform.position - CoR;
+        TriStartRotation = Tri.transform.rotation;
         // 마우스 시작위치는 깨다 기준 상대적 위치
         MouseStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - CoR;
     }
 
     // 회전
 	void Update () {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if (isCo)
+            {
+                CoAngle.SetActive(false);
+                isCo = false;
+            }
+            else
+            {
+                CoAngle.SetActive(true);
+                isCo = true;
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             isRotating = true;
@@ -179,8 +208,12 @@ public class EventController : MonoBehaviour {
             // Vertor2.Angle은 항상 0<=Angle<180이므로 외적을 이용해서 반환
             if (Vector3.Cross(MouseStartPosition, MousePresentPosition).z < 0) RotateAngle = 360f - RotateAngle;
             // 회전 및 삼각형 중심 - 회전 중심 위치 조정
-            Tri.GetComponent<Transform>().rotation = TriStartRotation * Quaternion.Euler(Vector3.forward * RotateAngle);
-            Tri.GetComponent<Transform>().position = Quaternion.Euler(Vector3.forward * RotateAngle) * TriStartPosition + CoR;
+            Tri.transform.rotation = TriStartRotation * Quaternion.Euler(Vector3.forward * RotateAngle);
+            HypoLength.transform.rotation = Quaternion.Euler(-(Tri.transform.rotation * Vector3.forward));
+            HeightLength.transform.rotation = Quaternion.Euler(-(Tri.transform.rotation * Vector3.forward));
+            BaseLength.transform.rotation = Quaternion.Euler(-(Tri.transform.rotation * Vector3.forward));
+
+            Tri.transform.position = Quaternion.Euler(Vector3.forward * RotateAngle) * TriStartPosition + CoR;
         }
 	}
 
@@ -200,20 +233,28 @@ public class EventController : MonoBehaviour {
             CoShield.SetActive(false);
             if (isLaunching)
             {
+                Tri.transform.localScale = StandardScale;
                 isLaunching = false;
                 isCo = false;
                 CoAngle.SetActive(false);
+
                 HypoActivated.SetActive(false);
-                HeightActivated.SetActive(false);
-                BaseActivated.SetActive(false);
+                HypoLength.SetActive(false);
                 HypoIdleCircle.SetActive(false);
                 HypoCoCircle.SetActive(false);
-                HeightCircle.SetActive(false);
-                BaseCircle.SetActive(false);
                 HypoIdleLineEffect.SetActive(false);
                 HypoCoLineEffect.SetActive(false);
+
+                HeightActivated.SetActive(false);
+                HeightLength.SetActive(false);
+                HeightCircle.SetActive(false);
                 HeightLineEffect.SetActive(false);
+
+                BaseActivated.SetActive(false);
+                BaseLength.SetActive(false);
+                BaseCircle.SetActive(false);
                 BaseLineEffect.SetActive(false);
+
                 Tstate = 0;
             }
         }
@@ -263,7 +304,7 @@ public class EventController : MonoBehaviour {
     public void GetSkillGauge(int num)
     {
         if (!SkillReady) SkillGauge += num;
-        if (SkillGauge >= 20)
+        if (SkillGauge >= 1)
         {
             SkillButton.SetActive(true);
             SkillReady = true;
@@ -323,5 +364,6 @@ public class EventController : MonoBehaviour {
         StopCoroutine("Timer");
         GameOverWindow.SetActive(true);
         GameOverWindow.transform.Translate(new Vector3(0f, 0f, 0.01f));
+        if (!isMonsterTypeOn) PlayerPrefs.SetInt("isMonsterTypeOff", 1);
     }
 }

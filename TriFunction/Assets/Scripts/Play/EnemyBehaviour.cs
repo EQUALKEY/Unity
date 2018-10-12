@@ -28,7 +28,10 @@ public class EnemyBehaviour : MonoBehaviour {
             ec.LostLife();
             Destroy(this.gameObject);
         }
-	}
+
+        if (ec.isMonsterTypeOn) this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        else this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+    }
 
     public void DoDie(bool isSkill = false)
     {
@@ -43,6 +46,7 @@ public class EnemyBehaviour : MonoBehaviour {
     IEnumerator DoDestroy() {
         Destroy(GetComponent<CircleCollider2D>());
         yield return new WaitForSeconds(0.5f);
+        Destroy(this.gameObject.transform.GetChild(0).gameObject);
         Destroy(this.gameObject);
     }
 }

@@ -65,7 +65,9 @@ public class HypoEdgeRange : MonoBehaviour {
         switch(ec.Tstate)
         {
             case 0: // 변활성화된게 없는경우
+                ec.Tri.transform.localScale = ec.Tri.transform.localScale * 0.807f;
                 ec.HypoActivated.SetActive(true);
+                ec.HypoLength.SetActive(true);
                 ec.HypoEffect.SetActive(false);
                 ec.HypoDeleteEffect.SetActive(true);
                 ec.Tstate = 1;
@@ -73,7 +75,9 @@ public class HypoEdgeRange : MonoBehaviour {
                 else ec.MakeCircle(ec.HypoIdleCircle);
                 break;
             case 1: // Hypo 활성화시
+                ec.Tri.transform.localScale = ec.StandardScale;
                 ec.HypoActivated.SetActive(false);
+                ec.HypoLength.SetActive(false);
                 ec.HypoEffect.SetActive(true);
                 ec.HypoDeleteEffect.SetActive(false);
                 ec.HypoCoCircle.SetActive(false);
@@ -127,8 +131,7 @@ public class HypoEdgeRange : MonoBehaviour {
     IEnumerator Shoot_Spear()
     {
         GameObject SpearObject = Instantiate(Spear, ec.Spear.transform.position, ec.Spear.transform.rotation);
-
-        SpearObject.tag = "sec";
+        
         yield return new WaitForSeconds(2f);
         Destroy(SpearObject);
     }
@@ -136,8 +139,8 @@ public class HypoEdgeRange : MonoBehaviour {
     IEnumerator Shoot_CoSpear()
     {
         GameObject CoSpearObject = Instantiate(CoSpear, ec.CoSpear.transform.position, ec.CoSpear.transform.rotation);
+        CoSpearObject.transform.localScale *= 1.365f;
 
-        CoSpearObject.tag = "cosec";
         yield return new WaitForSeconds(2f);
         Destroy(CoSpearObject);
     }

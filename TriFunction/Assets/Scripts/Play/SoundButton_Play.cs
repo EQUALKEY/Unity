@@ -34,6 +34,7 @@ public class SoundButton_Play : MonoBehaviour {
         {
             SoundOff.SetActive(true);
             SoundOn.SetActive(false);
+            PlayerPrefs.SetInt("isSoundOn", 0);
             isOn = false;
             AM.SoundOn();
         }
@@ -41,6 +42,7 @@ public class SoundButton_Play : MonoBehaviour {
         {
             SoundOff.SetActive(false);
             SoundOn.SetActive(true);
+            PlayerPrefs.SetInt("isSoundOn", 1);
             isOn = true;
             AM.SoundOff();
         }

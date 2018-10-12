@@ -26,6 +26,7 @@ public class HeightEdgeRange : MonoBehaviour {
             {
                 case 0:
                     ec.HeightEffect.SetActive(true);
+                    if (!ec.isCo) ec.CoAngleEffect.SetActive(true);
                     break;
                 case 1:
                     if (!ec.isCo)
@@ -50,6 +51,7 @@ public class HeightEdgeRange : MonoBehaviour {
         ec.ShieldEffect.SetActive(false);
         ec.HeightDeleteEffect.SetActive(false);
         ec.HeightEffect.SetActive(false);
+        ec.CoAngleEffect.SetActive(false);
         if (!ec.isLaunching) ec.BaseLineEffect.SetActive(false);
     }
 
@@ -58,11 +60,16 @@ public class HeightEdgeRange : MonoBehaviour {
         switch (ec.Tstate)
         {
             case 0: // 변활성화된게 없는경우
+                ec.Tri.transform.localScale = ec.Tri.transform.localScale * 1.365f;
                 ec.HeightActivated.SetActive(true);
+                ec.HeightLength.SetActive(true);
                 ec.HeightEffect.SetActive(false);
                 ec.HeightDeleteEffect.SetActive(true);
                 ec.Tstate = 2;
-                if (ec.isCo) ec.MakeCircle(ec.HeightCircle);
+                ec.isCo = true;
+                ec.CoAngle.SetActive(true);
+                ec.CoAngleEffect.SetActive(false);
+                ec.MakeCircle(ec.HeightCircle);
                 break;
             case 1: // Hypo 활성화시
                 if(!ec.isCo)
@@ -77,7 +84,9 @@ public class HeightEdgeRange : MonoBehaviour {
                 }
                 break;
             case 2: // Height 활성화시
+                ec.Tri.transform.localScale = ec.StandardScale;
                 ec.HeightActivated.SetActive(false);
+                ec.HeightLength.SetActive(false);
                 ec.HeightEffect.SetActive(true);
                 ec.HeightDeleteEffect.SetActive(false);
                 ec.HeightCircle.SetActive(false);
@@ -120,8 +129,9 @@ public class HeightEdgeRange : MonoBehaviour {
     {
         GameObject BowObject = Instantiate(Bow, ec.Bow.transform.position, ec.Bow.transform.rotation);
         GameObject ArrowObject = Instantiate(Arrow, ec.Arrow.transform.position, ec.Arrow.transform.rotation);
+        BowObject.transform.localScale *= 0.807f;
+        ArrowObject.transform.localScale *= 0.807f;
 
-        ArrowObject.tag = "sin";
         yield return new WaitForSeconds(1f);
         Destroy(BowObject);
         yield return new WaitForSeconds(1f);
@@ -132,7 +142,6 @@ public class HeightEdgeRange : MonoBehaviour {
     {
         GameObject ShieldObject = Instantiate(Shield, ec.Shield.transform.position, ec.Shield.transform.rotation);
 
-        ShieldObject.tag = "tan";
         yield return new WaitForSeconds(2f);
         Destroy(ShieldObject);
     }

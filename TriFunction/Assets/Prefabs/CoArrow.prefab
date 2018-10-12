@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 50707159071644302}
   m_Layer: 0
   m_Name: CoArrow
-  m_TagString: weapon
+  m_TagString: cos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,9 +36,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967108768077796}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: -0.7071068}
-  m_LocalPosition: {x: 0.93, y: -0.35, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.75, z: 1}
+  m_LocalRotation: {x: 0, y: -0, z: 0.7071068, w: -0.7071068}
+  m_LocalPosition: {x: 0.67, y: -0.03, z: 0}
+  m_LocalScale: {x: 1.35, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -79,7 +79,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.97, y: 0.26}
+    oldSize: {x: 1.280468, y: 0.16899577}
     newSize: {x: 3.5, y: 0.79}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
