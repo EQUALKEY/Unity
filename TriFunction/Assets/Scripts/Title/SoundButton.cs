@@ -16,13 +16,13 @@ public class SoundButton : MonoBehaviour {
 	void OnMouseDown() {
 		if(isOn) {
 			PlayerPrefs.SetInt("isSoundOn", 0);
-			SoundOff.SetActive(true);
-			SoundOn.SetActive(false);
+			SoundOff.SetActive(false);
+			SoundOn.SetActive(true);
 			isOn = false;
 		} else {
 			PlayerPrefs.SetInt("isSoundOn", 1);
-			SoundOff.SetActive(false);
-			SoundOn.SetActive(true);
+			SoundOff.SetActive(true);
+			SoundOn.SetActive(false);
 			isOn = true;
 		}
 	}

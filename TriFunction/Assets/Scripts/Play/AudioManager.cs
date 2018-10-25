@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour {
 
     private void Awake()
     {
-        if (PlayerPrefs.GetInt("isSoundOn")==0)
+        if (PlayerPrefs.GetInt("isSoundOn")==1)
         {
             SoundOn();
         }
