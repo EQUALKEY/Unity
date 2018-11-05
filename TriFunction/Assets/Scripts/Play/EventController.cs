@@ -320,6 +320,9 @@ public class EventController : MonoBehaviour {
         }
 
         switch (Tstate) {
+            case 0:
+                Tri.transform.localScale = StandardScale;
+                break;
             case 1:
                 HypoActivated.SetActive(true);
                 HypoLength.SetActive(true);
@@ -333,6 +336,7 @@ public class EventController : MonoBehaviour {
             case 3:
                 BaseActivated.SetActive(true);
                 BaseLength.SetActive(true);
+                Tri.transform.localScale = StandardScale;
                 break;
         }
 
@@ -381,12 +385,10 @@ public class EventController : MonoBehaviour {
             Tri.transform.position = Quaternion.Euler(Vector3.forward * RotateAngle) * TriStartPosition + CoR;
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1)) { // 우클릭 초기화
-            ClearTri();
-        }
+        if (Input.GetKeyDown(KeyCode.Mouse1)) { Reset(); } // 우클릭 시 초기화
     }
 
-    private void RotateFinish() {
+    private void RotateFinish() { // 회전 끝
         Tri.transform.localScale = StandardScale;
         isLaunching = 0;
         Tstate = 0;
@@ -398,7 +400,7 @@ public class EventController : MonoBehaviour {
         ClearTri();
     }
 
-    // 삼각형 내 모든걸 끔
+    // 삼각형 내 단위원을 제외한 모든걸 끔. 단, Tstate, isCo 등 값은 안바꿈. SetActive(false)만 해줌.
     private void ClearTri() {
         ClearWeaponEffect();
 
@@ -438,7 +440,7 @@ public class EventController : MonoBehaviour {
         BaseLineEffect.SetActive(false);
     }
 
-    private void ClearWeaponEffect() {
+    private void ClearWeaponEffect() { // 무기 Effect 지우기
         BowEffect.SetActive(false);
         ArrowEffect.SetActive(false);
         SpearEffect.SetActive(false);
@@ -447,6 +449,18 @@ public class EventController : MonoBehaviour {
         CoArrowEffect.SetActive(false);
         CoSpearEffect.SetActive(false);
         CoShieldEffect.SetActive(false);
+    }
+
+    private void Reset() { // ㄹㅇ Reset = Play Scene 시작할 때 상태로 감
+        ClearTri();
+        Tstate = 0;
+        isCo = false;
+        isLaunching = 0;
+        isRotating = false;
+        HypoIdleCircle.SetActive(false);
+        HypoCoCircle.SetActive(false);
+        HeightCircle.SetActive(false);
+        BaseCircle.SetActive(false);
     }
 
     // 원 생성, 생성할 원을 인자로 받아옴
