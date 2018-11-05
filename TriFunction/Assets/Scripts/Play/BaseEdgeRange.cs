@@ -20,6 +20,7 @@ public class BaseEdgeRange : MonoBehaviour {
 
     private void OnMouseEnter()
     {
+        ec.onBaseRange = true;
         if (!ec.isRotating)
         {
             switch (ec.Tstate)
@@ -51,6 +52,7 @@ public class BaseEdgeRange : MonoBehaviour {
 
     private void OnMouseExit()
     {
+        ec.onBaseRange = false;
         ec.CoBowEffect.SetActive(false);
         ec.CoShieldEffect.SetActive(false);
         ec.BaseEffect.SetActive(false);

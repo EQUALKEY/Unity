@@ -13,6 +13,7 @@ public class IdleAngleRange : MonoBehaviour {
 
     private void OnMouseEnter()
     {
+        ec.onIdleAngleRange = true;
         if (!ec.isRotating && ec.isCo)
         {
             ec.CoAngleDeleteEffect.SetActive(true);
@@ -22,6 +23,7 @@ public class IdleAngleRange : MonoBehaviour {
 
     private void OnMouseExit()
     {
+        ec.onIdleAngleRange = false;
         ec.CoAngleDeleteEffect.SetActive(false);
         ec.IdleAngleEffect.SetActive(false);
     }

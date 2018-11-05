@@ -19,6 +19,7 @@ public class HypoEdgeRange : MonoBehaviour {
 
     private void OnMouseEnter()
     {
+        ec.onHypoRange = true;
         if (!ec.isRotating)
         {
             switch(ec.Tstate)
@@ -49,6 +50,7 @@ public class HypoEdgeRange : MonoBehaviour {
 
     private void OnMouseExit()
     {
+        ec.onHypoRange = false;
         ec.SpearEffect.SetActive(false);
         ec.CoSpearEffect.SetActive(false);
         ec.HypoEffect.SetActive(false);

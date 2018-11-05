@@ -7,6 +7,7 @@ public class StoryButton : MonoBehaviour
 {
     void OnMouseDown()
     {
+        PlayerPrefs.SetInt("isMonsterTypeOff", 0);
         PlayerPrefs.SetInt("Mode", 0);
         SceneManager.LoadScene("Play");
     }

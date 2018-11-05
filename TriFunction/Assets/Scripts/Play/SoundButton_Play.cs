@@ -17,14 +17,14 @@ public class SoundButton_Play : MonoBehaviour {
         if (PlayerPrefs.GetInt("isSoundOn") == 1)
         {
             isOn = true;
-            SoundOn.SetActive(true);
-            SoundOff.SetActive(false);
+            SoundOn.SetActive(false);
+            SoundOff.SetActive(true);
         }
         else
         {
             isOn = false;
-            SoundOff.SetActive(true);
-            SoundOn.SetActive(false);
+            SoundOff.SetActive(false);
+            SoundOn.SetActive(true);
         }
     }
 

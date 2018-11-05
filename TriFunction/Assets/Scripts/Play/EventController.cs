@@ -7,6 +7,10 @@ public class EventController : MonoBehaviour {
 
     // GameOver 오브젝트
     public GameObject GameOverWindow;
+    public GameObject GameOverBack;
+    public GameObject ClearBack;
+    public GameObject RankButton;
+    public GameObject InfinityModeButton;
 
     // 깨다
     public GameObject Character;
@@ -110,6 +114,12 @@ public class EventController : MonoBehaviour {
 
     public Vector3 StandardScale;
 
+    // 마우스 위치 추적
+    public bool onBaseRange;
+    public bool onHeightRange;
+    public bool onHypoRange;
+    public bool onCoAngleRange;
+    public bool onIdleAngleRange;
 
     // 현재 시각
     public float current_Time;
@@ -150,6 +160,12 @@ public class EventController : MonoBehaviour {
 
         if (PlayerPrefs.GetInt("isMonsterTypeOff") == 1) isMonsterTypeOn = false;
         else isMonsterTypeOn = true;
+        
+        onBaseRange = false;
+        onHeightRange = false;
+        onHypoRange = false;
+        onCoAngleRange = false;
+        onIdleAngleRange = false;
 
         StartTime();
 	}
@@ -173,11 +189,21 @@ public class EventController : MonoBehaviour {
             {
                 CoAngle.SetActive(false);
                 isCo = false;
+                if (onCoAngleRange)
+                {
+                    CoAngleEffect.SetActive(true);
+                    CoAngleDeleteEffect.SetActive(false);
+                }
             }
             else
             {
                 CoAngle.SetActive(true);
                 isCo = true;
+                if (onCoAngleRange)
+                {
+                    CoAngleEffect.SetActive(false);
+                    CoAngleDeleteEffect.SetActive(true);
+                }
             }
         }
 
@@ -353,17 +379,31 @@ public class EventController : MonoBehaviour {
                 LifeOn[0].SetActive(false);
                 LifeOff[0].SetActive(true);
                 Lifes--;
-                GameOver();
+                GameOver(false);
                 GetComponent<AudioManager>().GameOverSound();
                 break;
         }
     }
 
-    public void GameOver() // GameOver 시 해야될 일을 해주는 함수
+    public void GameOver(bool isCleared) // GameOver 시 해야될 일을 해주는 함수
     {
         StopCoroutine("Timer");
         GameOverWindow.SetActive(true);
         GameOverWindow.transform.Translate(new Vector3(0f, 0f, 0.01f));
+        if (isCleared)
+        {
+            GameOverBack.SetActive(false);
+            ClearBack.SetActive(true);
+            RankButton.SetActive(false);
+            InfinityModeButton.SetActive(true);
+        }
+        else
+        {
+            GameOverBack.SetActive(true);
+            ClearBack.SetActive(false);
+            RankButton.SetActive(true);
+            InfinityModeButton.SetActive(false);
+        }
         if (!isMonsterTypeOn) PlayerPrefs.SetInt("isMonsterTypeOff", 1);
     }
 }

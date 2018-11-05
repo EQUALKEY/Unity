@@ -20,6 +20,7 @@ public class HeightEdgeRange : MonoBehaviour {
 
     private void OnMouseEnter()
     {
+        ec.onHeightRange = true;
         if (!ec.isRotating)
         {
             switch (ec.Tstate)
@@ -47,6 +48,7 @@ public class HeightEdgeRange : MonoBehaviour {
 
     private void OnMouseExit()
     {
+        ec.onHeightRange = false;
         ec.BowEffect.SetActive(false);
         ec.ShieldEffect.SetActive(false);
         ec.HeightDeleteEffect.SetActive(false);
