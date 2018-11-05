@@ -319,6 +319,7 @@ public class EventController : MonoBehaviour {
             }
         }
 
+        ClearEdgeActivated();
         switch (Tstate) {
             case 0:
                 Tri.transform.localScale = StandardScale;
@@ -403,19 +404,12 @@ public class EventController : MonoBehaviour {
     // 삼각형 내 단위원을 제외한 모든걸 끔. 단, Tstate, isCo 등 값은 안바꿈. SetActive(false)만 해줌.
     private void ClearTri() {
         ClearWeaponEffect();
+        ClearEdgeActivated();
 
         CoAngle.SetActive(false);
         CoAngleEffect.SetActive(false);
         CoAngleDeleteEffect.SetActive(false);
         IdleAngleEffect.SetActive(false);
-
-        HypoActivated.SetActive(false);
-        HeightActivated.SetActive(false);
-        BaseActivated.SetActive(false);
-
-        HypoLength.SetActive(false);
-        HeightLength.SetActive(false);
-        BaseLength.SetActive(false);
 
         HypoEffect.SetActive(false);
         HeightEffect.SetActive(false);
@@ -449,6 +443,16 @@ public class EventController : MonoBehaviour {
         CoArrowEffect.SetActive(false);
         CoSpearEffect.SetActive(false);
         CoShieldEffect.SetActive(false);
+    }
+
+    private void ClearEdgeActivated() { // 변 활성화 지우기
+        HypoActivated.SetActive(false);
+        HeightActivated.SetActive(false);
+        BaseActivated.SetActive(false);
+
+        HypoLength.SetActive(false);
+        HeightLength.SetActive(false);
+        BaseLength.SetActive(false);
     }
 
     private void Reset() { // ㄹㅇ Reset = Play Scene 시작할 때 상태로 감
