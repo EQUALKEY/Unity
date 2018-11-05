@@ -314,11 +314,6 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 212321838925884592, guid: c43a62dec064a4e40b8fc7ea3bbfc107,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c43a62dec064a4e40b8fc7ea3bbfc107, type: 2}
   m_IsPrefabAsset: 0
@@ -588,9 +583,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EC: {fileID: 1053816591}
-  Bow: {fileID: 1991850319822730, guid: 52a3f119cb2802f4b9469b6270687e0f, type: 2}
-  Arrow: {fileID: 1513671332654114, guid: c6cf530817ff66146a7bdd32af5059a2, type: 2}
-  Shield: {fileID: 1540495521467336, guid: 003197686d819204aa209ea5c880a077, type: 2}
 --- !u!1 &203364991
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,11 +1285,6 @@ Prefab:
     - target: {fileID: 1665356344106220, guid: 10044f3e91e4c3b42b4fdbdae8d46e8d, type: 2}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212047085951169794, guid: 10044f3e91e4c3b42b4fdbdae8d46e8d,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10044f3e91e4c3b42b4fdbdae8d46e8d, type: 2}
@@ -2163,11 +2150,6 @@ Prefab:
     - target: {fileID: 1692464922331672, guid: a73350289efe7c744a719636a4661b75, type: 2}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212461243078135398, guid: a73350289efe7c744a719636a4661b75,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a73350289efe7c744a719636a4661b75, type: 2}
@@ -3207,9 +3189,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EC: {fileID: 1053816591}
-  CoBow: {fileID: 1450692844362282, guid: 25969f6e7839ff64eb2110e5a18d1c45, type: 2}
-  CoArrow: {fileID: 1967108768077796, guid: 668683be9a767e74ebc0c70a7d6a9ec9, type: 2}
-  CoShield: {fileID: 1434099684512490, guid: c43a62dec064a4e40b8fc7ea3bbfc107, type: 2}
 --- !u!1 &681628015
 GameObject:
   m_ObjectHideFlags: 0
@@ -3407,11 +3386,6 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 212351064255250534, guid: 52a3f119cb2802f4b9469b6270687e0f,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52a3f119cb2802f4b9469b6270687e0f, type: 2}
   m_IsPrefabAsset: 0
@@ -3482,8 +3456,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EC: {fileID: 1053816591}
-  Spear: {fileID: 1665356344106220, guid: 10044f3e91e4c3b42b4fdbdae8d46e8d, type: 2}
-  CoSpear: {fileID: 1692464922331672, guid: a73350289efe7c744a719636a4661b75, type: 2}
 --- !u!1 &759442335
 GameObject:
   m_ObjectHideFlags: 0
@@ -4151,11 +4123,6 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 212197068079840666, guid: 668683be9a767e74ebc0c70a7d6a9ec9,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 668683be9a767e74ebc0c70a7d6a9ec9, type: 2}
   m_IsPrefabAsset: 0
@@ -4486,6 +4453,21 @@ MonoBehaviour:
   CoBow: {fileID: 921569598}
   CoArrow: {fileID: 317522788}
   CoShield: {fileID: 203364991}
+  SpearPrefab: {fileID: 1665356344106220, guid: 10044f3e91e4c3b42b4fdbdae8d46e8d,
+    type: 2}
+  BowPrefab: {fileID: 1991850319822730, guid: 52a3f119cb2802f4b9469b6270687e0f, type: 2}
+  ArrowPrefab: {fileID: 1513671332654114, guid: c6cf530817ff66146a7bdd32af5059a2,
+    type: 2}
+  ShieldPrefab: {fileID: 1540495521467336, guid: 003197686d819204aa209ea5c880a077,
+    type: 2}
+  CoSpearPrefab: {fileID: 1692464922331672, guid: a73350289efe7c744a719636a4661b75,
+    type: 2}
+  CoBowPrefab: {fileID: 1450692844362282, guid: 25969f6e7839ff64eb2110e5a18d1c45,
+    type: 2}
+  CoArrowPrefab: {fileID: 1967108768077796, guid: 668683be9a767e74ebc0c70a7d6a9ec9,
+    type: 2}
+  CoShieldPrefab: {fileID: 1434099684512490, guid: c43a62dec064a4e40b8fc7ea3bbfc107,
+    type: 2}
   SpearEffect: {fileID: 1917723826}
   BowEffect: {fileID: 2141125363}
   ArrowEffect: {fileID: 1575333609}
@@ -4507,6 +4489,11 @@ MonoBehaviour:
   Tstate: 0
   isCo: 0
   StandardScale: {x: 0, y: 0, z: 0}
+  onHypo: 0
+  onHeight: 0
+  onBase: 0
+  onCoAngle: 0
+  onIdleAngle: 0
   current_Time: 0
   TimeText: {fileID: 2016155944}
   Score: 0
@@ -5493,11 +5480,6 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 212738221162213800, guid: c6cf530817ff66146a7bdd32af5059a2,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6cf530817ff66146a7bdd32af5059a2, type: 2}
   m_IsPrefabAsset: 0
@@ -6278,11 +6260,6 @@ Prefab:
     - target: {fileID: 1450692844362282, guid: 25969f6e7839ff64eb2110e5a18d1c45, type: 2}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212301073155586632, guid: 25969f6e7839ff64eb2110e5a18d1c45,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25969f6e7839ff64eb2110e5a18d1c45, type: 2}
@@ -8340,11 +8317,6 @@ Prefab:
     - target: {fileID: 1540495521467336, guid: 003197686d819204aa209ea5c880a077, type: 2}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212836313902928924, guid: 003197686d819204aa209ea5c880a077,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 003197686d819204aa209ea5c880a077, type: 2}
