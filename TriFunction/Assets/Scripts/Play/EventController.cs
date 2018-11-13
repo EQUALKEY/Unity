@@ -50,6 +50,11 @@ public class EventController : MonoBehaviour {
     public bool SkillReady;      // 필살기 사용 가능여부 체크
     public int SkillGauge;       // 필살기 게이지, 0-20까지
 
+    // 콤보
+    public int combo;
+    public GameObject comboGO;
+
+
     public bool isMonsterTypeOn; // 몬스터 타입이 켜져있는지 꺼져있는지 체크
     public bool isRotating;      // bool형태로 삼각형 회전 중인지 아닌지 체크
     public int isLaunching;      // 어떤 무기 발사 중인지. 0: 발사X, 1 ~ 6: sin, sec, tan, cos, cosec, cotan
@@ -92,8 +97,11 @@ public class EventController : MonoBehaviour {
     public int Lifes;
 
     // 필살기
-    public GameObject UltiBar;
+    public GameObject UltiBarBlank;
     public GameObject UltiGage;
+    public GameObject UltiStarBlank;
+    public GameObject UltiStar;
+    public GameObject UltiBar;
     public int UltimateGage;
 
     // 초기화
@@ -106,6 +114,7 @@ public class EventController : MonoBehaviour {
         UltimateGage = 0;
         Lifes = 3;
         Score = 0;
+        combo = 0;
 
         Character_Animator = Character.GetComponent<Animator>();
         Character_Animator.SetInteger("Quebon_state", 0);
@@ -501,18 +510,23 @@ public class EventController : MonoBehaviour {
         StartCoroutine("Timer");
     }
 
-    public void GetScore(int num)
+    public void GetScore(int num,Vector3 pos,Quaternion rot)
     {
         Score += num;
         ScoreText.text = Score.ToString("0") + " 마리";
+
+        GameObject newCombo = Instantiate(comboGO, pos, rot);
     }
 
 
     public void GetSkillGauge(int num)
     {
         if (!SkillReady) SkillGauge += num;
+        UltiBar.GetComponent<Image>().fillAmount = (float)SkillGauge / 20f;
+        UltiStar.GetComponent<Image>().fillAmount = (float)SkillGauge / 20f;
         if (SkillGauge >= 20)
         {
+            UltiStar.SetActive(true);
             SkillButton.SetActive(true);
             SkillReady = true;
             SkillGauge = 0;
@@ -543,6 +557,7 @@ public class EventController : MonoBehaviour {
 
     public void LostLife() // Life를 잃는 것을 처리해주는 함수, 적이 몸에 닿을 시 실행
     {
+        combo = 0;
         GetComponent<AudioManager>().DamagedSound();
         switch (Lifes)
         {

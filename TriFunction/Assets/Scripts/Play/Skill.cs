@@ -14,6 +14,7 @@ public class Skill : MonoBehaviour {
         this.gameObject.transform.localScale = new Vector3(f, f, 1f);
         ec = EC.GetComponent<EventController>();
         ec.SkillReady = false;
+        ec.UltiStar.SetActive(false);
     }
 
     void Update()

@@ -7,6 +7,8 @@ public class EnemyBehaviour : MonoBehaviour {
     public GameObject EC;
     private EventController ec;
 
+    public GameObject Combo;
+
     public float Velocity;
     private Vector3 Direction3d;
     private Vector2 Direction;
@@ -14,6 +16,7 @@ public class EnemyBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         EC = GameObject.Find("EC"); // Prefab이다 보니까 public에 못넣음. 직접 찾아야 되더라. 다른방법 찾으면 Find 없애자.
+        Combo = GameObject.Find("Combo");
         ec = EC.GetComponent<EventController>();
         Direction3d = new Vector3(0f,0f,0f) - transform.position;
         Direction = (new Vector2(Direction3d.x,Direction3d.y )).normalized;
@@ -37,7 +40,8 @@ public class EnemyBehaviour : MonoBehaviour {
     {
         EC.GetComponent<AudioManager>().MonsterHitSound();
         if (!isSkill) ec.GetSkillGauge(1);
-        ec.GetScore(1);
+        ec.combo++;
+        ec.GetScore(1,transform.position,transform.rotation);
         Velocity = 0f;
         GetComponent<Animator>().SetInteger("Monster_state", 1);
         StartCoroutine("DoDestroy");

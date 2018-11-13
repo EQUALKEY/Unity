@@ -66,6 +66,9 @@ TagManager:
   - name: Weapon
     uniqueID: 3244139239
     locked: 0
+  - name: Combo
+    uniqueID: 1750699697
+    locked: 0
   - name: Button
     uniqueID: 2893389857
     locked: 0
