@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Skill : MonoBehaviour {
 
@@ -11,10 +12,11 @@ public class Skill : MonoBehaviour {
     void Awake()
     {
         f = 0.3f;
-        this.gameObject.transform.localScale = new Vector3(f, f, 1f);
+        gameObject.transform.localScale = new Vector3(f, f, 1f);
         ec = EC.GetComponent<EventController>();
         ec.SkillReady = false;
-        ec.UltiStar.SetActive(false);
+        ec.UltiBar.GetComponent<Image>().fillAmount = 0f;
+        ec.UltiStar.GetComponent<Image>().fillAmount = 0f;
     }
 
     void Update()
@@ -24,12 +26,12 @@ public class Skill : MonoBehaviour {
             ec.SkillButton.SetActive(false);
             ec.SkillReady = false;
             f += 0.04f;
-            this.gameObject.transform.localScale = new Vector3(f, f, 1f);
+            gameObject.transform.localScale = new Vector3(f, f, 1f);
         } else
         {
             f = 0.3f;
-            this.gameObject.transform.localScale = new Vector3(f, f, 1f);
-            this.gameObject.SetActive(false);
+            gameObject.transform.localScale = new Vector3(f, f, 1f);
+            gameObject.SetActive(false);
         }
     }
     

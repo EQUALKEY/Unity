@@ -230,6 +230,7 @@ public class EventController : MonoBehaviour {
                 case 2:
                     if (isCo) {
                         if (Input.GetKeyDown(KeyCode.W)) {
+                            SetAnimationParameters(0, 1);
                             StartCoroutine("Cosec");
                             RotateFinish();
                         } else {
@@ -241,6 +242,7 @@ public class EventController : MonoBehaviour {
                 case 3:
                     if (!isCo) {
                         if (Input.GetKeyDown(KeyCode.W)) {
+                            SetAnimationParameters(0, 1);
                             StartCoroutine("Sec");
                             RotateFinish();
                         } else {
@@ -263,6 +265,7 @@ public class EventController : MonoBehaviour {
                 case 1:
                     if (!isCo) {
                         if (Input.GetKeyDown(KeyCode.D)) {
+                            SetAnimationParameters(0, 1);
                             StartCoroutine("Sin");
                             RotateFinish();
                         } else {
@@ -279,6 +282,7 @@ public class EventController : MonoBehaviour {
                 case 3:
                     if (!isCo) {
                         if (Input.GetKeyDown(KeyCode.D)) {
+                            SetAnimationParameters(0, 1);
                             StartCoroutine("Tan");
                             RotateFinish();
                         } else {
@@ -301,6 +305,7 @@ public class EventController : MonoBehaviour {
                 case 1:
                     if (isCo) {
                         if (Input.GetKeyDown(KeyCode.A)) {
+                            SetAnimationParameters(0, 1);
                             StartCoroutine("Cos");
                             RotateFinish();
                         } else {
@@ -313,6 +318,7 @@ public class EventController : MonoBehaviour {
                 case 2:
                     if (isCo) {
                         if (Input.GetKeyDown(KeyCode.A)) {
+                            SetAnimationParameters(0, 1);
                             StartCoroutine("Cotan");
                             RotateFinish();
                         } else {
