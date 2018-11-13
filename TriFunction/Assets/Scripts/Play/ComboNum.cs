@@ -12,7 +12,7 @@ public class ComboNum : MonoBehaviour {
 
     IEnumerator DestroyThis()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.0f);
         Destroy(this.gameObject);
     }
     // Use this for initialization

@@ -14,14 +14,32 @@ public class combo : MonoBehaviour {
         switch (numline)
         {
             case 0:
-                Transform newnum = Instantiate(transform.GetChild(num), transform.position, transform.rotation);
+                Transform newnum = Instantiate(transform.GetChild(num), transform.position+ new Vector3(0f,0.5f,0f), transform.rotation);
                 newnum.gameObject.SetActive(true);
                 break;
             case 1:
+                Transform newnum1_0 = Instantiate(transform.GetChild(num/10), transform.position + new Vector3(-0.2f, 0.5f, 0f), transform.rotation);
+                newnum1_0.gameObject.SetActive(true);
+                Transform newnum1_1 = Instantiate(transform.GetChild(num%10), transform.position + new Vector3(0.2f, 0.5f, 0f), transform.rotation);
+                newnum1_1.gameObject.SetActive(true);
                 break;
             case 2:
+                Transform newnum2_0 = Instantiate(transform.GetChild(num / 100), transform.position + new Vector3(-0.4f, 0.5f, 0f), transform.rotation);
+                newnum2_0.gameObject.SetActive(true);
+                Transform newnum2_1 = Instantiate(transform.GetChild((num / 10)%10), transform.position + new Vector3(0f, 0.5f, 0f), transform.rotation);
+                newnum2_1.gameObject.SetActive(true);
+                Transform newnum2_2 = Instantiate(transform.GetChild(num % 10), transform.position + new Vector3(0.4f, 0.5f, 0f), transform.rotation);
+                newnum2_2.gameObject.SetActive(true);
                 break;
             case 3:
+                Transform newnum3_0 = Instantiate(transform.GetChild(num / 1000), transform.position + new Vector3(-0.6f, 0.5f, 0f), transform.rotation);
+                newnum3_0.gameObject.SetActive(true);
+                Transform newnum3_1 = Instantiate(transform.GetChild((num / 100) % 10), transform.position + new Vector3(-0.2f, 0.5f, 0f), transform.rotation);
+                newnum3_1.gameObject.SetActive(true);
+                Transform newnum3_2 = Instantiate(transform.GetChild((num /10)% 10), transform.position + new Vector3(0.2f, 0.5f, 0f), transform.rotation);
+                newnum3_2.gameObject.SetActive(true);
+                Transform newnum3_3 = Instantiate(transform.GetChild(num % 10), transform.position + new Vector3(0.6f, 0.5f, 0f), transform.rotation);
+                newnum3_3.gameObject.SetActive(true);
                 break;
         }
 
@@ -30,7 +48,7 @@ public class combo : MonoBehaviour {
 
     IEnumerator DestroyThis()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.0f);
         Destroy(this.gameObject);
     }
     // Use this for initialization
