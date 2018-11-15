@@ -16,6 +16,9 @@ public class EventController : MonoBehaviour {
     // 폭탄 오브젝트들
     public GameObject SinBoom, SecBoom, TanBoom, CosBoom, CosecBoom, CotanBoom;
 
+    // 폭탄 Prefab 부모
+    public GameObject EnemyPar;
+
     // 삼각형 오브젝트
     public GameObject Tri;
     
@@ -25,8 +28,8 @@ public class EventController : MonoBehaviour {
     public GameObject HypoDeleteEffect, HeightDeleteEffect, BaseDeleteEffect;
     public GameObject HypoLength, HeightLength, BaseLength;
 
-    // Circle 4가지
-    public GameObject HypoIdleCircle, HypoCoCircle, HeightCircle, BaseCircle;
+    // Circle 4가지 + 충돌 Circle
+    public GameObject HypoIdleCircle, HypoCoCircle, HeightCircle, BaseCircle, CircleCollision;
 
     // 조준선 Effect
     public GameObject HypoIdleLineEffect, HypoCoLineEffect, BaseLineEffect, HeightLineEffect;
@@ -563,6 +566,7 @@ public class EventController : MonoBehaviour {
 
     public void LostLife() // Life를 잃는 것을 처리해주는 함수, 적이 몸에 닿을 시 실행
     {
+        foreach (Transform Enemy in EnemyPar.transform) Enemy.GetComponent<EnemyBehaviour>().PushBack();
         combo = 0;
         GetComponent<AudioManager>().DamagedSound();
         switch (Lifes)
@@ -590,6 +594,10 @@ public class EventController : MonoBehaviour {
     public void GameOver(bool isCleared) // GameOver 시 해야될 일을 해주는 함수
     {                                    // isCleared면 Clear, 아니면 GameOver
         StopCoroutine("Timer");
+        foreach(Transform Enemy in EnemyPar.transform) Destroy(Enemy.gameObject);
+        Tri.SetActive(false);
+        CircleCollision.SetActive(false);
+        Character.SetActive(false);
         GameOverWindow.SetActive(true);
         GameOverWindow.transform.Translate(new Vector3(0f, 0f, 0.01f));
         if (isCleared)

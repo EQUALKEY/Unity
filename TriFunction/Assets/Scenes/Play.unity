@@ -1003,7 +1003,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 234791640}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1193320171}
@@ -1044,7 +1044,7 @@ SpriteRenderer:
   m_SortingLayerID: 199176289
   m_SortingLayer: 9
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 162140f6942c75845850451967e07292, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 35655d879ef530d48a33f89b80bfc04e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4562,6 +4562,7 @@ MonoBehaviour:
   CosBoom: {fileID: 586667777}
   CosecBoom: {fileID: 1673408643}
   CotanBoom: {fileID: 630327703}
+  EnemyPar: {fileID: 1888521509}
   Tri: {fileID: 914847918}
   HypoActivated: {fileID: 474859038}
   HeightActivated: {fileID: 558072118}
@@ -4579,6 +4580,7 @@ MonoBehaviour:
   HypoCoCircle: {fileID: 361303734}
   HeightCircle: {fileID: 2073075968}
   BaseCircle: {fileID: 456907946}
+  CircleCollision: {fileID: 817435122}
   HypoIdleLineEffect: {fileID: 647309873}
   HypoCoLineEffect: {fileID: 2131025414}
   BaseLineEffect: {fileID: 1582868110}
@@ -6111,7 +6113,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1413225536}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1193320171}
@@ -6152,7 +6154,7 @@ SpriteRenderer:
   m_SortingLayerID: 199176289
   m_SortingLayer: 9
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9a4790db82af93e4898267f73a188494, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d336a97d18b077641b419697da865b9b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6649,6 +6651,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd7bdbba466b29f41919c784c0a3c457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tri: {fileID: 914847918}
+  CircleCollision: {fileID: 817435122}
+  Character: {fileID: 204254640}
 --- !u!212 &1514995117
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8699,6 +8704,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd7bdbba466b29f41919c784c0a3c457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tri: {fileID: 914847918}
+  CircleCollision: {fileID: 817435122}
+  Character: {fileID: 204254640}
 --- !u!1 &2016155942
 GameObject:
   m_ObjectHideFlags: 0
