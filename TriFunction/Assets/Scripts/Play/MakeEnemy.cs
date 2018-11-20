@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MakeEnemy : MonoBehaviour {
 
@@ -10,6 +11,34 @@ public class MakeEnemy : MonoBehaviour {
 
     public GameObject EC;
     private EventController ec;
+
+    public GameObject TextBox;
+    public Text TextBox_text;
+   
+    public GameObject SpeechBubble;
+    public Text SpeechBubble_text;
+    public bool isAttacked;
+
+    string[] textArr = 
+    {
+        "어느 날 깨다는 깨봉으로 열심히 삼각함수를 공부를 하였습니다. 공부를 마친 깨다는 잠시 쉬기 위해 TV를 켰는데 마침 중세시대의 기사들이 나오는 영화를 하고있었습니다. 지난 방학 때 로마로 여행을 갔다 온 깨다는 콜로세움의 검투사들의 전투가 멋있어 보였습니다. 한창 영화를 보던 깨다는 눈꺼풀이 점차 무거워 지며 참을 수 없는 졸음에 빠집니다."
+        ,"정신을 차린 깨다는 콜로세움 경기장 안에 서있었습니다. 그리고 바로 눈 앞에는 험상궂게 생기고 온몸에 흉터가 있는 검투사가 한 명 서있었습니다. 깨다를 노려보며 그 검투사는 입을 열었습니다."
+        ,"신참! 정신 똑바로 차려라! 싸울 검투사가 부족해 지원을 받았더니 이렇게 흐리멍텅한 사람을 보내주다니…. 나 원 참… 한 눈에 봐도 싸움을 해본 적이 없는 것 같으니 내가 가르쳐주겠다. 정신 똑바로 챙기고 들어! 니 목숨이 걸린 일이다."
+        ,"이 삼각형을 이용해서 공격과 방어를 할 수 있다. 삼각함수는 알고 있겠지? 잘 모르겠으면 깨봉tv에서 공부하고 와라. Sin의 개념을 알고 있다면 삼각형의 변을 눌러서 sin을 표현해봐라."
+        ,"멋진 화살이군. 이번에는 활로 슬라임을 조준해서 쏘아보거라. 처음이니까 3마리부터다."
+        ,"이번에는 sec다. 멋진 창을 날릴 수 있지"
+        ,"이번에는 tan다. 든든한 방패로 적을 막을 수 있지"
+        ,"좀 실력이 늘었나? 그렇다면 한번 테스트 해보지. 10마리다."
+        ,"이번에는 co를 이용해 보지. 기준각의 대각을 누르면 co각이 활성화 된다. cos이 co각의 sin인건 알고 있겠지? cos 3마리다."
+        ,"이번에는 cosec다."
+        ,"드디어 마지막 몬스터로군 cotan다."
+        ,"co몬스터 10마리만 처치해봐라"
+        ,"이제 좀 쓸만해졌는걸? 이제 연습은 끝났다. 20마리를 잡아봐라"
+        ,"마지막 시험이다. 더 강한 놈들을 준비해놨지."
+        ,"훌륭하군! 처음에 경솔했던 내 발언은 잊어주게. 너는 이미 훌륭한 전사다. 이제 너는 콜로세움의 수 많은 전사들과 경쟁할 수 있다. 누가 더 훌륭한 전사인지 겨루어보거라"
+    };
+
+    public int StoryProgress;
 
     /// <summary>
     /// 자 이제 레벨디자인을 한번 해봅시다. 전창민 군께서 velocity = 1, rezentime = 3 인 상황에서 100마리 넘게 잡았으므로 더올려도 문제없다고 판단됩니다.
@@ -57,17 +86,22 @@ public class MakeEnemy : MonoBehaviour {
         {
             isStoryMode = true;
             storyLevelState = 1;
+            ec.isPlay = false;
+            StoryProgress = 0;
+            StoryManager();
+            
         }
         else
         {
             isStoryMode = false;
             storyLevelState = 0;
+            ec.isPlay = true;
         }
 
         LevelState = 1;
         CreatedMonsterCnt = 0;
 
-        Make_Enemy();
+        if(!isStoryMode) Make_Enemy();
     }
 
     void Make_Enemy() 
@@ -157,7 +191,12 @@ public class MakeEnemy : MonoBehaviour {
 
         Create_Enemy(EnemyType,Monster_velocity);
         yield return new WaitForSeconds(rezentime);
-        if (ec.Lifes != 0 || storyLevelState == 11) StartCoroutine("Create_Enemy_Controller");
+        if (ec.Lifes != 0 || storyLevelState == 11)
+        {
+            if(!isStoryMode || (CreatedMonsterCnt!=2 && CreatedMonsterCnt!= 4 && CreatedMonsterCnt != 6 && CreatedMonsterCnt != 16 && CreatedMonsterCnt != 18
+                && CreatedMonsterCnt != 20 && CreatedMonsterCnt != 22 && CreatedMonsterCnt != 32 && CreatedMonsterCnt != 52 && CreatedMonsterCnt != 72))
+                StartCoroutine("Create_Enemy_Controller");
+        }
     }
 
     void Create_Enemy(int EnemyType, float velocity) // EnemyType이랑 velocity넣으면 적 만들어줌.
@@ -178,8 +217,8 @@ public class MakeEnemy : MonoBehaviour {
             else
             {
                 storyLevelState = 11;
-                ec.GameOver(true);
             }
+
         }
         else
         {
@@ -209,5 +248,169 @@ public class MakeEnemy : MonoBehaviour {
         Instantiate(EnemyTypeInfo[EnemyType], newEnemy.transform);
         
         newEnemy.GetComponent<EnemyBehaviour>().Velocity = velocity;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !ec.isPlay)
+        {
+            StoryProgress++;
+            StoryManager();
+        }
+    }
+
+    public void StoryManager()
+    {
+        switch (StoryProgress )
+        {
+            case 0:
+                Start_TextBox(0);
+                break;
+            case 1:
+                Start_TextBox(1);
+                break;
+            case 2:
+                Stop_TextBox();
+                Start_SpeechBubble(2);
+                break;
+            case 3:
+                Start_SpeechBubble(3);
+                break;
+            case 4:// storyLevelState 1 시작
+                Stop_SpeechBubble();
+                ec.isPlay = true;
+                isAttacked = false;
+                break;
+            case 5:
+                ec.isPlay = false;
+                Start_SpeechBubble(4);
+                break;
+            case 6:
+                Stop_SpeechBubble();
+                ec.isPlay = true;
+                isAttacked = false;
+                Make_Enemy();
+                break;
+            case 7:
+                Start_SpeechBubble(5);
+                ec.isPlay = false;
+                break;
+            case 8:
+                Stop_SpeechBubble();
+                ec.isPlay = true;
+                isAttacked = false;
+                Make_Enemy();
+                break;
+            case 9:
+                Start_SpeechBubble(6);
+                ec.isPlay = false;
+                break;
+            case 10:
+                Stop_SpeechBubble();
+                ec.isPlay = true;
+                isAttacked = false;
+                Make_Enemy();
+                break;
+            case 11:
+                Start_SpeechBubble(7);
+                ec.isPlay = false;
+                break;
+            case 12:
+                Stop_SpeechBubble();
+                ec.isPlay = true;
+                isAttacked = false;
+                Make_Enemy();
+                break;
+            case 13:
+                Start_SpeechBubble(8);
+                ec.isPlay = false;
+                break;
+            case 14:
+                Stop_SpeechBubble();
+                ec.isPlay = true;
+                isAttacked = false;
+                Make_Enemy();
+                break;
+            case 15:
+                Start_SpeechBubble(9);
+                ec.isPlay = false;
+                break;
+            case 16:
+                Stop_SpeechBubble();
+                ec.isPlay = true;
+                isAttacked = false;
+                Make_Enemy();
+                break;
+            case 17:
+                Start_SpeechBubble(10);
+                ec.isPlay = false;
+                break;
+            case 18:
+                Stop_SpeechBubble();
+                ec.isPlay = true;
+                isAttacked = false;
+                Make_Enemy();
+                break;
+            case 19:
+                Start_SpeechBubble(11);
+                ec.isPlay = false;
+                break;
+            case 20:
+                Stop_SpeechBubble();
+                ec.isPlay = true;
+                isAttacked = false;
+                Make_Enemy();
+                break;
+            case 21:
+                Start_SpeechBubble(12);
+                ec.isPlay = false;
+                break;
+            case 22:
+                Stop_SpeechBubble();
+                ec.isPlay = true;
+                isAttacked = false;
+                Make_Enemy();
+                break;
+            case 23:
+                Start_SpeechBubble(13);
+                ec.isPlay = false;
+                break;
+            case 24:
+                Stop_SpeechBubble();
+                ec.isPlay = true;
+                isAttacked = false;
+                Make_Enemy();
+                break;
+            case 25:
+                Start_SpeechBubble(14);
+                ec.isPlay = false;
+                break;
+            case 26:
+                Stop_SpeechBubble();
+                ec.GameOver(true);
+                break;
+
+        }
+    }
+    void Start_TextBox(int num)
+    {
+        TextBox.SetActive(true);
+        TextBox_text.text = textArr[num];
+    }
+
+    void Stop_TextBox()
+    {
+        TextBox.SetActive(false);
+    }
+
+    void Start_SpeechBubble(int num)
+    {
+        SpeechBubble.SetActive(true);
+        SpeechBubble_text.text = textArr[num];
+    }
+
+    void Stop_SpeechBubble()
+    {
+        SpeechBubble.SetActive(false);
     }
 }

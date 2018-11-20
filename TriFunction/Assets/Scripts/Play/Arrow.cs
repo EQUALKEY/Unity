@@ -8,6 +8,15 @@ public class Arrow : MonoBehaviour {
     
     private void Awake()
     {
+        if (PlayerPrefs.GetInt("Mode") == 0){
+            if (GameObject.Find("EC").GetComponent<MakeEnemy>().StoryProgress == 4)
+            {
+                GameObject.Find("EC").GetComponent<MakeEnemy>().StoryProgress++;
+                GameObject.Find("EC").GetComponent<MakeEnemy>().StoryManager();
+            }
+
+
+        }
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
     // Update is called once per frame

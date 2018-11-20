@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class EventController : MonoBehaviour {
 
+    public bool isPlay;
+
     // GameOver창 전체 (부모), GameOver 배경, Clear 배경
     // 랭크버튼 (GameOver시 시작화면-재시작-랭크), 무한모드버튼 (Clear시 시작화면-재시작-무한모드)
     public GameObject GameOverWindow, GameOverBack, ClearBack, RankButton, InfinityModeButton;
@@ -109,6 +111,13 @@ public class EventController : MonoBehaviour {
 
     // 초기화
     void Awake () {
+        if (PlayerPrefs.GetInt("Mode") == 0)
+        {
+            GameObject.Find("TimeBackground").SetActive(false);
+            GameObject.Find("ScoreBackground").SetActive(false);
+            GameObject.Find("Ulti").SetActive(false);
+        }
+
         CoR = new Vector3(0f, 0f, 0f);  // 깨다 위치
         Tstate = 0;
         isCo = false;
@@ -150,261 +159,304 @@ public class EventController : MonoBehaviour {
         MouseStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - CoR;
     }
 
-	void Update () {
+    void Update()
+    {
         // 좌클릭하면 회전시작
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (isPlay)
         {
-            isRotating = true;
-            RotateInit();
-        }
-
-        // 변, 각, 무기 Effect
-        ClearWeaponEffect();
-        if (!isRotating) {
-            ClearTri();
-            switch (Tstate) {
-                case 0:
-                    if (onHypo) HypoEffect.SetActive(true);
-                    else if (onHeight && isCo) HeightEffect.SetActive(true);
-                    else if (onBase && !isCo) BaseEffect.SetActive(true);
-                    break;
-                case 1:
-                    if (onHypo) HypoDeleteEffect.SetActive(true);
-                    else if (onHeight && !isCo) {
-                        BowEffect.SetActive(true);
-                        ArrowEffect.SetActive(true);
-                        BaseLineEffect.SetActive(true);
-                    }
-                    else if (onBase && isCo) {
-                        CoBowEffect.SetActive(true);
-                        CoArrowEffect.SetActive(true);
-                        HeightLineEffect.SetActive(true);
-                    }
-                    break;
-                case 2:
-                    if (onHeight) HeightDeleteEffect.SetActive(true);
-                    else if (onHypo && isCo) {
-                        CoSpearEffect.SetActive(true);
-                        HypoCoLineEffect.SetActive(true);
-                    }
-                    else if (onBase && isCo) CoShieldEffect.SetActive(true);
-                    break;
-                case 3:
-                    if (onBase) BaseDeleteEffect.SetActive(true);
-                    else if (onHypo && !isCo) {
-                        SpearEffect.SetActive(true);
-                        HypoIdleLineEffect.SetActive(true);
-                    }
-                    else if (onHeight && !isCo) ShieldEffect.SetActive(true);
-                    break;
-            }
-            if (onCoAngle) {
-                if (isCo) CoAngleDeleteEffect.SetActive(true);
-                else if (!isCo) CoAngleEffect.SetActive(true);
-            }
-            if (onIdleAngle && isCo) {
-                CoAngleDeleteEffect.SetActive(true);
-                IdleAngleEffect.SetActive(true);
-            }
-        }
-
-        // 키보드'space' or CoAngle 클릭시
-        if (Input.GetKeyDown(KeyCode.Space) || (Input.GetKeyDown(KeyCode.Mouse0) && onCoAngle)) { isCo = !isCo; }
-
-        // Co상태에서 IdleAngle 클릭시
-        if (isCo && Input.GetKeyDown(KeyCode.Mouse0) && onIdleAngle) { isCo = false; }
-
-        if (isCo) CoAngle.SetActive(true);
-        else CoAngle.SetActive(false);
-
-        // 키보드'w' or Hypo 클릭시
-        if (Input.GetKeyDown(KeyCode.W) || (Input.GetKeyDown(KeyCode.Mouse0) && onHypo)) {
-            switch (Tstate) {
-                case 0:
-                    Tstate = 1;
-                    if (!isCo) MakeCircle(HypoIdleCircle);
-                    else MakeCircle(HypoCoCircle);
-                    break;
-                case 1:
-                    Tstate = 0;
-                    HypoIdleCircle.SetActive(false);
-                    HypoCoCircle.SetActive(false);
-                    break;
-                case 2:
-                    if (isCo) {
-                        if (Input.GetKeyDown(KeyCode.W)) {
-                            SetAnimationParameters(0, 1);
-                            StartCoroutine("Cosec");
-                            RotateFinish();
-                        } else {
-                            CoSpear.SetActive(true);
-                            isLaunching = 5;
-                        }
-                    }
-                    break;
-                case 3:
-                    if (!isCo) {
-                        if (Input.GetKeyDown(KeyCode.W)) {
-                            SetAnimationParameters(0, 1);
-                            StartCoroutine("Sec");
-                            RotateFinish();
-                        } else {
-                            Spear.SetActive(true);
-                            isLaunching = 2;
-                        }
-                    }
-                    break;
-            }
-        }
-
-        // 키보드'd' or Height 클릭시
-        if (Input.GetKeyDown(KeyCode.D) || (Input.GetKeyDown(KeyCode.Mouse0) && onHeight)) {
-            switch (Tstate)
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                case 0:
-                    MakeCircle(HeightCircle);
-                    Tstate = 2;
-                    break;
-                case 1:
-                    if (!isCo) {
-                        if (Input.GetKeyDown(KeyCode.D)) {
-                            SetAnimationParameters(0, 1);
-                            StartCoroutine("Sin");
-                            RotateFinish();
-                        } else {
-                            Bow.SetActive(true);
-                            Arrow.SetActive(true);
-                            isLaunching = 1;
-                        }
-                    }
-                    break;
-                case 2:
-                    Tstate = 0;
-                    HeightCircle.SetActive(false);
-                    break;
-                case 3:
-                    if (!isCo) {
-                        if (Input.GetKeyDown(KeyCode.D)) {
-                            SetAnimationParameters(0, 1);
-                            StartCoroutine("Tan");
-                            RotateFinish();
-                        } else {
-                            Shield.SetActive(true);
-                            isLaunching = 3;
-                        }
-                    }
-                    break;
+                isRotating = true;
+                RotateInit();
             }
-        }
 
-        // 키보드'a' or Base 클릭시
-        if (Input.GetKeyDown(KeyCode.A) || (Input.GetKeyDown(KeyCode.Mouse0) && onBase)) {
-            switch (Tstate)
+            // 변, 각, 무기 Effect
+            ClearWeaponEffect();
+            if (!isRotating)
             {
-                case 0:
-                    MakeCircle(BaseCircle);
-                    Tstate = 3;
-                    break;
-                case 1:
-                    if (isCo) {
-                        if (Input.GetKeyDown(KeyCode.A)) {
-                            SetAnimationParameters(0, 1);
-                            StartCoroutine("Cos");
-                            RotateFinish();
-                        } else {
-                            CoBow.SetActive(true);
-                            CoArrow.SetActive(true);
-                            isLaunching = 4;
-                        }
-                    }
-                    break;
-                case 2:
-                    if (isCo) {
-                        if (Input.GetKeyDown(KeyCode.A)) {
-                            SetAnimationParameters(0, 1);
-                            StartCoroutine("Cotan");
-                            RotateFinish();
-                        } else {
-                            CoShield.SetActive(true);
-                            isLaunching = 6;
-                        }
-                    }
-                    break;
-                case 3:
-                    Tstate = 0;
-                    BaseCircle.SetActive(false);
-                    break;
-            }
-        }
-
-        ClearEdgeActivated();
-        switch (Tstate) {
-            case 0:
-                Tri.transform.localScale = StandardScale;
-                break;
-            case 1:
-                HypoActivated.SetActive(true);
-                HypoLength.SetActive(true);
-                Tri.transform.localScale = StandardScale * 0.807f;
-                break;
-            case 2:
-                HeightActivated.SetActive(true);
-                HeightLength.SetActive(true);
-                Tri.transform.localScale = StandardScale * 1.365f;
-                break;
-            case 3:
-                BaseActivated.SetActive(true);
-                BaseLength.SetActive(true);
-                Tri.transform.localScale = StandardScale;
-                break;
-        }
-
-        // 마우스 떼면 회전종료
-        if (Input.GetKeyUp(KeyCode.Mouse0))
-        {
-            isRotating = false;
-            if (isLaunching != 0) {
-                switch (isLaunching) {
+                ClearTri();
+                switch (Tstate)
+                {
+                    case 0:
+                        if (onHypo) HypoEffect.SetActive(true);
+                        else if (onHeight && isCo) HeightEffect.SetActive(true);
+                        else if (onBase && !isCo) BaseEffect.SetActive(true);
+                        break;
                     case 1:
-                        StartCoroutine("Sin");
+                        if (onHypo) HypoDeleteEffect.SetActive(true);
+                        else if (onHeight && !isCo)
+                        {
+                            BowEffect.SetActive(true);
+                            ArrowEffect.SetActive(true);
+                            BaseLineEffect.SetActive(true);
+                        }
+                        else if (onBase && isCo)
+                        {
+                            CoBowEffect.SetActive(true);
+                            CoArrowEffect.SetActive(true);
+                            HeightLineEffect.SetActive(true);
+                        }
                         break;
                     case 2:
-                        StartCoroutine("Sec");
+                        if (onHeight) HeightDeleteEffect.SetActive(true);
+                        else if (onHypo && isCo)
+                        {
+                            CoSpearEffect.SetActive(true);
+                            HypoCoLineEffect.SetActive(true);
+                        }
+                        else if (onBase && isCo) CoShieldEffect.SetActive(true);
                         break;
                     case 3:
-                        StartCoroutine("Tan");
-                        break;
-                    case 4:
-                        StartCoroutine("Cos");
-                        break;
-                    case 5:
-                        StartCoroutine("Cosec");
-                        break;
-                    case 6:
-                        StartCoroutine("Cotan");
+                        if (onBase) BaseDeleteEffect.SetActive(true);
+                        else if (onHypo && !isCo)
+                        {
+                            SpearEffect.SetActive(true);
+                            HypoIdleLineEffect.SetActive(true);
+                        }
+                        else if (onHeight && !isCo) ShieldEffect.SetActive(true);
                         break;
                 }
-                RotateFinish();
+                if (onCoAngle)
+                {
+                    if (isCo) CoAngleDeleteEffect.SetActive(true);
+                    else if (!isCo) CoAngleEffect.SetActive(true);
+                }
+                if (onIdleAngle && isCo)
+                {
+                    CoAngleDeleteEffect.SetActive(true);
+                    IdleAngleEffect.SetActive(true);
+                }
             }
+
+            // 키보드'space' or CoAngle 클릭시
+            if (Input.GetKeyDown(KeyCode.Space) || (Input.GetKeyDown(KeyCode.Mouse0) && onCoAngle)) { isCo = !isCo; }
+
+            // Co상태에서 IdleAngle 클릭시
+            if (isCo && Input.GetKeyDown(KeyCode.Mouse0) && onIdleAngle) { isCo = false; }
+
+            if (isCo) CoAngle.SetActive(true);
+            else CoAngle.SetActive(false);
+
+            // 키보드'w' or Hypo 클릭시
+            if (Input.GetKeyDown(KeyCode.W) || (Input.GetKeyDown(KeyCode.Mouse0) && onHypo))
+            {
+                switch (Tstate)
+                {
+                    case 0:
+                        Tstate = 1;
+                        if (!isCo) MakeCircle(HypoIdleCircle);
+                        else MakeCircle(HypoCoCircle);
+                        break;
+                    case 1:
+                        Tstate = 0;
+                        HypoIdleCircle.SetActive(false);
+                        HypoCoCircle.SetActive(false);
+                        break;
+                    case 2:
+                        if (isCo)
+                        {
+                            if (Input.GetKeyDown(KeyCode.W))
+                            {
+                                SetAnimationParameters(0, 1);
+                                StartCoroutine("Cosec");
+                                RotateFinish();
+                            }
+                            else
+                            {
+                                CoSpear.SetActive(true);
+                                isLaunching = 5;
+                            }
+                        }
+                        break;
+                    case 3:
+                        if (!isCo)
+                        {
+                            if (Input.GetKeyDown(KeyCode.W))
+                            {
+                                SetAnimationParameters(0, 1);
+                                StartCoroutine("Sec");
+                                RotateFinish();
+                            }
+                            else
+                            {
+                                Spear.SetActive(true);
+                                isLaunching = 2;
+                            }
+                        }
+                        break;
+                }
+            }
+
+            // 키보드'd' or Height 클릭시
+            if (Input.GetKeyDown(KeyCode.D) || (Input.GetKeyDown(KeyCode.Mouse0) && onHeight))
+            {
+                switch (Tstate)
+                {
+                    case 0:
+                        MakeCircle(HeightCircle);
+                        Tstate = 2;
+                        break;
+                    case 1:
+                        if (!isCo)
+                        {
+                            if (Input.GetKeyDown(KeyCode.D))
+                            {
+                                SetAnimationParameters(0, 1);
+                                StartCoroutine("Sin");
+                                RotateFinish();
+                            }
+                            else
+                            {
+                                Bow.SetActive(true);
+                                Arrow.SetActive(true);
+                                isLaunching = 1;
+                            }
+                        }
+                        break;
+                    case 2:
+                        Tstate = 0;
+                        HeightCircle.SetActive(false);
+                        break;
+                    case 3:
+                        if (!isCo)
+                        {
+                            if (Input.GetKeyDown(KeyCode.D))
+                            {
+                                SetAnimationParameters(0, 1);
+                                StartCoroutine("Tan");
+                                RotateFinish();
+                            }
+                            else
+                            {
+                                Shield.SetActive(true);
+                                isLaunching = 3;
+                            }
+                        }
+                        break;
+                }
+            }
+
+            // 키보드'a' or Base 클릭시
+            if (Input.GetKeyDown(KeyCode.A) || (Input.GetKeyDown(KeyCode.Mouse0) && onBase))
+            {
+                switch (Tstate)
+                {
+                    case 0:
+                        MakeCircle(BaseCircle);
+                        Tstate = 3;
+                        break;
+                    case 1:
+                        if (isCo)
+                        {
+                            if (Input.GetKeyDown(KeyCode.A))
+                            {
+                                SetAnimationParameters(0, 1);
+                                StartCoroutine("Cos");
+                                RotateFinish();
+                            }
+                            else
+                            {
+                                CoBow.SetActive(true);
+                                CoArrow.SetActive(true);
+                                isLaunching = 4;
+                            }
+                        }
+                        break;
+                    case 2:
+                        if (isCo)
+                        {
+                            if (Input.GetKeyDown(KeyCode.A))
+                            {
+                                SetAnimationParameters(0, 1);
+                                StartCoroutine("Cotan");
+                                RotateFinish();
+                            }
+                            else
+                            {
+                                CoShield.SetActive(true);
+                                isLaunching = 6;
+                            }
+                        }
+                        break;
+                    case 3:
+                        Tstate = 0;
+                        BaseCircle.SetActive(false);
+                        break;
+                }
+            }
+
+            ClearEdgeActivated();
+            switch (Tstate)
+            {
+                case 0:
+                    Tri.transform.localScale = StandardScale;
+                    break;
+                case 1:
+                    HypoActivated.SetActive(true);
+                    HypoLength.SetActive(true);
+                    Tri.transform.localScale = StandardScale * 0.807f;
+                    break;
+                case 2:
+                    HeightActivated.SetActive(true);
+                    HeightLength.SetActive(true);
+                    Tri.transform.localScale = StandardScale * 1.365f;
+                    break;
+                case 3:
+                    BaseActivated.SetActive(true);
+                    BaseLength.SetActive(true);
+                    Tri.transform.localScale = StandardScale;
+                    break;
+            }
+
+            // 마우스 떼면 회전종료
+            if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                isRotating = false;
+                if (isLaunching != 0)
+                {
+                    switch (isLaunching)
+                    {
+                        case 1:
+                            StartCoroutine("Sin");
+                            break;
+                        case 2:
+                            StartCoroutine("Sec");
+                            break;
+                        case 3:
+                            StartCoroutine("Tan");
+                            break;
+                        case 4:
+                            StartCoroutine("Cos");
+                            break;
+                        case 5:
+                            StartCoroutine("Cosec");
+                            break;
+                        case 6:
+                            StartCoroutine("Cotan");
+                            break;
+                    }
+                    RotateFinish();
+                }
+            }
+
+            if (isRotating)
+            {
+                MousePresentPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - CoR;   // 마우스 현재위치는 깨다 기준 상대적 위치
+                RotateAngle = Vector2.Angle(MouseStartPosition, MousePresentPosition);              // RotateAngle 계산
+                                                                                                    // Vertor2.Angle은 항상 0<=Angle<180이므로 외적을 이용해서 반환
+                if (Vector3.Cross(MouseStartPosition, MousePresentPosition).z < 0) RotateAngle = 360f - RotateAngle;
+                // 회전 및 삼각형 중심 - 회전 중심 위치 조정
+                Tri.transform.rotation = TriStartRotation * Quaternion.Euler(Vector3.forward * RotateAngle);
+                // Hypo, Height, Base Length 같이 회전 (역방향)
+                HypoLength.transform.rotation = Quaternion.Euler(-(Tri.transform.rotation * Vector3.forward));
+                HeightLength.transform.rotation = Quaternion.Euler(-(Tri.transform.rotation * Vector3.forward));
+                BaseLength.transform.rotation = Quaternion.Euler(-(Tri.transform.rotation * Vector3.forward));
+
+                Tri.transform.position = Quaternion.Euler(Vector3.forward * RotateAngle) * TriStartPosition + CoR;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Mouse1)) { Reset(); } // 우클릭 시 초기화
         }
-
-        if (isRotating)
-        {
-            MousePresentPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - CoR;   // 마우스 현재위치는 깨다 기준 상대적 위치
-            RotateAngle = Vector2.Angle(MouseStartPosition, MousePresentPosition);              // RotateAngle 계산
-            // Vertor2.Angle은 항상 0<=Angle<180이므로 외적을 이용해서 반환
-            if (Vector3.Cross(MouseStartPosition, MousePresentPosition).z < 0) RotateAngle = 360f - RotateAngle;
-            // 회전 및 삼각형 중심 - 회전 중심 위치 조정
-            Tri.transform.rotation = TriStartRotation * Quaternion.Euler(Vector3.forward * RotateAngle);
-            // Hypo, Height, Base Length 같이 회전 (역방향)
-            HypoLength.transform.rotation = Quaternion.Euler(-(Tri.transform.rotation * Vector3.forward));
-            HeightLength.transform.rotation = Quaternion.Euler(-(Tri.transform.rotation * Vector3.forward));
-            BaseLength.transform.rotation = Quaternion.Euler(-(Tri.transform.rotation * Vector3.forward));
-
-            Tri.transform.position = Quaternion.Euler(Vector3.forward * RotateAngle) * TriStartPosition + CoR;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse1)) { Reset(); } // 우클릭 시 초기화
     }
 
     private void RotateFinish() { // 회전 끝

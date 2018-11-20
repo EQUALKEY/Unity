@@ -6,6 +6,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     public GameObject EC;
     private EventController ec;
+    private MakeEnemy me;
 
     public GameObject Combo;
 
@@ -15,12 +16,13 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private float PushVelocity;
     private bool isPushing;
-
+    
     // Use this for initialization
     void Awake () {
         EC = GameObject.Find("EC"); // Prefab이다 보니까 public에 못넣음. 직접 찾아야 되더라. 다른방법 찾으면 Find 없애자.
         Combo = GameObject.Find("Combo");
         ec = EC.GetComponent<EventController>();
+        me = EC.GetComponent<MakeEnemy>();
         Direction3d = new Vector3(0f,0f,0f) - transform.position;
         Direction = (new Vector2(Direction3d.x,Direction3d.y )).normalized;
         PushVelocity = 30f;
@@ -36,6 +38,45 @@ public class EnemyBehaviour : MonoBehaviour {
         if (Vector3.Distance(new Vector3(0f, 0f, 0f), transform.position) < 1.6f) {
             ec.SetAnimationParameters(0, 2);
             ec.LostLife();
+            if (PlayerPrefs.GetInt("Mode") == 0)
+            {
+                me.isAttacked = true;
+                ec.GetScore(1, transform.position, transform.rotation);
+                if (me.StoryProgress == 6 || me.StoryProgress == 8 || me.StoryProgress == 10 || me.StoryProgress == 12 || me.StoryProgress == 14 || me.StoryProgress == 16 || me.StoryProgress == 18
+                    || me.StoryProgress == 20 || me.StoryProgress == 22 || me.StoryProgress == 24 )
+                {
+                    if (me.StoryProgress==12 || me.StoryProgress==20)
+                    {
+                        if (ec.Score == 10)
+                        {
+                            ec.Score = 0;
+                            me.StoryProgress++;
+                            me.StoryManager();
+                            me.SpeechBubble_text.text = "좀 더 집중하지 않으면 여기서 살아남을 수 없다! " + me.SpeechBubble_text.text;
+                        }
+                    }
+                    else if ( me.StoryProgress == 22 || me.StoryProgress==24 )
+                    {
+                        if(ec.Score == 20)
+                        {
+                            ec.Score = 0;
+                            me.StoryProgress++;
+                            me.StoryManager();
+                            me.SpeechBubble_text.text = "좀 더 집중하지 않으면 여기서 살아남을 수 없다! " + me.SpeechBubble_text.text;
+                        }
+                    }
+                    else
+                    {
+                        if (ec.Score == 2)
+                        {
+                            ec.Score = 0;
+                            me.StoryProgress++;
+                            me.StoryManager();
+                            me.SpeechBubble_text.text = "좀 더 집중하지 않으면 여기서 살아남을 수 없다! " + me.SpeechBubble_text.text;
+                        }
+                    }
+                }
+            }
             Destroy(this.gameObject);
         }
 
@@ -54,6 +95,54 @@ public class EnemyBehaviour : MonoBehaviour {
         ec.GetScore(1,transform.position,transform.rotation);
         Velocity = 0f;
         GetComponent<Animator>().SetInteger("Monster_state", 1);
+
+        if (PlayerPrefs.GetInt("Mode") == 0)
+        {
+            if (me.StoryProgress == 6 || me.StoryProgress == 8 || me.StoryProgress == 10 || me.StoryProgress == 12 || me.StoryProgress == 14 || me.StoryProgress == 16 || me.StoryProgress == 18
+                   || me.StoryProgress == 20 || me.StoryProgress == 22 || me.StoryProgress == 24 || me.StoryProgress == 26 || me.StoryProgress == 28)
+            {
+                if (me.StoryProgress == 12 || me.StoryProgress == 20)
+                {
+                    if (ec.Score == 10)
+                    {
+                        ec.Score = 0;
+                        me.StoryProgress++;
+                        me.StoryManager();
+                        if(me.isAttacked)
+                            me.SpeechBubble_text.text = "좀 더 집중하지 않으면 여기서 살아남을 수 없다! " + me.SpeechBubble_text.text;
+                        else
+                            me.SpeechBubble_text.text = "잘했다! " + me.SpeechBubble_text.text;
+                    }
+                }
+                else if (me.StoryProgress == 22 || me.StoryProgress == 24)
+                {
+                    if (ec.Score == 20)
+                    {
+                        ec.Score = 0;
+                        me.StoryProgress++;
+                        me.StoryManager();
+                        if (me.isAttacked)
+                            me.SpeechBubble_text.text = "좀 더 집중하지 않으면 여기서 살아남을 수 없다! " + me.SpeechBubble_text.text;
+                        else
+                            me.SpeechBubble_text.text = "잘했다! " + me.SpeechBubble_text.text;
+                    }
+                }
+                else
+                {
+                    if (ec.Score == 2)
+                    {
+                        ec.Score = 0;
+                        me.StoryProgress++;
+                        me.StoryManager();
+                        if (me.isAttacked)
+                            me.SpeechBubble_text.text = "좀 더 집중하지 않으면 여기서 살아남을 수 없다! " + me.SpeechBubble_text.text;
+                        else
+                            me.SpeechBubble_text.text = "잘했다! " + me.SpeechBubble_text.text;
+                    }
+                }
+            }
+        }
+
         StartCoroutine("DoDestroy");
     }
 
