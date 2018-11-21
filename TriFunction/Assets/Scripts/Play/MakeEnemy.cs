@@ -70,7 +70,7 @@ public class MakeEnemy : MonoBehaviour {
     /// 
     /// </story>
 
-    private int LevelState; // 1,2,3,4,5
+    private int LevelState; // 1,2,3,4,5,6,7
     private int storyLevelState; // 0 ~ 10
     private int CreatedMonsterCnt;
     private bool isStoryMode;
@@ -146,12 +146,28 @@ public class MakeEnemy : MonoBehaviour {
                     rezentime = 3.0f;
                     break;
                 case 4:
-                    Monster_velocity = 1.1f;
-                    rezentime = 2.8f;
-                    break;
-                case 5:
                     Monster_velocity = 1.2f;
                     rezentime = 2.5f;
+                    break;
+                case 5:
+                    Monster_velocity = 1.4f;
+                    rezentime = 2.0f;
+                    break;
+                case 6:
+                    Monster_velocity = 1.5f;
+                    rezentime = 1.8f;
+                    break;
+                case 7:
+                    Monster_velocity = 1.5f;
+                    rezentime = 1.5f;
+                    break;
+                case 8:
+                    Monster_velocity = 1.5f;
+                    rezentime = 1.3f;
+                    break;
+                case 9:
+                    Monster_velocity = 1.5f;
+                    rezentime = 1.0f;
                     break;
             }
         }
@@ -238,10 +254,23 @@ public class MakeEnemy : MonoBehaviour {
             {
                 LevelState = 4;
             }
-            else
+            else if (CreatedMonsterCnt < 160)
             {
                 LevelState = 5;
             }
+            else if (CreatedMonsterCnt < 250)
+            {
+                LevelState = 6;
+            }
+            else if (CreatedMonsterCnt < 400)
+            {
+                LevelState = 7;
+            }
+            else if (CreatedMonsterCnt < 600)
+            {
+                LevelState = 8;
+            }
+            else LevelState = 9;
         }
         float PositionEdge = Random.Range(-1f * Mathf.PI, Mathf.PI); // 360도 방향에서 랜덤 생성
         GameObject newEnemy = Instantiate(Enemy[EnemyType], new Vector3(10f * Mathf.Cos(PositionEdge), 10f * Mathf.Sin(PositionEdge)), new Quaternion(0f,0f,0f,1f), EnemyParent.transform);
