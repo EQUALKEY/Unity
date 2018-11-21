@@ -587,8 +587,10 @@ public class EventController : MonoBehaviour {
         UltiStar.GetComponent<Image>().fillAmount = (float)SkillGauge / 20f;
         if (SkillGauge >= 20)
         {
-            UltiStar.SetActive(true);
-            SkillButton.SetActive(true);
+            if (PlayerPrefs.GetInt("Mode") == 1) {
+                UltiStar.SetActive(true);
+                SkillButton.SetActive(true);
+            }
             SkillReady = true;
             SkillGauge = 0;
         }
