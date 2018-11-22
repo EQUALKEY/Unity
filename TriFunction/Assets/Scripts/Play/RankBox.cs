@@ -6,16 +6,7 @@ using UnityEngine.UI;
 public class RankBox : MonoBehaviour {
 
     public GameObject N, S, T, NN, B, L;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    
     public void Set_RankBox(int num, int score, int time, string nickname, int badge, int level)
     {
         Set_Num_Text(num);

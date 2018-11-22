@@ -59,8 +59,7 @@ public class EventController : MonoBehaviour {
     public int combo;
     public GameObject comboGO;
 
-
-    public bool isMonsterTypeOn; // 몬스터 타입이 켜져있는지 꺼져있는지 체크
+    public bool isMonsterInfoOn; // MonsterInfo On/Off 체크
     public bool isRotating;      // bool형태로 삼각형 회전 중인지 아닌지 체크
     public int isLaunching;      // 어떤 무기 발사 중인지. 0: 발사X, 1 ~ 6: sin, sec, tan, cos, cosec, cotan
     // int형태로 Tstate변수에 변활성화상태 저장
@@ -95,7 +94,7 @@ public class EventController : MonoBehaviour {
     // 점수
     public int Score;
     public Text ScoreText;
-    public int KillMosters;
+    public int KillMonsters;
 
     // 목숨
     public GameObject[] LifeOn = new GameObject[3];
@@ -114,12 +113,14 @@ public class EventController : MonoBehaviour {
 
     // 초기화
     void Awake () {
-        if (PlayerPrefs.GetInt("Mode") == 0)
-        {
+        if (PlayerPrefs.GetInt("Mode") == 0) {
             GameObject.Find("TimeBackground").SetActive(false);
             GameObject.Find("ScoreBackground").SetActive(false);
             GameObject.Find("Ulti").SetActive(false);
         }
+
+        if (PlayerPrefs.GetInt("isMonsterTypeOn") == 1) isMonsterInfoOn = true;
+        else isMonsterInfoOn = false;
 
         CoR = new Vector3(0f, 0f, 0f);  // 깨다 위치
         Tstate = 0;
@@ -129,7 +130,7 @@ public class EventController : MonoBehaviour {
         UltimateGage = 0;
         Lifes = 3;
         Score = 0;
-        KillMosters = 0;
+        KillMonsters = 0;
         combo = 0;
 
         Character_Animator = Character.GetComponent<Animator>();
@@ -146,9 +147,6 @@ public class EventController : MonoBehaviour {
         onCoAngle = false;
         onIdleAngle = false;
 
-        if (PlayerPrefs.GetInt("isMonsterTypeOff") == 1) isMonsterTypeOn = false;
-        else isMonsterTypeOn = true;
-
         RM = gameObject.GetComponent<RankManager>();
 
         StartTime();
@@ -164,9 +162,8 @@ public class EventController : MonoBehaviour {
         // 마우스 시작위치는 깨다 기준 상대적 위치
         MouseStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - CoR;
     }
-
-    void Update()
-    {
+    
+    void Update() {
         // 좌클릭하면 회전시작
         if (isPlay)
         {
@@ -577,11 +574,11 @@ public class EventController : MonoBehaviour {
         StartCoroutine("Timer");
     }
 
-    public void GetScore(int num,Vector3 pos,Quaternion rot)
-    {
+    public void GetScore(int num, Vector3 pos,Quaternion rot) {
         Score += num;
-        KillMosters++;
-        ScoreText.text = Score.ToString("0") + " 점";
+        KillMonsters++;
+
+        ScoreText.text = Score.ToString() + " 점";
 
         GameObject newCombo = Instantiate(comboGO, pos, rot);
     }
@@ -661,16 +658,13 @@ public class EventController : MonoBehaviour {
         Character.SetActive(false);
         GameOverWindow.SetActive(true);
         GameOverWindow.transform.Translate(new Vector3(0f, 0f, 0.01f));
-        if (isCleared)
-        {
+        if (isCleared) {
             GameOverBack.SetActive(false);
             ClearBack.SetActive(true);
             RankButton.SetActive(false);
             InfinityModeButton.SetActive(true);
             RM.Make_RankBox_Only_Mine();
-        }
-        else
-        {
+        } else {
             GameOverBack.SetActive(true);
             ClearBack.SetActive(false);
             RankButton.SetActive(true);
@@ -678,66 +672,53 @@ public class EventController : MonoBehaviour {
             RM.Make_RankBox_Only_Mine();
             RM.Push_Rank_Info();
         }
-        if (!isMonsterTypeOn) PlayerPrefs.SetInt("isMonsterTypeOff", 1);
     }
 
     ///////////////////////////////////////////////////////////// 무기 발사 Coroutine
-    IEnumerator Sin()
-    {
+    IEnumerator Sin() {
         GameObject BowObject = Instantiate(BowPrefab, Bow.transform.position, Bow.transform.rotation);
         GameObject ArrowObject = Instantiate(ArrowPrefab, Arrow.transform.position, Arrow.transform.rotation);
         BowObject.transform.localScale *= 0.807f;
         ArrowObject.transform.localScale *= 0.807f;
-
         yield return new WaitForSeconds(1f);
         Destroy(BowObject);
         yield return new WaitForSeconds(1f);
         Destroy(ArrowObject);
     }
 
-    IEnumerator Sec()
-    {
+    IEnumerator Sec() {
         GameObject SpearObject = Instantiate(SpearPrefab, Spear.transform.position, Spear.transform.rotation);
-
         yield return new WaitForSeconds(2f);
         Destroy(SpearObject);
     }
 
-    IEnumerator Tan()
-    {
+    IEnumerator Tan() {
         GameObject ShieldObject = Instantiate(ShieldPrefab, Shield.transform.position, Shield.transform.rotation);
-
         yield return new WaitForSeconds(2f);
         Destroy(ShieldObject);
     }
     
-    IEnumerator Cos()
-    {
+    IEnumerator Cos() {
         GameObject CoBowObject = Instantiate(CoBowPrefab, CoBow.transform.position, CoBow.transform.rotation);
         GameObject CoArrowObject = Instantiate(CoArrowPrefab, CoArrow.transform.position, CoArrow.transform.rotation);
         CoBowObject.transform.localScale *= 0.807f;
         CoArrowObject.transform.localScale *= 0.807f;
-
         yield return new WaitForSeconds(1f);
         Destroy(CoBowObject);
         yield return new WaitForSeconds(1f);
         Destroy(CoArrowObject);
     }
 
-    IEnumerator Cosec()
-    {
+    IEnumerator Cosec() {
         GameObject CoSpearObject = Instantiate(CoSpearPrefab, CoSpear.transform.position, CoSpear.transform.rotation);
         CoSpearObject.transform.localScale *= 1.365f;
-
         yield return new WaitForSeconds(2f);
         Destroy(CoSpearObject);
     }
 
-    IEnumerator Cotan()
-    {
+    IEnumerator Cotan() {
         GameObject CoShieldObject = Instantiate(CoShieldPrefab, CoShield.transform.position, CoShield.transform.rotation);
         CoShieldObject.transform.localScale *= 1.365f;
-
         yield return new WaitForSeconds(2f);
         Destroy(CoShieldObject);
     }

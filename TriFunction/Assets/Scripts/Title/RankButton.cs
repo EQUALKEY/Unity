@@ -8,16 +8,14 @@ public class RankButton : MonoBehaviour {
     public GameObject EC;
     private RankManager RM;
 
-    private void Awake()
-    {
+    private void Awake() {
         RM = EC.GetComponent<RankManager>();
     }
-    void OnMouseDown()
-    {
+
+    void OnMouseDown() {
         RM.Make_RankBox_top5andMine();
-        RM.RankBox_OnlyMine.SetActive(false);
+        RM.RankBoxOnlyMine.SetActive(false);
         RankImage.SetActive(true);
         CloseButton.SetActive(true);
     }
-
 }

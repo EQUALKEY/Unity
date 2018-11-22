@@ -12,21 +12,26 @@ public class MonsterTypeButton : MonoBehaviour {
     void Awake()
     {
         ec = EC.GetComponent<EventController>();
-    }
-
-    void OnMouseDown()
-    {
-        if(ec.isMonsterTypeOn)
-        {
-            TypeOn.SetActive(true);
-            TypeOff.SetActive(false);
-            ec.isMonsterTypeOn = false;
-        }
-        else
-        {
+        if (PlayerPrefs.GetInt("isMonsterTypeOn") == 1) {
             TypeOn.SetActive(false);
             TypeOff.SetActive(true);
-            ec.isMonsterTypeOn = true;
+        } else {
+            TypeOn.SetActive(true);
+            TypeOff.SetActive(false);
+        }
+    }
+
+    void OnMouseDown() {
+        if(ec.isMonsterInfoOn) {
+            PlayerPrefs.SetInt("isMonsterTypeOn", 0);
+            ec.isMonsterInfoOn = false;
+            TypeOn.SetActive(true);
+            TypeOff.SetActive(false);
+        } else {
+            PlayerPrefs.SetInt("isMonsterTypeOn", 1);
+            ec.isMonsterInfoOn = true;
+            TypeOn.SetActive(false);
+            TypeOff.SetActive(true);
         }
     }
 }

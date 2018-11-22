@@ -10,41 +10,33 @@ public class SoundButton_Play : MonoBehaviour {
     private AudioManager AM;
     bool isOn;
 
-    void Awake()
-    {
+    void Awake() {
         AM = EC.GetComponent<AudioManager>();
 
-        if (PlayerPrefs.GetInt("isSoundOn") == 1)
-        {
+        if (PlayerPrefs.GetInt("isSoundOn") == 1) {
             isOn = true;
             SoundOn.SetActive(false);
             SoundOff.SetActive(true);
-        }
-        else
-        {
+        } else {
             isOn = false;
             SoundOff.SetActive(false);
             SoundOn.SetActive(true);
         }
     }
 
-    void OnMouseDown()
-    {
-        if (isOn)
-        {
-            SoundOff.SetActive(true);
-            SoundOn.SetActive(false);
-            PlayerPrefs.SetInt("isSoundOn", 0);
-            isOn = false;
-            AM.SoundOn();
-        }
-        else
-        {
+    void OnMouseDown() {
+        if (isOn) {
             SoundOff.SetActive(false);
             SoundOn.SetActive(true);
+            PlayerPrefs.SetInt("isSoundOn", 0);
+            isOn = false;
+            AM.SoundOff();
+        } else {
+            SoundOff.SetActive(true);
+            SoundOn.SetActive(false);
             PlayerPrefs.SetInt("isSoundOn", 1);
             isOn = true;
-            AM.SoundOff();
+            AM.SoundOn();
         }
     }
 }

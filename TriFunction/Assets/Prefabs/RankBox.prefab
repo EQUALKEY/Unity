@@ -78,7 +78,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1180997541472714
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1951700155709810
 GameObject:
   m_ObjectHideFlags: 1
@@ -565,7 +565,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 12
+  m_Text: 1
 --- !u!114 &114412880636935792
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -598,7 +598,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "123456789\uC810"
+  m_Text: 100
 --- !u!114 &114473164441427148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -739,7 +739,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC774\uAC83\uC774\uB2C9\uB124\uC784\uC774\uB2E4\uD558\uD558\uD573\n"
+  m_Text: Hello
 --- !u!114 &114759326573722760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -886,7 +886,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "12345\uCD08"
+  m_Text: 100
 --- !u!114 &114921190816868370
 MonoBehaviour:
   m_ObjectHideFlags: 1
