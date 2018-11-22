@@ -5,6 +5,7 @@ using UnityEngine;
 public class SoundButton : MonoBehaviour {
 	public GameObject SoundOn;
 	public GameObject SoundOff;
+    public GameObject EC;
 
 	bool isOn;
 
@@ -19,11 +20,13 @@ public class SoundButton : MonoBehaviour {
 			SoundOff.SetActive(false);
 			SoundOn.SetActive(true);
 			isOn = false;
+            EC.GetComponent<TitleAudioManager>().SoundOff();
 		} else {
 			PlayerPrefs.SetInt("isSoundOn", 1);
 			SoundOff.SetActive(true);
 			SoundOn.SetActive(false);
 			isOn = true;
-		}
+            EC.GetComponent<TitleAudioManager>().SoundOn();
+        }
 	}
 }

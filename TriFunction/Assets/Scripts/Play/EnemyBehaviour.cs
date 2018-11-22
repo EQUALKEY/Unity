@@ -9,6 +9,7 @@ public class EnemyBehaviour : MonoBehaviour {
     private MakeEnemy me;
 
     public GameObject Combo;
+    private int newScore;
 
     public float Velocity;
     private Vector3 Direction3d;
@@ -41,15 +42,16 @@ public class EnemyBehaviour : MonoBehaviour {
             if (PlayerPrefs.GetInt("Mode") == 0)
             {
                 me.isAttacked = true;
-                ec.GetScore(1, transform.position, transform.rotation);
+                newScore = (100 + ec.combo-1) * me.LevelState * me.LevelState;
+                ec.GetScore(newScore, transform.position, transform.rotation);
                 if (me.StoryProgress == 6 || me.StoryProgress == 8 || me.StoryProgress == 10 || me.StoryProgress == 12 || me.StoryProgress == 14 || me.StoryProgress == 16 || me.StoryProgress == 18
                     || me.StoryProgress == 20 || me.StoryProgress == 22 || me.StoryProgress == 24 )
                 {
                     if (me.StoryProgress==12 || me.StoryProgress==20)
                     {
-                        if (ec.Score == 10)
+                        if (ec.KillMosters == 10)
                         {
-                            ec.Score = 0;
+                            ec.KillMosters = 0;
                             me.StoryProgress++;
                             me.StoryManager();
                             me.SpeechBubble_text.text = "좀 더 집중하지 않으면 여기서 살아남을 수 없다! " + me.SpeechBubble_text.text;
@@ -57,9 +59,9 @@ public class EnemyBehaviour : MonoBehaviour {
                     }
                     else if ( me.StoryProgress == 22 || me.StoryProgress==24 )
                     {
-                        if(ec.Score == 20)
+                        if(ec.KillMosters == 20)
                         {
-                            ec.Score = 0;
+                            ec.KillMosters = 0;
                             me.StoryProgress++;
                             me.StoryManager();
                             me.SpeechBubble_text.text = "좀 더 집중하지 않으면 여기서 살아남을 수 없다! " + me.SpeechBubble_text.text;
@@ -67,9 +69,9 @@ public class EnemyBehaviour : MonoBehaviour {
                     }
                     else
                     {
-                        if (ec.Score == 2)
+                        if (ec.KillMosters == 2)
                         {
-                            ec.Score = 0;
+                            ec.KillMosters = 0;
                             me.StoryProgress++;
                             me.StoryManager();
                             me.SpeechBubble_text.text = "좀 더 집중하지 않으면 여기서 살아남을 수 없다! " + me.SpeechBubble_text.text;
@@ -92,7 +94,8 @@ public class EnemyBehaviour : MonoBehaviour {
         EC.GetComponent<AudioManager>().MonsterHitSound();
         if (!isSkill) ec.GetSkillGauge(1);
         ec.combo++;
-        ec.GetScore(1,transform.position,transform.rotation);
+        newScore = (100 + ec.combo-1) * me.LevelState * me.LevelState;
+        ec.GetScore(newScore,transform.position,transform.rotation);
         Velocity = 0f;
         GetComponent<Animator>().SetInteger("Monster_state", 1);
 
@@ -103,9 +106,9 @@ public class EnemyBehaviour : MonoBehaviour {
             {
                 if (me.StoryProgress == 12 || me.StoryProgress == 20)
                 {
-                    if (ec.Score == 10)
+                    if (ec.KillMosters == 10)
                     {
-                        ec.Score = 0;
+                        ec.KillMosters = 0;
                         me.StoryProgress++;
                         me.StoryManager();
                         if(me.isAttacked)
@@ -116,9 +119,9 @@ public class EnemyBehaviour : MonoBehaviour {
                 }
                 else if (me.StoryProgress == 22 || me.StoryProgress == 24)
                 {
-                    if (ec.Score == 20)
+                    if (ec.KillMosters == 20)
                     {
-                        ec.Score = 0;
+                        ec.KillMosters = 0;
                         me.StoryProgress++;
                         me.StoryManager();
                         if (me.isAttacked)
@@ -129,9 +132,9 @@ public class EnemyBehaviour : MonoBehaviour {
                 }
                 else
                 {
-                    if (ec.Score == 2)
+                    if (ec.KillMosters == 2)
                     {
-                        ec.Score = 0;
+                        ec.KillMosters = 0;
                         me.StoryProgress++;
                         me.StoryManager();
                         if (me.isAttacked)

@@ -95,6 +95,7 @@ public class EventController : MonoBehaviour {
     // 점수
     public int Score;
     public Text ScoreText;
+    public int KillMosters;
 
     // 목숨
     public GameObject[] LifeOn = new GameObject[3];
@@ -108,6 +109,8 @@ public class EventController : MonoBehaviour {
     public GameObject UltiStar;
     public GameObject UltiBar;
     public int UltimateGage;
+
+    private RankManager RM;
 
     // 초기화
     void Awake () {
@@ -126,6 +129,7 @@ public class EventController : MonoBehaviour {
         UltimateGage = 0;
         Lifes = 3;
         Score = 0;
+        KillMosters = 0;
         combo = 0;
 
         Character_Animator = Character.GetComponent<Animator>();
@@ -144,6 +148,8 @@ public class EventController : MonoBehaviour {
 
         if (PlayerPrefs.GetInt("isMonsterTypeOff") == 1) isMonsterTypeOn = false;
         else isMonsterTypeOn = true;
+
+        RM = gameObject.GetComponent<RankManager>();
 
         StartTime();
 	}
@@ -574,7 +580,8 @@ public class EventController : MonoBehaviour {
     public void GetScore(int num,Vector3 pos,Quaternion rot)
     {
         Score += num;
-        ScoreText.text = Score.ToString("0") + " 마리";
+        KillMosters++;
+        ScoreText.text = Score.ToString("0") + " 점";
 
         GameObject newCombo = Instantiate(comboGO, pos, rot);
     }
@@ -660,6 +667,7 @@ public class EventController : MonoBehaviour {
             ClearBack.SetActive(true);
             RankButton.SetActive(false);
             InfinityModeButton.SetActive(true);
+            RM.Make_RankBox_Only_Mine();
         }
         else
         {
@@ -667,6 +675,8 @@ public class EventController : MonoBehaviour {
             ClearBack.SetActive(false);
             RankButton.SetActive(true);
             InfinityModeButton.SetActive(false);
+            RM.Make_RankBox_Only_Mine();
+            RM.Push_Rank_Info();
         }
         if (!isMonsterTypeOn) PlayerPrefs.SetInt("isMonsterTypeOff", 1);
     }
