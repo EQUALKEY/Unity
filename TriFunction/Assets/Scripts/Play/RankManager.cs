@@ -26,6 +26,7 @@ public class RankManager : MonoBehaviour {
     // Use this for initialization
     private void Awake()
     {
+        Get_Rank_Info();
     }
 
     void Start () {

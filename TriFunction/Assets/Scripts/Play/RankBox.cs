@@ -19,6 +19,7 @@ public class RankBox : MonoBehaviour {
     public void Set_RankBox(int num, int score, int time, string nickname, int badge, int level)
     {
         Set_Num_Text(num);
+        Set_Badge(badge);
         Set_Text(S, score.ToString());
         Set_Text(T, time.ToString());
         Set_Text(NN, nickname);
@@ -36,5 +37,9 @@ public class RankBox : MonoBehaviour {
             N.transform.GetChild(5).GetComponent<Text>().text = num.ToString();
         else
             N.transform.GetChild(5).GetComponent<Text>().text = "99+";
+    }
+    void Set_Badge(int num)
+    {
+        B.transform.GetChild(num).gameObject.SetActive(true);
     }
 }
