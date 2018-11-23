@@ -5,32 +5,21 @@ using UnityEngine.UI;
 
 public class RankBox : MonoBehaviour {
 
-    public GameObject N, S, T, NN, B, L;
+    // 등수, 점수, 시간, 닉네임, 레벨
+    public GameObject N, S, T, NN, L;
+    public GameObject NumBackGroundPar;
     
-    public void Set_RankBox(int num, int score, int time, string nickname, int badge, int level)
-    {
-        Set_Num_Text(num);
-        Set_Badge(badge);
-        Set_Text(S, score.ToString());
-        Set_Text(T, time.ToString());
-        Set_Text(NN, nickname);
-        Set_Text(L, level.ToString());
+    public void SetRankBox(int num, int score, int time, string nickname, int level) {
+        NumBackGroundPar.transform.GetChild(num % 5).gameObject.SetActive(true);
+        if (num < 100) SetText(N, num.ToString());
+        else SetText(N, "99+");
+        SetText(S, score.ToString());
+        SetText(T, time.ToString());
+        SetText(NN, nickname);
+        SetText(L, level.ToString());
     }
 
-    void Set_Text(GameObject GO, string str)
-    {
-        GO.transform.GetChild(0).GetComponent<Text>().text = str;
-    }
-    void Set_Num_Text(int num)
-    {
-        N.transform.GetChild(num % 5).gameObject.SetActive(true);
-        if (num < 100)
-            N.transform.GetChild(5).GetComponent<Text>().text = num.ToString();
-        else
-            N.transform.GetChild(5).GetComponent<Text>().text = "99+";
-    }
-    void Set_Badge(int num)
-    {
-        B.transform.GetChild(num).gameObject.SetActive(true);
+    void SetText(GameObject GO, string str) {
+        GO.transform.GetComponent<Text>().text = str;
     }
 }

@@ -5,68 +5,104 @@ using UnityEngine;
 public class RankManager : MonoBehaviour {
 
     public GameObject EC;
-
-    public GameObject RankBoxPref;
-    public GameObject RankBoxOnlyMine;
-    public GameObject RankWindow;
-    public GameObject[] RankBoxTop5 = new GameObject[5];
-    public GameObject RankBoxMineWithTop5;
-
-    struct rank_str {
-        public int rank_num;
-        public int rank_Score;
-        public int rank_Time;
-        public string rank_Nickname;
-        public int rank_Badge;
-        public int rank_Level;
-    }
-
-    rank_str[] top5 = new rank_str[5];
-    rank_str myrank;
     
-    private void Awake()
-    {
-        Get_Rank_Info();
-        myrank.rank_num = 1;
-        myrank.rank_Score = 100;
-        myrank.rank_Time = 100;
-        myrank.rank_Nickname = "Hello";
-        myrank.rank_Badge = 0;
-        myrank.rank_Level = 1;
+    public GameObject GameoverRankBox;
+    public GameObject RankWindow;
+    public GameObject RankImage;
+    public GameObject RankCloseButton;
+    public GameObject[] RankBoxTop5 = new GameObject[5];
+    public GameObject MyRankBoxWithTop5;
+
+    // RankData 저장할 구조체
+    struct RankData {
+        public int Rank;        // 등수
+        public int Score;       // 점수
+        public int Time;        // 시간
+        public string Nickname; // 닉네임
+        public int Level;       // 레벨 (깨봉홈페이지 레벨)
     }
 
-    public void Push_Rank_Info()
-    {
-        //DB에 정보 전송
-    }
-    void Get_Rank_Info()
-    {
-        //top5 에 정보를 저장
-        //myrank에 정보를 저장
-    }
+    // 상위 5등과 자신의 RankData 저장할 구조체
+    RankData[] Top5 = new RankData[5];
+    RankData MyRank;
 
-    public void Make_RankBox_Only_Mine()
-    {
-        RankBoxOnlyMine.SetActive(true);
-        Get_Rank_Info();
-        RankBoxOnlyMine.GetComponent<RankBox>().Set_RankBox(myrank.rank_num, myrank.rank_Score, myrank.rank_Time, myrank.rank_Nickname, myrank.rank_Badge, myrank.rank_Level);
+    // DB에 정보 전송
+    public void PushRankInfo(int Rank, int Time, string Nickname) {
+        // 이 세 값을 DB로 보낸다.
+        // Rank, Time, Nickname을 DB로보내고 저장한다.
     }
 
-    public void Make_RankBox_top5andMine()
-    {
+    // DB에서 Top5와 자신의 정보 받아온다.
+    // 받아오는 데이터는 각각의 등수, 점수, 시간, 닉네임, 레벨
+    private void GetRankInfo() {
+        // RankData MyRank, Top5[5]; 에서
+        // MyRank에는 플레이어의 정보 저장
+        // Top5[5]에는 상위 5명 정보 저장
 
-        Get_Rank_Info();
+        //////////////////////
+        //
+        // ????
+        //
+        ///////////////////////
+
+        /* 받아온 값들 대입
+        MyRank.Rank = 
+        MyRank.Score = 
+        MyRank.Time = 
+        MyRank.Nickname = 
+        MyRank.Level = 
+
+        Top5[0].Rank = 
+        Top5[0].Score = 
+        Top5[0].Time = 
+        Top5[0].Nickname = 
+        Top5[0].Level = 
+
+        Top5[1].Rank = 
+        Top5[1].Score = 
+        Top5[1].Time = 
+        Top5[1].Nickname = 
+        Top5[1].Level = 
+
+        ...
+
+        Top5[4].Rank = 
+        Top5[4].Score = 
+        Top5[4].Time = 
+        Top5[4].Nickname = 
+        Top5[4].Level = 
+        */
+    }
+
+    // Clear나 Gameover 화면 중앙에 랭크 띄우는 함수
+    public void MakeGameoverRankBox() {
+        GetRankInfo();
+        GameoverRankBox.SetActive(true);
+        GameoverRankBox.GetComponent<RankBox>().SetRankBox(MyRank.Rank, MyRank.Score, MyRank.Time, MyRank.Nickname, MyRank.Level);
+    }
+
+    // RankButton 눌러서 랭킹창 띄우는 함수
+    public void MakeRankBox() {
+        GetRankInfo();
+        GameoverRankBox.SetActive(false);
+        RankImage.SetActive(true);
+        RankCloseButton.SetActive(true);
         RankWindow.SetActive(true);
         for (int i = 0; i < 5; i++)
-        {
-            RankBoxTop5[i].GetComponent<RankBox>().Set_RankBox(top5[i].rank_num, top5[i].rank_Score, top5[i].rank_Time, top5[i].rank_Nickname, top5[i].rank_Badge, top5[i].rank_Level);
+            RankBoxTop5[i].GetComponent<RankBox>().SetRankBox(Top5[i].Rank, Top5[i].Score, Top5[i].Time, Top5[i].Nickname, Top5[i].Level);
+
+        if (MyRank.Rank <= 5)
+            MyRankBoxWithTop5.SetActive(false);
+        else {
+            MyRankBoxWithTop5.SetActive(true);
+            MyRankBoxWithTop5.GetComponent<RankBox>().SetRankBox(MyRank.Rank, MyRank.Score, MyRank.Time, MyRank.Nickname, MyRank.Level);
         }
-        if (myrank.rank_num <= 5)
-            RankBoxMineWithTop5.SetActive(false);
-        else
-        {
-            RankBoxMineWithTop5.SetActive(true);
-            RankBoxMineWithTop5.GetComponent<RankBox>().Set_RankBox(myrank.rank_num, myrank.rank_Score, myrank.rank_Time, myrank.rank_Nickname, myrank.rank_Badge, myrank.rank_Level);
-        }
+    }
+
+    // RankBox 끔. GameoverRankBox는 안켜줌 (Title에서는 필요없는 기능)
+    public void CloseRankBox() {
+        RankWindow.SetActive(false);
+        RankImage.SetActive(false);
+        RankCloseButton.SetActive(false);
     }
 }

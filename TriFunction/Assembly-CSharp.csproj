@@ -68,7 +68,7 @@
      <Compile Include="Assets\Scripts\Play\MonsterInfoButton.cs" />
      <Compile Include="Assets\Scripts\Play\MonsterTypeButton.cs" />
      <Compile Include="Assets\Scripts\Play\RankBox.cs" />
-     <Compile Include="Assets\Scripts\Play\RankClose.cs" />
+     <Compile Include="Assets\Scripts\Play\RankClose_play.cs" />
      <Compile Include="Assets\Scripts\Play\RankManager.cs" />
      <Compile Include="Assets\Scripts\Play\RestartButton.cs" />
      <Compile Include="Assets\Scripts\Play\Shield.cs" />
@@ -83,6 +83,7 @@
      <Compile Include="Assets\Scripts\Title\HelpRightButton.cs" />
      <Compile Include="Assets\Scripts\Title\InfinityButton.cs" />
      <Compile Include="Assets\Scripts\Title\RankButton.cs" />
+     <Compile Include="Assets\Scripts\Title\RankCloseButton_Title.cs" />
      <Compile Include="Assets\Scripts\Title\SoundButton.cs" />
      <Compile Include="Assets\Scripts\Title\StoryButton.cs" />
      <Compile Include="Assets\Scripts\Title\TitleAudioManager.cs" />

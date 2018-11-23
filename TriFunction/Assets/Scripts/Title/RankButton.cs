@@ -13,9 +13,6 @@ public class RankButton : MonoBehaviour {
     }
 
     void OnMouseDown() {
-        RM.Make_RankBox_top5andMine();
-        RM.RankBoxOnlyMine.SetActive(false);
-        RankImage.SetActive(true);
-        CloseButton.SetActive(true);
+        RM.MakeRankBox();
     }
 }
