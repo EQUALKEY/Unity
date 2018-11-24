@@ -108,7 +108,7 @@ public class EventController : MonoBehaviour {
     public GameObject UltiStar;
     public GameObject UltiBar;
     public int UltimateGage;
-
+    
     private RankManager RM;
 
     // 초기화
@@ -669,7 +669,7 @@ public class EventController : MonoBehaviour {
             ClearBack.SetActive(false);
             RankButton.SetActive(true);
             InfinityModeButton.SetActive(false);
-            RM.PushRankInfo(Score, (int)current_Time, "AAA");
+            RM.PushRankInfo(Score, (int)current_Time);
             RM.MakeGameoverRankBox();
         }
     }

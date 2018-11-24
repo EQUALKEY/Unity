@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.InteropServices;
+using System;
 
 public class RankManager : MonoBehaviour {
 
@@ -12,6 +14,29 @@ public class RankManager : MonoBehaviour {
     public GameObject RankCloseButton;
     public GameObject[] RankBoxTop5 = new GameObject[5];
     public GameObject MyRankBoxWithTop5;
+
+    // JavaScript 함수 import
+    [DllImport("__Internal")]
+    private static extern string GetUserData();
+    
+    // UserData 저장용 구조체
+    struct UserData {
+        public string userid;
+        public string nickname;
+        public string token;
+    }
+
+    // UserData 받아올 JSON과 구조체
+    public string UserJsonData;
+    UserData user = new UserData();
+
+    // 시작하면서 UserData 받아오고 저장
+    void Start() {
+        UserJsonData = GetUserData();
+
+        // JSON Parsing
+        user = JsonUtility.FromJson<UserData>(UserJsonData);
+    }
 
     // RankData 저장할 구조체
     struct RankData {
@@ -26,13 +51,15 @@ public class RankManager : MonoBehaviour {
     RankData[] Top5 = new RankData[5];
     RankData MyRank;
 
-    // DB에 정보 전송
-    public void PushRankInfo(int Rank, int Time, string Nickname) {
-        // 이 세 값을 DB로 보낸다.
-        // Rank, Time, Nickname을 DB로보내고 저장한다.
+    // DB에 정보 전송, 점수-시간-userid 를 보낸다
+    public void PushRankInfo(int score, int time) {
+
+        // 점수는 (int) score, 시간은 (int) time, userid는 (string) user.userid 에 저장되어있다
+        // 이 값들을 DB로 보내 저장한다.
     }
 
     // DB에서 Top5와 자신의 정보 받아온다.
+    // token은 (string) user.token에 저장되어 있다.
     // 받아오는 데이터는 각각의 등수, 점수, 시간, 닉네임, 레벨
     private void GetRankInfo() {
         // RankData MyRank, Top5[5]; 에서
