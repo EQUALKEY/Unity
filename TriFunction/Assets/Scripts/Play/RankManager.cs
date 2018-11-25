@@ -19,7 +19,7 @@ public class RankManager : MonoBehaviour {
     public GameObject[] RankBoxTop5 = new GameObject[5];
     public GameObject MyRankBoxWithTop5;
 
-    public Text js;
+    //// public Text js;
 
     // JavaScript 함수 import
     //[DllImport("__Internal")]

@@ -10,6 +10,7 @@ public class RankButton : MonoBehaviour {
     public GameObject RankText_tmp;
     public GameObject RankImage;
     public GameObject CloseButton;
+    public GameObject RankWindow;
 
     private RankManager RM;
 
@@ -22,6 +23,7 @@ public class RankButton : MonoBehaviour {
             PlayerPrefs.SetInt("WindowOn", 1);
             RankText_tmp.SetActive(true);
             RankImage.SetActive(true);
+            RankWindow.SetActive(false);
             CloseButton.SetActive(true);
         }
         //RM.MakeRankBox();

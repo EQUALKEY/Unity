@@ -746,7 +746,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   MyRankBoxWithTop5: {fileID: 0}
-  js: {fileID: 0}
   UserJsonData: 
 --- !u!20 &519420031
 Camera:
@@ -1062,7 +1061,6 @@ MonoBehaviour:
   - {fileID: 1733448835}
   - {fileID: 338696475}
   MyRankBoxWithTop5: {fileID: 1672515829}
-  js: {fileID: 630724594}
   UserJsonData: 
 --- !u!82 &609436041
 AudioSource:
@@ -1414,6 +1412,7 @@ MonoBehaviour:
   RankText_tmp: {fileID: 630724592}
   RankImage: {fileID: 1202807063}
   CloseButton: {fileID: 2009488559}
+  RankWindow: {fileID: 2009488559}
 --- !u!61 &798095181
 BoxCollider2D:
   m_ObjectHideFlags: 0

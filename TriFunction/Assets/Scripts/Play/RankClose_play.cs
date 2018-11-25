@@ -9,6 +9,7 @@ public class RankClose_play : MonoBehaviour {
     // 임시 Rank
     public GameObject RankImage;
     public GameObject RankText_tmp;
+    public GameObject MyRank;
 
     void OnMouseDown() {
         //// EC.GetComponent<RankManager>().CloseRankBox();
@@ -16,6 +17,7 @@ public class RankClose_play : MonoBehaviour {
         PlayerPrefs.SetInt("WindowOn", 0);
         RankImage.SetActive(false);
         RankText_tmp.SetActive(false);
+        MyRank.SetActive(true);
         gameObject.SetActive(false);
     }
 }

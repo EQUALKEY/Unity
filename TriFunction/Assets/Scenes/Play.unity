@@ -1354,6 +1354,81 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &237434494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 237434495}
+  - component: {fileID: 237434497}
+  - component: {fileID: 237434496}
+  m_Layer: 5
+  m_Name: MyRankText_tmp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &237434495
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 237434494}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1440955245}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 17.1, y: -11}
+  m_SizeDelta: {x: 276.11, y: 39.11}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &237434496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 237434494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.5283019, g: 0.2801075, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: e2534b0e47cb38b47ae67c141344a4dd, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\uB7AD\uD06C\uB294 \uCD94\uD6C4 \uC81C\uACF5 \uC608\uC815\uC785\uB2C8\uB2E4!"
+--- !u!222 &237434497
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 237434494}
+  m_CullTransparentMesh: 0
 --- !u!1 &243808002
 GameObject:
   m_ObjectHideFlags: 0
@@ -2461,6 +2536,7 @@ MonoBehaviour:
   RankText_tmp: {fileID: 1850913617}
   RankImage: {fileID: 1897912937}
   CloseButton: {fileID: 1654265163}
+  RankWindow: {fileID: 1440955244}
 --- !u!1001 &392608606
 Prefab:
   m_ObjectHideFlags: 0
@@ -5232,6 +5308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd2e3313e93ae743b374f9fa2538f0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RankWindow_tmp: {fileID: 1440955244}
   isPlay: 0
   GameOverWindow: {fileID: 1193320170}
   GameOverBack: {fileID: 1413225536}
@@ -5791,7 +5868,6 @@ MonoBehaviour:
   - {fileID: 805967966}
   - {fileID: 1398368563}
   MyRankBoxWithTop5: {fileID: 335614059}
-  js: {fileID: 0}
   UserJsonData: 
 --- !u!1001 &1077816252
 Prefab:
@@ -7181,6 +7257,76 @@ MonoBehaviour:
   TypeOn: {fileID: 448996005}
   TypeOff: {fileID: 1903500682}
   EC: {fileID: 1053816591}
+--- !u!1 &1440955244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1440955245}
+  - component: {fileID: 1440955247}
+  - component: {fileID: 1440955246}
+  m_Layer: 5
+  m_Name: MyRankBackground_tmp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1440955245
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1440955244}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 237434495}
+  m_Father: {fileID: 1530873705}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 6, y: -31}
+  m_SizeDelta: {x: 450, y: 40}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1440955246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1440955244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 9b23e28ff5c60e5499bcb5958b1d379e, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1440955247
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1440955244}
+  m_CullTransparentMesh: 0
 --- !u!1 &1458431621
 GameObject:
   m_ObjectHideFlags: 0
@@ -7638,6 +7784,7 @@ MonoBehaviour:
   Tri: {fileID: 914847918}
   CircleCollision: {fileID: 817435122}
   Character: {fileID: 204254640}
+  RankWindow: {fileID: 1440955244}
 --- !u!212 &1514995117
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7811,6 +7958,7 @@ RectTransform:
   - {fileID: 1817441054}
   - {fileID: 1482094111}
   - {fileID: 1850913618}
+  - {fileID: 1440955245}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8393,6 +8541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RankImage: {fileID: 1897912937}
   RankText_tmp: {fileID: 1850913617}
+  MyRank: {fileID: 1440955244}
 --- !u!1 &1663989766
 GameObject:
   m_ObjectHideFlags: 0
@@ -10113,6 +10262,7 @@ MonoBehaviour:
   Tri: {fileID: 914847918}
   CircleCollision: {fileID: 817435122}
   Character: {fileID: 204254640}
+  RankWindow: {fileID: 1440955244}
 --- !u!1 &2016155942
 GameObject:
   m_ObjectHideFlags: 0
