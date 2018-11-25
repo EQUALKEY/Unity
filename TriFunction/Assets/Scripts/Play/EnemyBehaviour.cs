@@ -17,7 +17,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private float PushVelocity;
     private bool isPushing;
-    private static readonly string AttackedMessage = "좀 더 집중하지 않으면 여기서 살아남을 수 없다! ";
+    private static readonly string AttackedMessage = "좀 더 집중하지 않으면 여기서 살아남을 수 없다! \n";
     private static readonly string NotAttackeMessage = "잘했다! ";
 
     void Awake () {
@@ -103,8 +103,11 @@ public class EnemyBehaviour : MonoBehaviour {
         ec.KillMonsters = 0;
         me.StoryProgress++;
         me.StoryManager();
-        if (me.isAttacked) me.SpeechBubble_text.text = AttackedMessage + me.SpeechBubble_text.text;
-        else me.SpeechBubble_text.text = NotAttackeMessage + me.SpeechBubble_text.text;
+        if (me.StoryProgress != 25)
+        {
+            if (me.isAttacked) me.SpeechBubble_text.text = AttackedMessage + me.SpeechBubble_text.text;
+            else me.SpeechBubble_text.text = NotAttackeMessage + me.SpeechBubble_text.text;
+        }
     }
 
     // 0.5초 후에 Destroy
