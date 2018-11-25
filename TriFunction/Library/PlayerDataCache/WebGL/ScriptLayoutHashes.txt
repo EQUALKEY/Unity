@@ -1,6 +1,6 @@
 WebGL
 PlayerPath?
-C:/Git/EQUALKEY.github.io/TriFunction/Ranking
+C:/Git/Web
 SceneListBegin?
 Assets/Scenes/Title.unity
 Assets/Scenes/Play.unity
@@ -102,7 +102,7 @@ c7dd12c15208b0447e101f80038706df UnityEngine.Timeline.dll:UnityEngine.Timeline.A
 0ddb2c46096a1e59e0dce07886ce4769 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 0ddb2c46096a1e59e0dce07886ce4769 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 64f3a13c1277a7f1324321d93d0ec13b UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
-ec57ed86db9ebb929ddace37133c3495 Assembly-CSharp.dll:.RankManager
+0307648794b46515b79a28dd78151397 Assembly-CSharp.dll:.RankManager
 5f4702e71b1eb5f49dbf51c94d5ebc5f Assembly-CSharp.dll:.EnemyBehaviour
 66b3109aa5921cf800bec17926c6adba Unity.TextMeshPro.dll:TMPro.TMP_SubMeshUI
 201273fb4f889724fb090164b7d6c657 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator

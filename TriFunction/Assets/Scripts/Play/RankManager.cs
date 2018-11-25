@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Runtime.InteropServices;
 using System;
+using UnityEngine.UI;
 
 public class RankManager : MonoBehaviour {
 
@@ -18,6 +19,8 @@ public class RankManager : MonoBehaviour {
     public GameObject[] RankBoxTop5 = new GameObject[5];
     public GameObject MyRankBoxWithTop5;
 
+    public Text js;
+
     // JavaScript 함수 import
     [DllImport("__Internal")]
     private static extern string GetUserData();
@@ -25,7 +28,7 @@ public class RankManager : MonoBehaviour {
     // UserData 저장용 구조체
     struct UserData {
         public string host;
-        public string userId;
+        public string userid;
         public string nickname;
         public string token;
     }
@@ -36,14 +39,13 @@ public class RankManager : MonoBehaviour {
 
     // 시작하면서 UserData 받아오고 저장
     void Start() {
-        //UserJsonData = GetUserData();
-
+        Debug.Log(GetUserData());
         // JSON Parsing
-        //user = JsonUtility.FromJson<UserData>(UserJsonData);
+        // user = JsonUtility.FromJson<UserData>(UserJsonData);
 
         //test data
         user.host = "https://dev-api.quebon.tv";
-        user.userId = "1068183666556929";
+        user.userid = "1068183666556929";
         user.nickname = "테스트닉네임";
         user.token = "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDMxMzg3MDQsInR5cGUiOiJJTkRWIiwiaWQiOiIxMDY4MTgzNjY2NTU2OTI5Iiwic2Vzc2lvbklkIjoiYTRlMTE1MTItMWExNS00MjM5LTllMDYtNTdiYTBkNzE2ZTE0IiwiYXV0aExldmVsIjo5LCJyb2xlcyI6W3sibmFtZSI6InByZW1pdW1fdXNlciIsInBlcm1pc3Npb25zIjpbIlBSRU1JVU1fVVNFUiJdfV0sInN1YnNjcmlwdGlvbiI6eyJzdWJzY3JpcHRpb25JZCI6IjEyNjg5MjI1OTU1NzQ3ODciLCJlbmREYXRlIjoiMjAxOS0wNS0yMSIsImFjdGl2ZSI6dHJ1ZX0sInJlYWRPbmx5IjpmYWxzZSwiaWF0IjoxNTQzMTE3MTA0fQ.L7s4O-Nskr4Q3YWnAn9Yj3uPe7XH3y6ceyAPeEVFsMY";
     }
@@ -229,7 +231,7 @@ public class RankManager : MonoBehaviour {
 
     private IEnumerator PutRanking(string token, int score, int time)
     {
-        string url = user.host + "/user/v1/games/" + gameName + "/users/" + user.userId;
+        string url = user.host + "/user/v1/games/" + gameName + "/users/" + user.userid;
         string data = "{\"score\":" + score + ",\"time\":" + time + "}";
 
         using (UnityWebRequest w = UnityWebRequest.Put(url, data))
