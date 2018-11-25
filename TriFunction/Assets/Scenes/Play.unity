@@ -2457,9 +2457,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ee46a94b9b992459340cb6e252d94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EC: {fileID: 1053816591}
+  RankText_tmp: {fileID: 1850913617}
   RankImage: {fileID: 1897912937}
   CloseButton: {fileID: 1654265163}
-  EC: {fileID: 1053816591}
 --- !u!1001 &392608606
 Prefab:
   m_ObjectHideFlags: 0
@@ -2728,7 +2729,7 @@ SpriteRenderer:
   m_SortingLayerID: -1401577439
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ed65b1106ddf18f44824df11f3612743, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 168d526564b8a8b488c2282ef908466a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3435,7 +3436,7 @@ SpriteRenderer:
   m_SortingLayerID: -1401577439
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 044e2250b924a5545bc81e6478606c49, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4f6d84aa9881489448b3e2cd3e397719, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3462,7 +3463,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.99, y: 0.84}
+    oldSize: {x: 1.05, y: 1.05}
     newSize: {x: 0.99, y: 0.84}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5790,6 +5791,7 @@ MonoBehaviour:
   - {fileID: 805967966}
   - {fileID: 1398368563}
   MyRankBoxWithTop5: {fileID: 335614059}
+  js: {fileID: 0}
   UserJsonData: 
 --- !u!1001 &1077816252
 Prefab:
@@ -6679,7 +6681,7 @@ SpriteRenderer:
   m_SortingLayerID: -1401577439
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e0eb442463704354e93a9cf687bcce1b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ca2990b4796590f4294bedf765264cf9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6720,7 +6722,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.99, y: 0.82}
+    oldSize: {x: 1.05, y: 1.05}
     newSize: {x: 0.99, y: 0.82}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -7808,6 +7810,7 @@ RectTransform:
   - {fileID: 45029303}
   - {fileID: 1817441054}
   - {fileID: 1482094111}
+  - {fileID: 1850913618}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8388,8 +8391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e449e796e6a5c4147920ef029310e0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EC: {fileID: 1053816591}
-  GameoverRankBox: {fileID: 1817441055}
+  RankImage: {fileID: 1897912937}
+  RankText_tmp: {fileID: 1850913617}
 --- !u!1 &1663989766
 GameObject:
   m_ObjectHideFlags: 0
@@ -9228,6 +9231,81 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1686287538310248, guid: 91754518eb6a7624d9b9d3e4cefc4de0,
     type: 2}
   m_PrefabInternal: {fileID: 1817441053}
+--- !u!1 &1850913617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1850913618}
+  - component: {fileID: 1850913620}
+  - component: {fileID: 1850913619}
+  m_Layer: 5
+  m_Name: RankText_tmp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1850913618
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1850913617}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1530873705}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 20.999998, y: -64.000015}
+  m_SizeDelta: {x: 301.8, y: 79.4}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1850913619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1850913617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.5, g: 0.29256985, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: e2534b0e47cb38b47ae67c141344a4dd, type: 3}
+    m_FontSize: 30
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 50
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\uCD94\uD6C4 \uC81C\uACF5 \uC608\uC815\uC785\uB2C8\uB2E4!"
+--- !u!222 &1850913620
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1850913617}
+  m_CullTransparentMesh: 0
 --- !u!1 &1888521509
 GameObject:
   m_ObjectHideFlags: 0
@@ -9462,6 +9540,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1897912939}
   - component: {fileID: 1897912938}
+  - component: {fileID: 1897912940}
   m_Layer: 0
   m_Name: RankImage
   m_TagString: Untagged
@@ -9528,6 +9607,31 @@ Transform:
   m_Father: {fileID: 388499330}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1897912940
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1897912937}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 11.407143, y: 7.65}
+    newSize: {x: 13.533898, y: 9.076271}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 11.407143, y: 6}
+  m_EdgeRadius: 0
 --- !u!1 &1903500682
 GameObject:
   m_ObjectHideFlags: 0
@@ -9543,7 +9647,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1903500683
 Transform:
   m_ObjectHideFlags: 0
@@ -9592,7 +9696,7 @@ SpriteRenderer:
   m_SortingLayerID: -1401577439
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 91834c49141ade14e9b5b83266ca2837, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8600a90d248bd5a449621ffa7f6b566a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

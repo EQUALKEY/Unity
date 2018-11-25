@@ -1181,12 +1181,12 @@ GameObject:
   - component: {fileID: 630724595}
   - component: {fileID: 630724594}
   m_Layer: 5
-  m_Name: Text
+  m_Name: RankText_tmp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &630724593
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1202,8 +1202,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -101.0697, y: -113.06975}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 21, y: -64}
+  m_SizeDelta: {x: 301.8, y: 79.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &630724594
 MonoBehaviour:
@@ -1217,7 +1217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.5, g: 0.29256985, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1225,19 +1225,19 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: e2534b0e47cb38b47ae67c141344a4dd, type: 3}
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 0
+    m_MaxSize: 50
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: "\uCD94\uD6C4 \uC81C\uACF5 \uC608\uC815\uC785\uB2C8\uB2E4!"
 --- !u!222 &630724595
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1410,9 +1410,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ee46a94b9b992459340cb6e252d94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EC: {fileID: 609436038}
+  RankText_tmp: {fileID: 630724592}
   RankImage: {fileID: 1202807063}
   CloseButton: {fileID: 2009488559}
-  EC: {fileID: 609436038}
 --- !u!61 &798095181
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3085,7 +3086,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc5f3cfd5b8bb5443903430524d51da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EC: {fileID: 609436038}
+  RankImage: {fileID: 1202807063}
+  RankText_tmp: {fileID: 630724592}
 --- !u!1 &2048823176
 GameObject:
   m_ObjectHideFlags: 0

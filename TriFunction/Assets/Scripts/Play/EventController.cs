@@ -663,14 +663,14 @@ public class EventController : MonoBehaviour {
             ClearBack.SetActive(true);
             RankButton.SetActive(false);
             InfinityModeButton.SetActive(true);
-            RM.MakeGameoverRankBox();
+            // RM.MakeGameoverRankBox();
         } else {
             GameOverBack.SetActive(true);
             ClearBack.SetActive(false);
             RankButton.SetActive(true);
             InfinityModeButton.SetActive(false);
             RM.PushRankInfo(Score, (int)current_Time);
-            RM.MakeGameoverRankBox();
+            // RM.MakeGameoverRankBox();
         }
     }
 

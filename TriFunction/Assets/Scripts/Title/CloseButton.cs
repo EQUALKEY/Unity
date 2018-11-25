@@ -7,5 +7,6 @@ public class CloseButton : MonoBehaviour {
 
 	void OnMouseDown() {
 		Target.SetActive(false);
+        PlayerPrefs.SetInt("WindowOn", 0);
 	}
 }

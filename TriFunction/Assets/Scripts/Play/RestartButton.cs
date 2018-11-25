@@ -9,10 +9,12 @@ public class RestartButton : MonoBehaviour {
     public GameObject Character;
 
     void OnMouseDown() {
-        Tri.SetActive(true);
-        CircleCollision.SetActive(true);
-        Character.SetActive(false);
-        if (this.gameObject.tag == "Finish") PlayerPrefs.SetInt("Mode", 1);
-        SceneManager.LoadScene("Play");
+        if (PlayerPrefs.GetInt("WindowOn") == 0) {
+            Tri.SetActive(true);
+            CircleCollision.SetActive(true);
+            Character.SetActive(false);
+            if (this.gameObject.tag == "Finish") PlayerPrefs.SetInt("Mode", 1);
+            SceneManager.LoadScene("Play");
+        }
     }
 }

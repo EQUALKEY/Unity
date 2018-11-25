@@ -15,18 +15,24 @@ public class SoundButton : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		if(isOn) {
-			PlayerPrefs.SetInt("isSoundOn", 0);
-			SoundOff.SetActive(false);
-			SoundOn.SetActive(true);
-			isOn = false;
-            EC.GetComponent<TitleAudioManager>().SoundOff();
-		} else {
-			PlayerPrefs.SetInt("isSoundOn", 1);
-			SoundOff.SetActive(true);
-			SoundOn.SetActive(false);
-			isOn = true;
-            EC.GetComponent<TitleAudioManager>().SoundOn();
+        if(PlayerPrefs.GetInt("WindowOn") == 0)
+        {
+            if (isOn)
+            {
+                PlayerPrefs.SetInt("isSoundOn", 0);
+                SoundOff.SetActive(false);
+                SoundOn.SetActive(true);
+                isOn = false;
+                EC.GetComponent<TitleAudioManager>().SoundOff();
+            }
+            else
+            {
+                PlayerPrefs.SetInt("isSoundOn", 1);
+                SoundOff.SetActive(true);
+                SoundOn.SetActive(false);
+                isOn = true;
+                EC.GetComponent<TitleAudioManager>().SoundOn();
+            }
         }
 	}
 }

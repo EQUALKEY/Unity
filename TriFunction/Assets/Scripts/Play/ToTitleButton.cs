@@ -7,6 +7,8 @@ public class ToTitleButton : MonoBehaviour
 {
     void OnMouseDown()
     {
-        SceneManager.LoadScene("Title");
+        if (PlayerPrefs.GetInt("WindowOn") == 0) {
+            SceneManager.LoadScene("Title");
+        }
     }
 }

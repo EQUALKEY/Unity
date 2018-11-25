@@ -51,6 +51,9 @@ public class HelpButton : MonoBehaviour {
     }
 
 	void OnMouseDown() {
-        Init();
+        if (PlayerPrefs.GetInt("WindowOn") == 0) {
+            PlayerPrefs.SetInt("WindowOn", 1);
+            Init();
+        }
 	}
 }
