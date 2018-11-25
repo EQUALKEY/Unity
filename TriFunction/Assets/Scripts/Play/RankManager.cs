@@ -36,24 +36,39 @@ public class RankManager : MonoBehaviour {
 
     // 시작하면서 UserData 받아오고 저장
     void Start() {
-        UserJsonData = GetUserData();
+        //UserJsonData = GetUserData();
 
         // JSON Parsing
-        user = JsonUtility.FromJson<UserData>(UserJsonData);
+        //user = JsonUtility.FromJson<UserData>(UserJsonData);
+
+        //test data
+        user.host = "https://dev-api.quebon.tv";
+        user.userId = "1068183666556929";
+        user.nickname = "테스트닉네임";
+        user.token = "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDMxMzg3MDQsInR5cGUiOiJJTkRWIiwiaWQiOiIxMDY4MTgzNjY2NTU2OTI5Iiwic2Vzc2lvbklkIjoiYTRlMTE1MTItMWExNS00MjM5LTllMDYtNTdiYTBkNzE2ZTE0IiwiYXV0aExldmVsIjo5LCJyb2xlcyI6W3sibmFtZSI6InByZW1pdW1fdXNlciIsInBlcm1pc3Npb25zIjpbIlBSRU1JVU1fVVNFUiJdfV0sInN1YnNjcmlwdGlvbiI6eyJzdWJzY3JpcHRpb25JZCI6IjEyNjg5MjI1OTU1NzQ3ODciLCJlbmREYXRlIjoiMjAxOS0wNS0yMSIsImFjdGl2ZSI6dHJ1ZX0sInJlYWRPbmx5IjpmYWxzZSwiaWF0IjoxNTQzMTE3MTA0fQ.L7s4O-Nskr4Q3YWnAn9Yj3uPe7XH3y6ceyAPeEVFsMY";
     }
 
+    [System.Serializable]
+    struct Badges
+    {
+        public Badge winner;
+    }
+
+    [System.Serializable]
     struct Badge
     {
         public int level;
     }
 
+    [System.Serializable]
     struct User
     {
         public string userId;
         public string nickname;
-        public Dictionary<string, Badge> badges;
+        public Badges badges;
     }
 
+    [System.Serializable]
     struct Ranking
     {
         public RankData my;
@@ -61,6 +76,7 @@ public class RankManager : MonoBehaviour {
     }
 
     // RankData 저장할 구조체
+    [System.Serializable]
     struct RankData {
         public User user;
         public int rank;        // 등수
@@ -83,7 +99,7 @@ public class RankManager : MonoBehaviour {
             return;
         }
 
-        PutRanking(user.token, score, time);
+        StartCoroutine(PutRanking(user.token, score, time));
 
         // 점수는 (int) score, 시간은 (int) time, userid는 (string) user.userid 에 저장되어있다
         // 이 값들을 DB로 보내 저장한다.
@@ -97,7 +113,7 @@ public class RankManager : MonoBehaviour {
             //not authorized
             return;
         }
-        GetRanking(user.token);
+        StartCoroutine(GetRanking(user.token));
         // RankData MyRank, Top5[5]; 에서
         // MyRank에는 플레이어의 정보 저장
         // Top5[5]에는 상위 5명 정보 저장
@@ -141,7 +157,7 @@ public class RankManager : MonoBehaviour {
     public void MakeGameoverRankBox() {
         GetRankInfo();
         GameoverRankBox.SetActive(true);
-        GameoverRankBox.GetComponent<RankBox>().SetRankBox(MyRank.Rank, MyRank.Score, MyRank.Time, MyRank.Nickname, MyRank.Level);
+        GameoverRankBox.GetComponent<RankBox>().SetRankBox(MyRank.rank, MyRank.score, MyRank.time, MyRank.nickname, MyRank.level);
     }
 
     // RankButton 눌러서 랭킹창 띄우는 함수
@@ -152,13 +168,13 @@ public class RankManager : MonoBehaviour {
         RankCloseButton.SetActive(true);
         RankWindow.SetActive(true);
         for (int i = 0; i < 5; i++)
-            RankBoxTop5[i].GetComponent<RankBox>().SetRankBox(Top5[i].Rank, Top5[i].Score, Top5[i].Time, Top5[i].Nickname, Top5[i].Level);
+            RankBoxTop5[i].GetComponent<RankBox>().SetRankBox(Top5[i].rank, Top5[i].score, Top5[i].time, Top5[i].nickname, Top5[i].level);
 
-        if (MyRank.Rank <= 5)
+        if (MyRank.rank <= 5)
             MyRankBoxWithTop5.SetActive(false);
         else {
             MyRankBoxWithTop5.SetActive(true);
-            MyRankBoxWithTop5.GetComponent<RankBox>().SetRankBox(MyRank.Rank, MyRank.Score, MyRank.Time, MyRank.Nickname, MyRank.Level);
+            MyRankBoxWithTop5.GetComponent<RankBox>().SetRankBox(MyRank.rank, MyRank.score, MyRank.time, MyRank.nickname, MyRank.level);
         }
     }
 
@@ -182,24 +198,24 @@ public class RankManager : MonoBehaviour {
                 //TODO handle error
             }
             else{
+                Debug.Log(w.downloadHandler.text);
                 //success
                 Ranking r = JsonUtility.FromJson<Ranking>(w.downloadHandler.text);
 
                 MyRank = r.my;
                 MyRank.nickname = r.my.user.nickname;
-                if (r.my.user.badges.ContainsKey("winner")) {
-                    MyRank.level = r.my.user.badges["winner"].level;
-                }
+                MyRank.level = r.my.user.badges.winner.level;
+
+                Debug.Log("my rank=" + MyRank.rank);
 
                 int size = Math.Min(r.ranking.Count, 5);
                 int i = 0;
                 for (i = 0; i < size; i++) {
                     Top5[i] = r.ranking[i];
                     Top5[i].nickname = r.ranking[i].user.nickname;
-                    if (r.my.user.badges.ContainsKey("winner"))
-                    {
-                        Top5[i].level = r.ranking[i].user.badges["winner"].level;
-                    }
+                    Top5[i].level = r.ranking[i].user.badges.winner.level;
+
+                    Debug.Log(i + ": rank=" + Top5[i].rank + ", score=" + Top5[i].score);
                 }
                 if (i < 5) {
                     for (int j = i; j < 5; j++) {
