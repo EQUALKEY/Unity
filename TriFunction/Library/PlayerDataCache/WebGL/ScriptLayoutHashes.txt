@@ -22,7 +22,7 @@ c7dd12c15208b0447e101f80038706df UnityEngine.Timeline.dll:UnityEngine.Timeline.A
 64f3a13c1277a7f1324321d93d0ec13b UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 fee3b8261105a0d39125a1b09b730618 Assembly-CSharp.dll:.SoundButton
 f6637497451c9a030c421de4a1ad5cdb Unity.TextMeshPro.dll:TMPro.TMP_ScrollbarEventHandler
-cb974ba2190823bd8b4f28c07bbfeeb8 Assembly-CSharp.dll:.EventController
+b0cd1965017d8b75dca95af17dcb1666 Assembly-CSharp.dll:.EventController
 b14b4630cc47b6e9ea8a644551a6a8cc Unity.TextMeshPro.dll:TMPro.TMP_Text
 53cefe5d98cadefbab750835e70b89c0 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 486cd95c82d8305219c352c06b776e1f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -123,7 +123,7 @@ fc061f3ae8a876c0687e86378d4a447c UnityEngine.Networking.dll:UnityEngine.Networki
 f8046c066d6603e7182a89bac32ab5b9 Assembly-CSharp.dll:.CloseButton
 382b8ef512fa8d6108723a01b57af65b UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 d22c788799ee45d8676254eccf20e8b8 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
-a526c04a8341844b610968a257fc56a4 Assembly-CSharp.dll:.GameStartButton
+d09c4a403349611cb1e01f2fe2517741 Assembly-CSharp.dll:.GameStartButton
 d75dc834c5dec688db75a55a1724c90f UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 486cd95c82d8305219c352c06b776e1f UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 e1ea12ca952c81d81a9a21fdf34446ed UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
@@ -136,7 +136,7 @@ fee3b8261105a0d39125a1b09b730618 Assembly-CSharp.dll:.SoundButton_Play
 59c061dc1a431cf09fe5491826942b72 Assembly-CSharp.dll:.HelpButton
 2807cad718819994419e7ede290e5415 Assembly-CSharp.dll:.RankBox
 f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
-89f54312d2d1654d4f43266fb538aac8 Assembly-CSharp.dll:.RankClose_play
+e047850a83b87aa2dbb73e18588ee61c Assembly-CSharp.dll:.RankClose_play
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.TitleAudioManager
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.ComboNum
 5abad292bd72955e889a23a026116d34 Assembly-CSharp.dll:.Skill
@@ -158,7 +158,7 @@ da21fc3f8056b1f91c3dd09c7bf4f90a UnityEngine.Networking.dll:UnityEngine.Networki
 529a95e9e8e7686c4816e08fbb37183f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 fc061f3ae8a876c0687e86378d4a447c UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 7ca56e063bd071986fff4f513cc4f477 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
-f0c532c6f5177697528ec6e0a5763d54 Assembly-CSharp.dll:.RankButton
+40bf1e00c1f376ca0f4beaca58db8269 Assembly-CSharp.dll:.RankButton
 443b749f35b5725117abe3a6f3508a0c Assembly-CSharp.dll:.AudioManager
 72a8523b432c0a5317826b7a9e0a0e79 Unity.TextMeshPro.dll:TMPro.PackageResourceImporterWindow
 e53cc67d84060d628c7f03fc725766d8 Unity.TextMeshPro.dll:TMPro.TMP_FontAsset
@@ -191,10 +191,12 @@ a9d01f1919fcfff507d40bc208f33afb Assembly-CSharp.dll:.MakeEnemy
 81299558e26bebe5dd23424217a3f8c8 Assembly-CSharp.dll:.combo
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.InfinityButton
 e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
-acc5d3cb7ff3bf4b19b592b92a7b95b1 Assembly-CSharp.dll:.RankCloseButton_Title
+dc4d8407a8c207f04a8255522bd42aa3 Assembly-CSharp.dll:.RankCloseButton_Title
 5abad292bd72955e889a23a026116d34 Assembly-CSharp.dll:.BaseEdgeRange
 2f9af06a78208a67db480e9bfed4a076 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 9318334b30e9f195f573b2ce00154b95 Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 4f80f9b68dc08e684716c88a9899dc97 Assembly-CSharp.dll:.HelpLeftButton
 4d476fa0e6078085f1dbd479e88ca3ea Assembly-CSharp.dll:.MonsterInfoButton
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.GameCloseButton
+12e3412f646b0ab29f668973b6777ca6 Assembly-CSharp.dll:.ModeSelectCloseButton

@@ -77,11 +77,13 @@
      <Compile Include="Assets\Scripts\Play\Spear.cs" />
      <Compile Include="Assets\Scripts\Play\ToTitleButton.cs" />
      <Compile Include="Assets\Scripts\Title\CloseButton.cs" />
+     <Compile Include="Assets\Scripts\Title\GameCloseButton.cs" />
      <Compile Include="Assets\Scripts\Title\GameStartButton.cs" />
      <Compile Include="Assets\Scripts\Title\HelpButton.cs" />
      <Compile Include="Assets\Scripts\Title\HelpLeftButton.cs" />
      <Compile Include="Assets\Scripts\Title\HelpRightButton.cs" />
      <Compile Include="Assets\Scripts\Title\InfinityButton.cs" />
+     <Compile Include="Assets\Scripts\Title\ModeSelectCloseButton.cs" />
      <Compile Include="Assets\Scripts\Title\RankButton.cs" />
      <Compile Include="Assets\Scripts\Title\RankCloseButton_Title.cs" />
      <Compile Include="Assets\Scripts\Title\SoundButton.cs" />

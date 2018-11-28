@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class EventController : MonoBehaviour {
 
-    // 임시 랭크
-    public GameObject RankWindow_tmp;
-
     public bool isPlay;
 
     // GameOver창 전체 (부모), GameOver 배경, Clear 배경
@@ -660,21 +657,19 @@ public class EventController : MonoBehaviour {
         CircleCollision.SetActive(false);
         Character.SetActive(false);
         GameOverWindow.SetActive(true);
-        RankWindow_tmp.SetActive(true);
         GameOverWindow.transform.Translate(new Vector3(0f, 0f, 0.01f));
         if (isCleared) {
             GameOverBack.SetActive(false);
             ClearBack.SetActive(true);
             RankButton.SetActive(false);
             InfinityModeButton.SetActive(true);
-            // RM.MakeGameoverRankBox();
         } else {
             GameOverBack.SetActive(true);
             ClearBack.SetActive(false);
             RankButton.SetActive(true);
             InfinityModeButton.SetActive(false);
             RM.PushRankInfo(Score, (int)current_Time);
-            // RM.MakeGameoverRankBox();
+            RM.MakeGameoverRankBox();
         }
     }
 
