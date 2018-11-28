@@ -2532,10 +2532,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ee46a94b9b992459340cb6e252d94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EC: {fileID: 1053816591}
   RankImage: {fileID: 1897912937}
   CloseButton: {fileID: 1654265163}
-  GameoverRankBox: {fileID: 1817441055}
+  GameoverRankBox: {fileID: 1440955244}
+  RankText_tmp: {fileID: 1850913617}
 --- !u!1001 &392608606
 Prefab:
   m_ObjectHideFlags: 0
@@ -5426,6 +5426,7 @@ MonoBehaviour:
   ClearBack: {fileID: 234791640}
   RankButton: {fileID: 388499329}
   InfinityModeButton: {fileID: 1514995113}
+  MyRank: {fileID: 1440955244}
   Character: {fileID: 204254640}
   SinBoom: {fileID: 1548777990}
   SecBoom: {fileID: 1324900722}
@@ -8650,9 +8651,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e449e796e6a5c4147920ef029310e0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EC: {fileID: 1053816591}
-  GameoverRankBox: {fileID: 1817441055}
+  GameoverRankBox: {fileID: 1440955244}
   RankImage: {fileID: 1897912937}
+  RankText_tmp: {fileID: 1850913617}
 --- !u!1 &1663989766
 GameObject:
   m_ObjectHideFlags: 0

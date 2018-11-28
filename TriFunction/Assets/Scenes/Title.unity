@@ -1409,10 +1409,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ee46a94b9b992459340cb6e252d94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EC: {fileID: 609436038}
   RankImage: {fileID: 1202807063}
   CloseButton: {fileID: 2009488559}
   GameoverRankBox: {fileID: 1202807063}
+  RankText_tmp: {fileID: 630724592}
 --- !u!61 &798095181
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3199,8 +3199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc5f3cfd5b8bb5443903430524d51da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EC: {fileID: 609436038}
   RankImage: {fileID: 1202807063}
+  RankText_tmp: {fileID: 630724592}
 --- !u!1 &2048823176
 GameObject:
   m_ObjectHideFlags: 0

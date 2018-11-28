@@ -11,6 +11,9 @@ public class EventController : MonoBehaviour {
     // 랭크버튼 (GameOver시 시작화면-재시작-랭크), 무한모드버튼 (Clear시 시작화면-재시작-무한모드)
     public GameObject GameOverWindow, GameOverBack, ClearBack, RankButton, InfinityModeButton;
 
+    // 자기랭크_tmp
+    public GameObject MyRank;
+
     // 깨다
     public GameObject Character;
     private Animator Character_Animator;
@@ -664,12 +667,13 @@ public class EventController : MonoBehaviour {
             RankButton.SetActive(false);
             InfinityModeButton.SetActive(true);
         } else {
+            MyRank.SetActive(true);
             GameOverBack.SetActive(true);
             ClearBack.SetActive(false);
             RankButton.SetActive(true);
             InfinityModeButton.SetActive(false);
-            RM.PushRankInfo(Score, (int)current_Time);
-            RM.MakeGameoverRankBox();
+            // RM.PushRankInfo(Score, (int)current_Time);
+            // RM.MakeGameoverRankBox();
         }
     }
 
