@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | TriFunction</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>  
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var onProgress = function(i, e) {
+        UnityProgress(i, e);
+        console.log(e);
+      }
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/TriFunc.json", {onProgress: onProgress});
+
+      //TODO set real data from quebon.tv web
+      var data = {
+        host: "https://dev-api.quebon.tv",
+        userid: "8050320605186",
+        nickname: "test",
+        token: "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDM4MTUxMDksInR5cGUiOiJJTkRWIiwiaWQiOiIxMDY4MTgzOTUxNzY5NjAyIiwic2Vzc2lvbklkIjoiODlmMjgxYjktNjRlZS00OWU3LWJlNTktYWNmODM2ZWIyMWU0IiwiYXV0aExldmVsIjoxLCJyb2xlcyI6W10sInN1YnNjcmlwdGlvbiI6eyJzdWJzY3JpcHRpb25JZCI6IjEzMDc4NTYxMzkyNTc4NTkiLCJlbmREYXRlIjoiMjAxOC0xMi0yNiIsImFjdGl2ZSI6dHJ1ZX0sInJlYWRPbmx5IjpmYWxzZSwiaWF0IjoxNTQzNzkzNTEwfQ.32pbD4QYqK-v0NGkn_6gCp7PkOY4yF8r3WRdI5I94yo"
+      };
+
+      //Send message to unity
+      var SetUserData = function() {
+          console.log("SET called")
+          gameInstance.SendMessage("EC", "SetUserData", JSON.stringify(data));
+      }
+    </script>
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="gameContainer" style="width: 1080px; height: 675px"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+        <div class="title">TriFunction</div>
+      </div>
+    </div>
+  </body>
+</html>
