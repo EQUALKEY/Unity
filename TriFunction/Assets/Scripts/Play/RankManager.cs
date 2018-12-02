@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-//using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using System;
 using UnityEngine.UI;
 
@@ -22,8 +22,8 @@ public class RankManager : MonoBehaviour {
     //// public Text js;
 
     // JavaScript 함수 import
-    //[DllImport("__Internal")]
-    //private static extern string GetUserData();
+    [DllImport("__Internal")]
+    private static extern string GetUserData();
     
     // UserData 저장용 구조체
     struct UserData {
@@ -33,21 +33,33 @@ public class RankManager : MonoBehaviour {
         public string token;
     }
 
+    public void SetUserData(string data) {
+        UserJsonData = data;
+        Debug.Log("Set: " + UserJsonData);
+
+        user = JsonUtility.FromJson<UserData>(UserJsonData);
+    }
+
     // UserData 받아올 JSON과 구조체
     public string UserJsonData;
     UserData user = new UserData();
 
     // 시작하면서 UserData 받아오고 저장
     void Start() {
-        // Debug.Log(GetUserData());
-        // JSON Parsing
-        // user = JsonUtility.FromJson<UserData>(UserJsonData);
-
         //test data
         //user.host = "https://dev-api.quebon.tv";
         //user.userid = "1068183666556929";
         //user.nickname = "테스트닉네임";
         //user.token = "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDMxMzg3MDQsInR5cGUiOiJJTkRWIiwiaWQiOiIxMDY4MTgzNjY2NTU2OTI5Iiwic2Vzc2lvbklkIjoiYTRlMTE1MTItMWExNS00MjM5LTllMDYtNTdiYTBkNzE2ZTE0IiwiYXV0aExldmVsIjo5LCJyb2xlcyI6W3sibmFtZSI6InByZW1pdW1fdXNlciIsInBlcm1pc3Npb25zIjpbIlBSRU1JVU1fVVNFUiJdfV0sInN1YnNjcmlwdGlvbiI6eyJzdWJzY3JpcHRpb25JZCI6IjEyNjg5MjI1OTU1NzQ3ODciLCJlbmREYXRlIjoiMjAxOS0wNS0yMSIsImFjdGl2ZSI6dHJ1ZX0sInJlYWRPbmx5IjpmYWxzZSwiaWF0IjoxNTQzMTE3MTA0fQ.L7s4O-Nskr4Q3YWnAn9Yj3uPe7XH3y6ceyAPeEVFsMY";
+    }
+
+    void LoadData() {
+        Application.ExternalCall("SetUserData");
+        //UserJsonData = GetUserData();
+        Debug.Log("Get: " + UserJsonData);
+
+        // JSON Parsing
+        user = JsonUtility.FromJson<UserData>(UserJsonData);
     }
 
     void Awake() {
@@ -98,9 +110,12 @@ public class RankManager : MonoBehaviour {
     RankData MyRank;
 
     // DB에 정보 전송, 점수-시간-userid 를 보낸다
-    public void PushRankInfo(int score, int time) { /*
+    public void PushRankInfo(int score, int time) {
         if (string.IsNullOrEmpty(user.token))
         {
+            Debug.Log("token is empty.");
+            LoadData();
+
             //not authorized
             return;
         }
@@ -109,54 +124,19 @@ public class RankManager : MonoBehaviour {
 
         // 점수는 (int) score, 시간은 (int) time, userid는 (string) user.userid 에 저장되어있다
         // 이 값들을 DB로 보내 저장한다.
-    */}
+    }
 
     // DB에서 Top5와 자신의 정보 받아온다.
     // token은 (string) user.token에 저장되어 있다.
     // 받아오는 데이터는 각각의 등수, 점수, 시간, 닉네임, 레벨
-    private void GetRankInfo() {/*
+    private void GetRankInfo() {
         if (string.IsNullOrEmpty(user.token)) {
+            Debug.Log("token is empty.");
+            LoadData();
             //not authorized
             return;
         }
-        StartCoroutine(GetRanking(user.token));*/
-        // RankData MyRank, Top5[5]; 에서
-        // MyRank에는 플레이어의 정보 저장
-        // Top5[5]에는 상위 5명 정보 저장
-
-        //////////////////////
-        //
-        // ????
-        //
-        ///////////////////////
-
-        /* 받아온 값들 대입
-        MyRank.Rank = 
-        MyRank.Score = 
-        MyRank.Time = 
-        MyRank.Nickname = 
-        MyRank.Level = 
-
-        Top5[0].Rank = 
-        Top5[0].Score = 
-        Top5[0].Time = 
-        Top5[0].Nickname = 
-        Top5[0].Level = 
-
-        Top5[1].Rank = 
-        Top5[1].Score = 
-        Top5[1].Time = 
-        Top5[1].Nickname = 
-        Top5[1].Level = 
-
-        ...
-
-        Top5[4].Rank = 
-        Top5[4].Score = 
-        Top5[4].Time = 
-        Top5[4].Nickname = 
-        Top5[4].Level = 
-        */
+        StartCoroutine(GetRanking(user.token));
     }
 
     // Clear나 Gameover 화면 중앙에 랭크 띄우는 함수

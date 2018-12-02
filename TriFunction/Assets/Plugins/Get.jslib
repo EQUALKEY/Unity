@@ -1,5 +1,4 @@
-mergeInto(LibraryManager.library, {
-
+var GetUserInfoLib = {
     // 서버에서 Data받아서 UserData를 JSON형태로 반환
     GetUserData: function() {
         var user = JSON.stringify({
@@ -8,12 +7,15 @@ mergeInto(LibraryManager.library, {
             "host":"https://dev-api.quebon.tv",
             "nickname":"테스트닉네임"
         })
-        var user_data = "UUUU";
+        var user_data = JSON.stringify(user);
+
         var bufferSize = lengthBytesUTF8(user_data) + 1;
         var buffer = _malloc(bufferSize);
         stringToUTF8(user_data, buffer, bufferSize);
         console.log(user_data);
-        console.log(user);
+
         return buffer;
-    },
-});
+    }
+};
+
+mergeInto(LibraryManager.library, GetUserInfoLib);

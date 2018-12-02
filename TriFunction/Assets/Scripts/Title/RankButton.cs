@@ -26,6 +26,6 @@ public class RankButton : MonoBehaviour {
             RankWindow.SetActive(false);
             CloseButton.SetActive(true);
         }
-        //RM.MakeRankBox();
+        RM.MakeRankBox();
     }
 }
