@@ -134,6 +134,7 @@ d53c840ecf939c1c4c58082dd68db816 Assembly-CSharp.dll:.MonsterTypeButton
 fee3b8261105a0d39125a1b09b730618 Assembly-CSharp.dll:.SoundButton_Play
 5abad292bd72955e889a23a026116d34 Assembly-CSharp.dll:.HeightEdgeRange
 59c061dc1a431cf09fe5491826942b72 Assembly-CSharp.dll:.HelpButton
+12e3412f646b0ab29f668973b6777ca6 Assembly-CSharp.dll:.ModeSelectCloseButton
 2807cad718819994419e7ede290e5415 Assembly-CSharp.dll:.RankBox
 f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 e047850a83b87aa2dbb73e18588ee61c Assembly-CSharp.dll:.RankClose_play
@@ -178,6 +179,7 @@ e033f131358cea5a0eabf9561e781deb UnityEngine.TestRunner.dll:UnityEngine.TestTool
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 5abad292bd72955e889a23a026116d34 Assembly-CSharp.dll:.HypoEdgeRange
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.GameCloseButton
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.StoryButton
 d75dc834c5dec688db75a55a1724c90f UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 486cd95c82d8305219c352c06b776e1f UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
@@ -198,5 +200,3 @@ dc4d8407a8c207f04a8255522bd42aa3 Assembly-CSharp.dll:.RankCloseButton_Title
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 4f80f9b68dc08e684716c88a9899dc97 Assembly-CSharp.dll:.HelpLeftButton
 4d476fa0e6078085f1dbd479e88ca3ea Assembly-CSharp.dll:.MonsterInfoButton
-486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.GameCloseButton
-12e3412f646b0ab29f668973b6777ca6 Assembly-CSharp.dll:.ModeSelectCloseButton
