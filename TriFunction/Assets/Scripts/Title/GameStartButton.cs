@@ -6,7 +6,7 @@ public class GameStartButton : MonoBehaviour {
 	public GameObject ModeSelect;
     public GameObject GameCloseButton;
 
-	void OnMouseDown() {
+	public void SelectMode() {
         if (PlayerPrefs.GetInt("WindowOn") == 0) {
             PlayerPrefs.SetInt("WindowOn", 1);
             ModeSelect.SetActive(true);

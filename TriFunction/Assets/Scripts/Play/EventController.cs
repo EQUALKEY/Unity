@@ -668,8 +668,8 @@ public class EventController : MonoBehaviour {
             ClearBack.SetActive(false);
             RankButton.SetActive(true);
             InfinityModeButton.SetActive(false);
+            RM.MakeGameoverRankBox(Score, (int)current_Time);
             RM.PushRankInfo(Score, (int)current_Time);
-            RM.MakeGameoverRankBox();
         }
     }
 

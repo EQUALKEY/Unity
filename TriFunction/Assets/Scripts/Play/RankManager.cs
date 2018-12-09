@@ -33,6 +33,12 @@ public class RankManager : MonoBehaviour
         public string userid;
         public string nickname;
         public string token;
+        public UserData(string host, string userid, string nickname, string token) {
+            this.host = host;
+            this.userid = userid;
+            this.nickname = nickname;
+            this.token = token;
+        }
     }
 
     public void SetUserData(string data)
@@ -55,17 +61,18 @@ public class RankManager : MonoBehaviour
         //user.userid = "1068183666556929";
         //user.nickname = "테스트닉네임";
         //user.token = "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDMxMzg3MDQsInR5cGUiOiJJTkRWIiwiaWQiOiIxMDY4MTgzNjY2NTU2OTI5Iiwic2Vzc2lvbklkIjoiYTRlMTE1MTItMWExNS00MjM5LTllMDYtNTdiYTBkNzE2ZTE0IiwiYXV0aExldmVsIjo5LCJyb2xlcyI6W3sibmFtZSI6InByZW1pdW1fdXNlciIsInBlcm1pc3Npb25zIjpbIlBSRU1JVU1fVVNFUiJdfV0sInN1YnNjcmlwdGlvbiI6eyJzdWJzY3JpcHRpb25JZCI6IjEyNjg5MjI1OTU1NzQ3ODciLCJlbmREYXRlIjoiMjAxOS0wNS0yMSIsImFjdGl2ZSI6dHJ1ZX0sInJlYWRPbmx5IjpmYWxzZSwiaWF0IjoxNTQzMTE3MTA0fQ.L7s4O-Nskr4Q3YWnAn9Yj3uPe7XH3y6ceyAPeEVFsMY";
-        LoadData();
+        // LoadData();
     }
 
     void LoadData()
     {
         Application.ExternalCall("SetUserData");
-        //UserJsonData = GetUserData();
+        // UserJsonData = GetUserData();
         Debug.Log("Get: " + UserJsonData);
 
         // JSON Parsing
-        user = JsonUtility.FromJson<UserData>(UserJsonData);
+        // user = JsonUtility.FromJson<UserData>(UserJsonData);
+        user = new UserData( "A", "AA", "AAA", "AAAA" );
     }
 
     void Awake()
@@ -150,12 +157,10 @@ public class RankManager : MonoBehaviour
         StartCoroutine(GetRanking(user.token));
     }
 
-    // Clear나 Gameover 화면 중앙에 랭크 띄우는 함수
-    public void MakeGameoverRankBox()
-    {
-        GetRankInfo();
+    // Gameover 화면 중앙에 랭크 띄우는 함수
+    public void MakeGameoverRankBox(int score, int time) {
+        GameoverRankBox.GetComponent<RankBox>().SetRankBox(0, score, time, user.nickname, 0, true);
         GameoverRankBox.SetActive(true);
-        GameoverRankBox.GetComponent<RankBox>().SetRankBox(MyRank.rank, MyRank.score, MyRank.time, MyRank.nickname, MyRank.level);
     }
 
     // RankButton 눌러서 랭킹창 띄우는 함수
@@ -167,14 +172,14 @@ public class RankManager : MonoBehaviour
         RankCloseButton.SetActive(true);
         RankWindow.SetActive(true);
         for (int i = 0; i < 5; i++)
-            RankBoxTop5[i].GetComponent<RankBox>().SetRankBox(Top5[i].rank, Top5[i].score, Top5[i].time, Top5[i].nickname, Top5[i].level);
+            RankBoxTop5[i].GetComponent<RankBox>().SetRankBox(Top5[i].rank, Top5[i].score, Top5[i].time, Top5[i].nickname, Top5[i].level, false);
 
         if (MyRank.rank <= 5)
             MyRankBoxWithTop5.SetActive(false);
         else
         {
             MyRankBoxWithTop5.SetActive(true);
-            MyRankBoxWithTop5.GetComponent<RankBox>().SetRankBox(MyRank.rank, MyRank.score, MyRank.time, MyRank.nickname, MyRank.level);
+            MyRankBoxWithTop5.GetComponent<RankBox>().SetRankBox(MyRank.rank, MyRank.score, MyRank.time, MyRank.nickname, MyRank.level, false);
         }
     }
 
@@ -241,6 +246,7 @@ public class RankManager : MonoBehaviour
         using (UnityWebRequest w = UnityWebRequest.Put(url, data))
         {
             w.SetRequestHeader("Authorization", "Bearer " + token);
+            w.SetRequestHeader("Content-Type", "application/json");
             yield return w.SendWebRequest();
 
             if (w.isHttpError || w.isNetworkError)
