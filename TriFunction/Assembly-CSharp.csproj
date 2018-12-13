@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Play\MonsterInfoButton.cs" />
      <Compile Include="Assets\Scripts\Play\MonsterTypeButton.cs" />
      <Compile Include="Assets\Scripts\Play\RankBox.cs" />
+     <Compile Include="Assets\Scripts\Play\RankButton_Play.cs" />
      <Compile Include="Assets\Scripts\Play\RankClose_play.cs" />
      <Compile Include="Assets\Scripts\Play\RankManager.cs" />
      <Compile Include="Assets\Scripts\Play\RestartButton.cs" />

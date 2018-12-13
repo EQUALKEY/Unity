@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RankCloseButton_Title : MonoBehaviour {
-    public GameObject EC;
-    public GameObject RankImage;
+    public GameObject RankWindow;
+    public GameObject RankDataWindow;
 
     void OnMouseDown() {
         PlayerPrefs.SetInt("WindowOn", 0);
-        RankImage.SetActive(false);
-        EC.transform.GetComponent<RankManager>().CloseRankBox();
-        gameObject.SetActive(false);
+        RankWindow.SetActive(false);
+        RankDataWindow.SetActive(false);
     }
 }
