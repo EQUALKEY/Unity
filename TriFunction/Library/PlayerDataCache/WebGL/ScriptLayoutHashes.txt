@@ -138,6 +138,7 @@ fee3b8261105a0d39125a1b09b730618 Assembly-CSharp.dll:.SoundButton_Play
 2807cad718819994419e7ede290e5415 Assembly-CSharp.dll:.RankBox
 f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 3b0555101d95acb9e93cb0e0099c6d43 Assembly-CSharp.dll:.RankClose_play
+64d0da27dae49249a585f2661958c01e Assembly-CSharp.dll:.RankButton_Play
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.TitleAudioManager
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.ComboNum
 5abad292bd72955e889a23a026116d34 Assembly-CSharp.dll:.Skill
@@ -200,4 +201,3 @@ df92da666ec3366a4b2d5c9db05baad0 Assembly-CSharp.dll:.RankCloseButton_Title
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 4f80f9b68dc08e684716c88a9899dc97 Assembly-CSharp.dll:.HelpLeftButton
 4d476fa0e6078085f1dbd479e88ca3ea Assembly-CSharp.dll:.MonsterInfoButton
-64d0da27dae49249a585f2661958c01e Assembly-CSharp.dll:.RankButton_Play

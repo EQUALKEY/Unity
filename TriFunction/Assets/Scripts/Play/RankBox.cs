@@ -9,7 +9,7 @@ public class RankBox : MonoBehaviour {
     public GameObject N, S, T, NN, L;
     public GameObject NumBackGroundPar;
     
-    public void SetRankBox(int num, int score, int time, string nickname, int level, bool isGameoverRankBox) {
+    public void SetRankBox(int num, int score, float time, string nickname, int level, bool isGameoverRankBox) {
         for (int i = 0; i < NumBackGroundPar.transform.childCount; i++) NumBackGroundPar.transform.GetChild(i).gameObject.SetActive(false);
         if (!isGameoverRankBox) NumBackGroundPar.transform.GetChild(num % 5).gameObject.SetActive(true);
         if (isGameoverRankBox) N.SetActive(false);
@@ -19,7 +19,7 @@ public class RankBox : MonoBehaviour {
             N.SetActive(true);
         }
         SetText(S, score.ToString() + "점");
-        SetText(T, time.ToString() + "초");
+        SetText(T, time.ToString("##0.00") + "초");
         SetText(NN, nickname);
         if (isGameoverRankBox) L.SetActive(false);
         else {

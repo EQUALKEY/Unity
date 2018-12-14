@@ -667,7 +667,7 @@ public class EventController : MonoBehaviour {
             RankButton.SetActive(false);
             InfinityModeButton.SetActive(true);
         } else {
-            RM.GetRankInfo();
+            RM.PutAndGetRankInfo(Score, current_Time);
             GameOverRankBox.SetActive(true);
             GameOverBack.SetActive(true);
             ClearBack.SetActive(false);
