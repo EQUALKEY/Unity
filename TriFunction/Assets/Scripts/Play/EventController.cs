@@ -111,7 +111,13 @@ public class EventController : MonoBehaviour {
     public GameObject UltiStar;
     public GameObject UltiBar;
     public int UltimateGage;
-    
+
+    // 사운드, 몬스터정보 버튼
+    public GameObject MonsterTypeOnButton;
+    public GameObject MonsterTypeOffButton;
+    public GameObject SoundOnButton;
+    public GameObject SoundOffButton;
+
     private RankManager RM;
 
     // 초기화
@@ -122,8 +128,23 @@ public class EventController : MonoBehaviour {
             GameObject.Find("Ulti").SetActive(false);
         }
 
-        if (PlayerPrefs.GetInt("isMonsterTypeOn") == 1) isMonsterInfoOn = true;
-        else isMonsterInfoOn = false;
+        if (PlayerPrefs.GetInt("isMonsterTypeOn") == 1) {
+            isMonsterInfoOn = true;
+            MonsterTypeOnButton.SetActive(false);
+            MonsterTypeOffButton.SetActive(true);
+        } else {
+            isMonsterInfoOn = false;
+            MonsterTypeOnButton.SetActive(true);
+            MonsterTypeOffButton.SetActive(false);
+        }
+
+        if (PlayerPrefs.GetInt("isSoundOn") == 1) {
+            SoundOnButton.SetActive(false);
+            SoundOffButton.SetActive(true);
+        } else {
+            SoundOnButton.SetActive(true);
+            SoundOffButton.SetActive(false);
+        }
 
         CoR = new Vector3(0f, 0f, 0f);  // 깨다 위치
         Tstate = 0;
@@ -299,8 +320,11 @@ public class EventController : MonoBehaviour {
                 switch (Tstate)
                 {
                     case 0:
-                        MakeCircle(HeightCircle);
-                        Tstate = 2;
+                        if (isCo)
+                        {
+                            MakeCircle(HeightCircle);
+                            Tstate = 2;
+                        }
                         break;
                     case 1:
                         if (!isCo)
@@ -348,8 +372,11 @@ public class EventController : MonoBehaviour {
                 switch (Tstate)
                 {
                     case 0:
-                        MakeCircle(BaseCircle);
-                        Tstate = 3;
+                        if (!isCo)
+                        {
+                            MakeCircle(BaseCircle);
+                            Tstate = 3;
+                        }
                         break;
                     case 1:
                         if (isCo)
@@ -660,12 +687,11 @@ public class EventController : MonoBehaviour {
         CircleCollision.SetActive(false);
         Character.SetActive(false);
         GameOverWindow.SetActive(true);
-        GameOverWindow.transform.Translate(new Vector3(0f, 0f, 0.01f));
         if (isCleared) {
-            GameOverBack.SetActive(false);
             ClearBack.SetActive(true);
-            RankButton.SetActive(false);
+            GameOverBack.SetActive(false);
             InfinityModeButton.SetActive(true);
+            RankButton.SetActive(false);
         } else {
             RM.PutAndGetRankInfo(Score, current_Time);
             GameOverRankBox.SetActive(true);

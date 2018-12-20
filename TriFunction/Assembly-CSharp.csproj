@@ -53,43 +53,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Play\Arrow.cs" />
+     <Compile Include="Assets\Scripts\ButtonController_Play.cs" />
+     <Compile Include="Assets\Scripts\ButtonController_Title.cs" />
      <Compile Include="Assets\Scripts\Play\AudioManager.cs" />
-     <Compile Include="Assets\Scripts\Play\BaseEdgeRange.cs" />
-     <Compile Include="Assets\Scripts\Play\CoAngleRange.cs" />
      <Compile Include="Assets\Scripts\Play\combo.cs" />
      <Compile Include="Assets\Scripts\Play\ComboNum.cs" />
      <Compile Include="Assets\Scripts\Play\EnemyBehaviour.cs" />
      <Compile Include="Assets\Scripts\Play\EventController.cs" />
-     <Compile Include="Assets\Scripts\Play\HeightEdgeRange.cs" />
-     <Compile Include="Assets\Scripts\Play\HypoEdgeRange.cs" />
-     <Compile Include="Assets\Scripts\Play\IdleAngleRange.cs" />
      <Compile Include="Assets\Scripts\Play\MakeEnemy.cs" />
-     <Compile Include="Assets\Scripts\Play\MonsterInfoButton.cs" />
-     <Compile Include="Assets\Scripts\Play\MonsterTypeButton.cs" />
-     <Compile Include="Assets\Scripts\Play\RankBox.cs" />
-     <Compile Include="Assets\Scripts\Play\RankButton_Play.cs" />
-     <Compile Include="Assets\Scripts\Play\RankClose_play.cs" />
-     <Compile Include="Assets\Scripts\Play\RankManager.cs" />
-     <Compile Include="Assets\Scripts\Play\RestartButton.cs" />
-     <Compile Include="Assets\Scripts\Play\Shield.cs" />
-     <Compile Include="Assets\Scripts\Play\Skill.cs" />
-     <Compile Include="Assets\Scripts\Play\SoundButton_Play.cs" />
-     <Compile Include="Assets\Scripts\Play\Spear.cs" />
-     <Compile Include="Assets\Scripts\Play\ToTitleButton.cs" />
-     <Compile Include="Assets\Scripts\Title\CloseButton.cs" />
-     <Compile Include="Assets\Scripts\Title\GameCloseButton.cs" />
-     <Compile Include="Assets\Scripts\Title\GameStartButton.cs" />
-     <Compile Include="Assets\Scripts\Title\HelpButton.cs" />
-     <Compile Include="Assets\Scripts\Title\HelpLeftButton.cs" />
-     <Compile Include="Assets\Scripts\Title\HelpRightButton.cs" />
-     <Compile Include="Assets\Scripts\Title\InfinityButton.cs" />
-     <Compile Include="Assets\Scripts\Title\ModeSelectCloseButton.cs" />
-     <Compile Include="Assets\Scripts\Title\RankButton.cs" />
-     <Compile Include="Assets\Scripts\Title\RankCloseButton_Title.cs" />
-     <Compile Include="Assets\Scripts\Title\SoundButton.cs" />
-     <Compile Include="Assets\Scripts\Title\StoryButton.cs" />
-     <Compile Include="Assets\Scripts\Title\TitleAudioManager.cs" />
+     <Compile Include="Assets\Scripts\Play\Range\BaseEdgeRange.cs" />
+     <Compile Include="Assets\Scripts\Play\Range\CoAngleRange.cs" />
+     <Compile Include="Assets\Scripts\Play\Range\HeightEdgeRange.cs" />
+     <Compile Include="Assets\Scripts\Play\Range\HypoEdgeRange.cs" />
+     <Compile Include="Assets\Scripts\Play\Range\IdleAngleRange.cs" />
+     <Compile Include="Assets\Scripts\Play\WeoponAndSkill\Arrow.cs" />
+     <Compile Include="Assets\Scripts\Play\WeoponAndSkill\Shield.cs" />
+     <Compile Include="Assets\Scripts\Play\WeoponAndSkill\Skill.cs" />
+     <Compile Include="Assets\Scripts\Play\WeoponAndSkill\Spear.cs" />
+     <Compile Include="Assets\Scripts\Rank\RankBox.cs" />
+     <Compile Include="Assets\Scripts\Rank\RankManager.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Git/Tri/Unity/TriFunction/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>

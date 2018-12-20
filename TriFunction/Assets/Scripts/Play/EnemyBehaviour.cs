@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour {
 
-    public GameObject EC;
+    private GameObject EC;
     private EventController ec;
     private MakeEnemy me;
 
-    public GameObject Combo;
+    private GameObject Combo;
     private int newScore;
 
     public float Velocity;
