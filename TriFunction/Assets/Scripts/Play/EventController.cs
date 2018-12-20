@@ -688,17 +688,18 @@ public class EventController : MonoBehaviour {
         Character.SetActive(false);
         GameOverWindow.SetActive(true);
         if (isCleared) {
+            GameOverRankBox.SetActive(false);
             ClearBack.SetActive(true);
             GameOverBack.SetActive(false);
             InfinityModeButton.SetActive(true);
             RankButton.SetActive(false);
         } else {
-            RM.PutAndGetRankInfo(Score, current_Time);
             GameOverRankBox.SetActive(true);
             GameOverBack.SetActive(true);
             ClearBack.SetActive(false);
             RankButton.SetActive(true);
             InfinityModeButton.SetActive(false);
+            RM.PutAndGetRankInfo(Score, current_Time);
         }
     }
 

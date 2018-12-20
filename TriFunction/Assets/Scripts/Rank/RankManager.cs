@@ -14,11 +14,13 @@ public class RankManager : MonoBehaviour
     public GameObject EC;
 
     public GameObject GameOverRankBox;
+    public GameObject MyRankData;
     public GameObject RankWindow;
     public GameObject RankDataWindow;
     public GameObject[] RankBoxTop5 = new GameObject[5];
     public GameObject MyRankBoxWithTop5;
     public Text WaitPlz;
+    public Text MyWaitPlz;
 
     //// public Text js;
 
@@ -115,6 +117,7 @@ public class RankManager : MonoBehaviour
     // DB에 정보 전송, 점수-시간-userid 를 보낸다
     public void PutAndGetRankInfo(int score, float time)
     {
+        MyWaitPlz.text = "로딩 중...";
         if (string.IsNullOrEmpty(user.token))
         {
             Debug.Log("token is empty.");
@@ -162,7 +165,6 @@ public class RankManager : MonoBehaviour
             else
             {
                 WaitPlz.text = "";
-                RankDataWindow.SetActive(true);
                 Debug.Log(w.downloadHandler.text);
                 //success
                 Ranking r = JsonUtility.FromJson<Ranking>(w.downloadHandler.text);
@@ -202,6 +204,7 @@ public class RankManager : MonoBehaviour
                     MyRankBoxWithTop5.SetActive(true);
                 }
                 if (PlayerPrefs.GetInt("Mode") == 1) GameOverRankBox.GetComponent<RankBox>().SetRankBox(MyRank.rank, MyRank.score, MyRank.time, MyRank.nickname, MyRank.level, false);
+                RankDataWindow.SetActive(true);
             }
         }
     }
@@ -224,12 +227,14 @@ public class RankManager : MonoBehaviour
             }
             else
             {
+                MyWaitPlz.text = "";
                 //sucess
                 MyRank = JsonUtility.FromJson<RankData>(w.downloadHandler.text);
 
                 Debug.Log("my rank=" + MyRank.rank);
                 
                 EC.transform.GetComponent<EventController>().GameOverRankBox.GetComponent<RankBox>().SetRankBox(MyRank.rank, MyRank.score, MyRank.time, MyRank.nickname, MyRank.level, false);
+                MyRankData.SetActive(true);
             }
         }
     }
