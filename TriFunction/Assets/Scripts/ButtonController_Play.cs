@@ -35,10 +35,11 @@ public class ButtonController_Play : MonoBehaviour {
     }
 
     public void Restart() {
-        Triangle.SetActive(true);
-        CollisionCircle.SetActive(true);
-        Character.SetActive(true);
-        if (gameObject.tag == "Finish") PlayerPrefs.SetInt("Mode", 1);
+        SceneManager.LoadScene("Play");
+    }
+
+    public void InfinityMode() {
+        PlayerPrefs.SetInt("Mode", 1);
         SceneManager.LoadScene("Play");
     }
 

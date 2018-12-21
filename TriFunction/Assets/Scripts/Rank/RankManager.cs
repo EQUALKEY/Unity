@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using System.Runtime.InteropServices;
 using System;
 using UnityEngine.UI;
 
@@ -21,12 +20,6 @@ public class RankManager : MonoBehaviour
     public GameObject MyRankBoxWithTop5;
     public Text WaitPlz;
     public Text MyWaitPlz;
-
-    //// public Text js;
-
-    // JavaScript 함수 import
-    [DllImport("__Internal")]
-    private static extern string GetUserData();
 
     // UserData 저장용 구조체
     struct UserData
@@ -63,7 +56,6 @@ public class RankManager : MonoBehaviour
     void LoadData()
     {
         Application.ExternalCall("SetUserData");
-        UserJsonData = GetUserData();
         Debug.Log("Get: " + UserJsonData);
 
         // JSON Parsing
@@ -164,7 +156,6 @@ public class RankManager : MonoBehaviour
             }
             else
             {
-                WaitPlz.text = "";
                 Debug.Log(w.downloadHandler.text);
                 //success
                 Ranking r = JsonUtility.FromJson<Ranking>(w.downloadHandler.text);
@@ -173,6 +164,9 @@ public class RankManager : MonoBehaviour
                 MyRank.nickname = r.my.user.nickname;
                 MyRank.level = r.my.user.badges.winner.level;
 
+                WaitPlz.text = "";
+                if (RankDataWindow.activeSelf) RankDataWindow.transform.localPosition = new Vector3();
+                else RankDataWindow.SetActive(true);
                 Debug.Log("my rank=" + MyRank.rank);
 
                 int size = Math.Min(r.ranking.Count, 5);
@@ -204,7 +198,6 @@ public class RankManager : MonoBehaviour
                     MyRankBoxWithTop5.SetActive(true);
                 }
                 if (PlayerPrefs.GetInt("Mode") == 1) GameOverRankBox.GetComponent<RankBox>().SetRankBox(MyRank.rank, MyRank.score, MyRank.time, MyRank.nickname, MyRank.level, false);
-                RankDataWindow.SetActive(true);
             }
         }
     }
@@ -227,13 +220,23 @@ public class RankManager : MonoBehaviour
             }
             else
             {
-                MyWaitPlz.text = "";
                 //sucess
                 MyRank = JsonUtility.FromJson<RankData>(w.downloadHandler.text);
 
+                Debug.Log(w.downloadHandler.text);
                 Debug.Log("my rank=" + MyRank.rank);
                 
-                EC.transform.GetComponent<EventController>().GameOverRankBox.GetComponent<RankBox>().SetRankBox(MyRank.rank, MyRank.score, MyRank.time, MyRank.nickname, MyRank.level, false);
+
+
+                Debug.Log(w.downloadHandler.text);
+                //success
+                RankData r = JsonUtility.FromJson<RankData>(w.downloadHandler.text);
+                
+                MyRank.nickname = r.user.nickname;
+                MyRank.level = r.user.badges.winner.level;
+                
+                EC.transform.GetComponent<EventController>().GameOverRankBox.GetComponent<RankBox>().SetRankBox(0, score, time, MyRank.nickname, MyRank.level, false);
+                MyWaitPlz.text = "";
                 MyRankData.SetActive(true);
             }
         }

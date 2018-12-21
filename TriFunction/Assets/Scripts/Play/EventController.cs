@@ -9,7 +9,7 @@ public class EventController : MonoBehaviour {
 
     // GameOver창 전체 (부모), GameOver 배경, Clear 배경
     // 랭크버튼 (GameOver시 시작화면-재시작-랭크), 무한모드버튼 (Clear시 시작화면-재시작-무한모드)
-    public GameObject GameOverWindow, GameOverBack, ClearBack, RankButton, InfinityModeButton;
+    public GameObject GameOverWindow, GameOverBack, ClearBack, RankButton, InfinityModeButton, MyRankData, MyWaitPlz;
 
     // GameOver시 중앙에 RankBox;
     public GameObject GameOverRankBox;
@@ -689,17 +689,26 @@ public class EventController : MonoBehaviour {
         GameOverWindow.SetActive(true);
         if (isCleared) {
             GameOverRankBox.SetActive(false);
+            MyWaitPlz.SetActive(false);
             ClearBack.SetActive(true);
             GameOverBack.SetActive(false);
             InfinityModeButton.SetActive(true);
             RankButton.SetActive(false);
-        } else {
+        } else if (PlayerPrefs.GetInt("Mode") == 1) {
             GameOverRankBox.SetActive(true);
+            MyRankData.SetActive(false);
             GameOverBack.SetActive(true);
             ClearBack.SetActive(false);
             RankButton.SetActive(true);
             InfinityModeButton.SetActive(false);
             RM.PutAndGetRankInfo(Score, current_Time);
+        } else {
+            GameOverRankBox.SetActive(false);
+            MyWaitPlz.SetActive(false);
+            ClearBack.SetActive(false);
+            GameOverBack.SetActive(true);
+            InfinityModeButton.SetActive(true);
+            RankButton.SetActive(false);
         }
     }
 

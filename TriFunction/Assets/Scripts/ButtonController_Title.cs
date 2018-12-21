@@ -7,6 +7,7 @@ public class ButtonController_Title : MonoBehaviour {
     public GameObject[] HelpContents = new GameObject[10];
     public GameObject LeftButton;
     public GameObject RightButton;
+    public GameObject RankData;
     public int Page;
 
     public void GameClose_Title() {
@@ -47,5 +48,10 @@ public class ButtonController_Title : MonoBehaviour {
         Page--;
         HelpContents[Page].SetActive(true);
         if (Page == 0) LeftButton.SetActive(false);
+    }
+
+    public void HideRankData() {
+        Vector3 pos = RankData.transform.position;
+        RankData.transform.position = new Vector3(pos.x, pos.y - 500f, 0);
     }
 }
