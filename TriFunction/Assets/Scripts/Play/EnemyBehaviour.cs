@@ -20,12 +20,15 @@ public class EnemyBehaviour : MonoBehaviour {
     private static readonly string AttackedMessage = "좀 더 집중하지 않으면 여기서 살아남을 수 없다! \n";
     private static readonly string NotAttackeMessage = "잘했다! ";
 
+    private bool isDying;
+
     void Awake () {
         // Prefab이라 EC, Combo find
         EC = GameObject.Find("EC");
         Combo = GameObject.Find("Combo");
         ec = EC.GetComponent<EventController>();
         me = EC.GetComponent<MakeEnemy>();
+        isDying = false;
         
         // 움직이는 방향
         Direction3d = new Vector3(0f, 0f, 0f) - transform.position;
@@ -70,32 +73,35 @@ public class EnemyBehaviour : MonoBehaviour {
 
     // 무기로 몬스터 맞춘경우 실행
     public void DoDie(bool isSkill = false) {
-        // 소리
-        EC.GetComponent<AudioManager>().MonsterHitSound();
+        if (!isDying) {
+            isDying = true;
+            // 소리
+            EC.GetComponent<AudioManager>().MonsterHitSound();
 
-        // 필살기 실행중이 아닌경우 필살기게이지++
-        if (!isSkill) ec.GetSkillGauge(1);
+            // 필살기 실행중이 아닌경우 필살기게이지++
+            if (!isSkill) ec.GetSkillGauge(1);
 
-        // 콤보++
-        ec.combo++;
+            // 콤보++
+            ec.combo++;
 
-        // 점수++
-        newScore = (100 + ec.combo-1) * (me.InfinityLevelState+1) * (me.InfinityLevelState+1);
-        ec.GetScore(newScore,transform.position,transform.rotation);
+            // 점수++
+            newScore = (100 + ec.combo - 1) * (me.InfinityLevelState + 1) * (me.InfinityLevelState + 1);
+            ec.GetScore(newScore, transform.position, transform.rotation);
 
-        // 맞으면 멈추고 죽는 애니메이션
-        Velocity = 0f;
-        GetComponent<Animator>().SetInteger("Monster_state", 1);
+            // 맞으면 멈추고 죽는 애니메이션
+            Velocity = 0f;
+            GetComponent<Animator>().SetInteger("Monster_state", 1);
 
-        // 죽는 애니메이션 보여주고 0.5초 뒤에 사라짐
-        StartCoroutine("DoDestroy");
+            // 죽는 애니메이션 보여주고 0.5초 뒤에 사라짐
+            StartCoroutine("DoDestroy");
 
-        // StoryMode에서 Story단계가 넘어가는 경우
-        if (PlayerPrefs.GetInt("Mode") == 0 &&
-            ((me.StoryProgress == 12 || me.StoryProgress == 20) && ec.KillMonsters == 10) ||
-            ((me.StoryProgress == 22 || me.StoryProgress == 24) && ec.KillMonsters == 20) ||
-            ((me.StoryProgress == 6 || me.StoryProgress == 8 || me.StoryProgress == 10 || me.StoryProgress == 14 || me.StoryProgress == 16 || me.StoryProgress == 18) && ec.KillMonsters == 2))
-            ToNextStory();
+            // StoryMode에서 Story단계가 넘어가는 경우
+            if (PlayerPrefs.GetInt("Mode") == 0 &&
+                ((me.StoryProgress == 12 || me.StoryProgress == 20) && ec.KillMonsters == 10) ||
+                ((me.StoryProgress == 22 || me.StoryProgress == 24) && ec.KillMonsters == 20) ||
+                ((me.StoryProgress == 6 || me.StoryProgress == 8 || me.StoryProgress == 10 || me.StoryProgress == 14 || me.StoryProgress == 16 || me.StoryProgress == 18) && ec.KillMonsters == 2))
+                ToNextStory();
+        }
     }
 
     // StoryMode에서 다음 Story로

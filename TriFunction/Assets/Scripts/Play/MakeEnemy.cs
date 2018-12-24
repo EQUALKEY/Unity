@@ -80,8 +80,8 @@ public class MakeEnemy : MonoBehaviour {
     private static readonly int[] InfinityModeMonsterCnt = { 4, 20, 60, 100, 160, 250, 400, 600, 99999999 };
     
     // StoryMode Level Control, 0 ~ 7은 속도-리젠간격 같고, 8, 9만 다름 => 3가지
-    private static readonly float[] StoryMonsterVelocity = { 0.5f, 0.6f, 0.8f };
-    private static readonly float[] StoryRezentime = { 4f, 4f, 3.5f };
+    private static readonly float[] StoryMonsterVelocity = { 0.7f, 0.8f, 0.9f };
+    private static readonly float[] StoryRezentime = { 4f, 3.5f, 3f };
 
     // InfinityMode Level Control, 0 ~ 8
     private static readonly float[] InfinityMonsterVelocity = { 0.6f, 0.8f, 1.0f, 1.2f, 1.4f, 1.5f, 1.5f, 1.5f, 1.5f };
@@ -204,7 +204,7 @@ public class MakeEnemy : MonoBehaviour {
     // 스토리모드 진행
     private void Update() {
         // 게임 멈춘 상태에서 마우스 클릭하면 스토리모드 진행
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !ec.isPlay) {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !ec.isPlay && EnemyParent.transform.childCount == 0) {
             if (StoryProgress == 2)
             {
                 StoryProgress = -2;

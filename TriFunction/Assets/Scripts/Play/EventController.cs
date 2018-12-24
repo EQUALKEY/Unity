@@ -687,14 +687,14 @@ public class EventController : MonoBehaviour {
         CircleCollision.SetActive(false);
         Character.SetActive(false);
         GameOverWindow.SetActive(true);
-        if (isCleared) {
+        if (isCleared) { // 스토리모드 클리어
             GameOverRankBox.SetActive(false);
             MyWaitPlz.SetActive(false);
             ClearBack.SetActive(true);
             GameOverBack.SetActive(false);
             InfinityModeButton.SetActive(true);
             RankButton.SetActive(false);
-        } else if (PlayerPrefs.GetInt("Mode") == 1) {
+        } else if (PlayerPrefs.GetInt("Mode") == 1) { // 무한모드 게임오버
             GameOverRankBox.SetActive(true);
             MyRankData.SetActive(false);
             GameOverBack.SetActive(true);
@@ -702,7 +702,7 @@ public class EventController : MonoBehaviour {
             RankButton.SetActive(true);
             InfinityModeButton.SetActive(false);
             RM.PutAndGetRankInfo(Score, current_Time);
-        } else {
+        } else { // 스토리모드 게임오버
             GameOverRankBox.SetActive(false);
             MyWaitPlz.SetActive(false);
             ClearBack.SetActive(false);
