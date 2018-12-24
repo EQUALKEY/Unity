@@ -20,6 +20,7 @@ public class RankBox : MonoBehaviour {
             else SetText(N, "99+");
             N.SetActive(true);
         }
+
         if (nickname == "")
         {
             SetText(N, "");
@@ -27,9 +28,7 @@ public class RankBox : MonoBehaviour {
             SetText(T, "");
             SetText(NN, "");
             SetText(L, "");
-        }
-        else
-        {
+        } else {
             SetText(S, score.ToString() + "점");
             SetText(T, time.ToString("##0.00") + "초");
             SetText(NN, nickname);

@@ -235,7 +235,8 @@ public class RankManager : MonoBehaviour
                 MyRank.nickname = r.user.nickname;
                 MyRank.level = r.user.badges.winner.level;
                 
-                EC.transform.GetComponent<EventController>().GameOverRankBox.GetComponent<RankBox>().SetRankBox(0, score, time, MyRank.nickname, MyRank.level, false);
+                if (MyRank.score <= score) EC.transform.GetComponent<EventController>().GameOverRankBox.GetComponent<RankBox>().SetRankBox(MyRank.rank, score, time, MyRank.nickname, MyRank.level, false);
+                else EC.transform.GetComponent<EventController>().GameOverRankBox.GetComponent<RankBox>().SetRankBox(0, score, time, MyRank.nickname, MyRank.level, true);
                 MyWaitPlz.text = "";
                 MyRankData.SetActive(true);
             }
