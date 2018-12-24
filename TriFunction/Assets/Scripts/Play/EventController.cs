@@ -255,8 +255,8 @@ public class EventController : MonoBehaviour {
                 }
             }
 
-            // 키보드'space' or CoAngle 클릭시
-            if (Input.GetKeyDown(KeyCode.Space) || (Input.GetKeyDown(KeyCode.Mouse0) && onCoAngle)) { isCo = !isCo; }
+            // CoAngle 클릭시
+            if (Input.GetKeyDown(KeyCode.Mouse0) && onCoAngle) { isCo = !isCo; }
 
             // Co상태에서 IdleAngle 클릭시
             if (isCo && Input.GetKeyDown(KeyCode.Mouse0) && onIdleAngle) { isCo = false; }
@@ -264,8 +264,8 @@ public class EventController : MonoBehaviour {
             if (isCo) CoAngle.SetActive(true);
             else CoAngle.SetActive(false);
 
-            // 키보드'w' or Hypo 클릭시
-            if (Input.GetKeyDown(KeyCode.W) || (Input.GetKeyDown(KeyCode.Mouse0) && onHypo))
+            // Hypo 클릭시
+            if (Input.GetKeyDown(KeyCode.Mouse0) && onHypo)
             {
                 switch (Tstate)
                 {
@@ -280,42 +280,22 @@ public class EventController : MonoBehaviour {
                         HypoCoCircle.SetActive(false);
                         break;
                     case 2:
-                        if (isCo)
-                        {
-                            if (Input.GetKeyDown(KeyCode.W))
-                            {
-                                SetAnimationParameters(0, 1);
-                                StartCoroutine("Cosec");
-                                RotateFinish();
-                            }
-                            else
-                            {
-                                CoSpear.SetActive(true);
-                                isLaunching = 5;
-                            }
+                        if (isCo) {
+                            CoSpear.SetActive(true);
+                            isLaunching = 5;
                         }
                         break;
                     case 3:
-                        if (!isCo)
-                        {
-                            if (Input.GetKeyDown(KeyCode.W))
-                            {
-                                SetAnimationParameters(0, 1);
-                                StartCoroutine("Sec");
-                                RotateFinish();
-                            }
-                            else
-                            {
-                                Spear.SetActive(true);
-                                isLaunching = 2;
-                            }
+                        if (!isCo) {
+                            Spear.SetActive(true);
+                            isLaunching = 2;
                         }
                         break;
                 }
             }
 
-            // 키보드'd' or Height 클릭시
-            if (Input.GetKeyDown(KeyCode.D) || (Input.GetKeyDown(KeyCode.Mouse0) && onHeight))
+            // Height 클릭시
+            if (Input.GetKeyDown(KeyCode.Mouse0) && onHeight)
             {
                 switch (Tstate)
                 {
@@ -329,18 +309,9 @@ public class EventController : MonoBehaviour {
                     case 1:
                         if (!isCo)
                         {
-                            if (Input.GetKeyDown(KeyCode.D))
-                            {
-                                SetAnimationParameters(0, 1);
-                                StartCoroutine("Sin");
-                                RotateFinish();
-                            }
-                            else
-                            {
-                                Bow.SetActive(true);
-                                Arrow.SetActive(true);
-                                isLaunching = 1;
-                            }
+                            Bow.SetActive(true);
+                            Arrow.SetActive(true);
+                            isLaunching = 1;
                         }
                         break;
                     case 2:
@@ -350,24 +321,15 @@ public class EventController : MonoBehaviour {
                     case 3:
                         if (!isCo)
                         {
-                            if (Input.GetKeyDown(KeyCode.D))
-                            {
-                                SetAnimationParameters(0, 1);
-                                StartCoroutine("Tan");
-                                RotateFinish();
-                            }
-                            else
-                            {
-                                Shield.SetActive(true);
-                                isLaunching = 3;
-                            }
+                            Shield.SetActive(true);
+                            isLaunching = 3;
                         }
                         break;
                 }
             }
 
-            // 키보드'a' or Base 클릭시
-            if (Input.GetKeyDown(KeyCode.A) || (Input.GetKeyDown(KeyCode.Mouse0) && onBase))
+            // Base 클릭시
+            if (Input.GetKeyDown(KeyCode.Mouse0) && onBase)
             {
                 switch (Tstate)
                 {
@@ -381,34 +343,16 @@ public class EventController : MonoBehaviour {
                     case 1:
                         if (isCo)
                         {
-                            if (Input.GetKeyDown(KeyCode.A))
-                            {
-                                SetAnimationParameters(0, 1);
-                                StartCoroutine("Cos");
-                                RotateFinish();
-                            }
-                            else
-                            {
-                                CoBow.SetActive(true);
-                                CoArrow.SetActive(true);
-                                isLaunching = 4;
-                            }
+                            CoBow.SetActive(true);
+                            CoArrow.SetActive(true);
+                            isLaunching = 4;
                         }
                         break;
                     case 2:
                         if (isCo)
                         {
-                            if (Input.GetKeyDown(KeyCode.A))
-                            {
-                                SetAnimationParameters(0, 1);
-                                StartCoroutine("Cotan");
-                                RotateFinish();
-                            }
-                            else
-                            {
-                                CoShield.SetActive(true);
-                                isLaunching = 6;
-                            }
+                            CoShield.SetActive(true);
+                            isLaunching = 6;
                         }
                         break;
                     case 3:

@@ -1,6 +1,6 @@
 WebGL
 PlayerPath?
-C:/Git/V
+C:/Git/TriFunc
 SceneListBegin?
 Assets/Scenes/Title.unity
 Assets/Scenes/Play.unity
