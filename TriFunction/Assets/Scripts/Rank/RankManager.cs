@@ -33,13 +33,13 @@ public class RankManager : MonoBehaviour
             this.userid = userid;
             this.nickname = nickname;
             this.token = token;
-        }
+        } 
     }
 
     public void SetUserData(string data)
     {
         UserJsonData = data;
-        Debug.Log("Set: " + UserJsonData);
+        // Debug.Log("Set: " + UserJsonData);
 
         user = JsonUtility.FromJson<UserData>(UserJsonData);
     }
@@ -56,7 +56,7 @@ public class RankManager : MonoBehaviour
     void LoadData()
     {
         Application.ExternalCall("SetUserData");
-        Debug.Log("Get: " + UserJsonData);
+        // Debug.Log("Get: " + UserJsonData);
 
         // JSON Parsing
         user = JsonUtility.FromJson<UserData>(UserJsonData);
@@ -112,7 +112,7 @@ public class RankManager : MonoBehaviour
         MyWaitPlz.text = "로딩 중...";
         if (string.IsNullOrEmpty(user.token))
         {
-            Debug.Log("token is empty.");
+            // Debug.Log("token is empty.");
             LoadData();
 
             //not authorized
@@ -133,7 +133,7 @@ public class RankManager : MonoBehaviour
         WaitPlz.text = "로딩 중...";
         if (string.IsNullOrEmpty(user.token))
         {
-            Debug.Log("token is empty.");
+            // Debug.Log("token is empty.");
             LoadData();
             //not authorized
             return;
@@ -156,7 +156,7 @@ public class RankManager : MonoBehaviour
             }
             else
             {
-                Debug.Log(w.downloadHandler.text);
+                // Debug.Log(w.downloadHandler.text);
                 //success
                 Ranking r = JsonUtility.FromJson<Ranking>(w.downloadHandler.text);
 
@@ -167,7 +167,7 @@ public class RankManager : MonoBehaviour
                 WaitPlz.text = "";
                 if (RankDataWindow.activeSelf) RankDataWindow.transform.localPosition = new Vector3();
                 else RankDataWindow.SetActive(true);
-                Debug.Log("my rank=" + MyRank.rank);
+                // Debug.Log("my rank=" + MyRank.rank);
 
                 int size = Math.Min(r.ranking.Count, 5);
                 int i = 0;
@@ -177,7 +177,7 @@ public class RankManager : MonoBehaviour
                     Top5[i].nickname = r.ranking[i].user.nickname;
                     Top5[i].level = r.ranking[i].user.badges.winner.level;
 
-                    Debug.Log(i + ": rank=" + Top5[i].rank + ", score=" + Top5[i].score);
+                    // Debug.Log(i + ": rank=" + Top5[i].rank + ", score=" + Top5[i].score);
                 }
                 if (i < 5)
                 {
@@ -211,7 +211,7 @@ public class RankManager : MonoBehaviour
         {
             w.SetRequestHeader("Authorization", "Bearer " + token);
             w.SetRequestHeader("Content-Type", "application/json");
-            Debug.Log(url + "\n\n" + data);
+            // Debug.Log(url + "\n\n" + data);
             yield return w.SendWebRequest();
 
             if (w.isHttpError || w.isNetworkError)
@@ -223,12 +223,10 @@ public class RankManager : MonoBehaviour
                 //sucess
                 MyRank = JsonUtility.FromJson<RankData>(w.downloadHandler.text);
 
-                Debug.Log(w.downloadHandler.text);
-                Debug.Log("my rank=" + MyRank.rank);
-                
+                // Debug.Log(w.downloadHandler.text);
+                // Debug.Log("my rank=" + MyRank.rank);
 
-
-                Debug.Log(w.downloadHandler.text);
+                // Debug.Log(w.downloadHandler.text);
                 //success
                 RankData r = JsonUtility.FromJson<RankData>(w.downloadHandler.text);
                 
